@@ -16,7 +16,7 @@ public class Conveyor : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 pos = rb.position;
-        rb.position += Vector3.back * speed * Time.fixedDeltaTime;
+        rb.position += -transform.forward * speed * Time.fixedDeltaTime;
         rb.MovePosition(pos);
     }
 }
