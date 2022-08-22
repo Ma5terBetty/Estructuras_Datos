@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 946240185077142114}
   - component: {fileID: 3741084487809119741}
   m_Layer: 0
-  m_Name: Conveyor
+  m_Name: ConveyorPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,8 +48,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3122122, y: 1.1000001, z: 3.1460252}
-  m_Center: {x: 0.3193301, y: 0.5281228, z: 0.0040938854}
+  m_Size: {x: 1.3122122, y: 1.0659469, z: 3.1460252}
+  m_Center: {x: 0.3193301, y: 0.5451494, z: 0.0040938854}
 --- !u!54 &946240185077142114
 Rigidbody:
   m_ObjectHideFlags: 0
