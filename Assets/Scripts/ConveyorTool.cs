@@ -12,6 +12,7 @@ public class ConveyorTool : MonoBehaviour
     BoxCollider convColl;
     public void Build(int amount)
     {
+        Clear();
         convColl = conveyor.GetComponent<BoxCollider>();
         float boxSize = convColl.size.z;
         int counter = 0;
@@ -32,5 +33,20 @@ public class ConveyorTool : MonoBehaviour
         Vector3 pos = transform.position;
         transform.position = new Vector3(pos.x, 0, pos.z);
         transform.position = new Vector3(pos.x, height, pos.z);
+    }
+
+    void Clear()
+    {
+        var tempArray = new GameObject[transform.childCount];
+
+        for (int i = 0; i < tempArray.Length; i++)
+        {
+            tempArray[i] = transform.GetChild(i).gameObject;
+        }
+
+        foreach (var child in tempArray)
+        { 
+            DestroyImmediate(child);
+        }
     }
 }
