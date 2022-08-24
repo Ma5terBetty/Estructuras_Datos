@@ -35,6 +35,15 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pointer"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""98cefecb-a82b-4c03-bd48-7355155f5f64"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -46,6 +55,17 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""698b0344-7f09-444a-8b18-d8a8d7b9b798"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pointer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -125,6 +145,7 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
+        m_Player_Pointer = m_Player.FindAction("Pointer", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -190,11 +211,13 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Click;
+    private readonly InputAction m_Player_Pointer;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
         public PlayerActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Click => m_Wrapper.m_Player_Click;
+        public InputAction @Pointer => m_Wrapper.m_Player_Pointer;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -207,6 +230,9 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                 @Click.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClick;
                 @Click.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClick;
                 @Click.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClick;
+                @Pointer.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPointer;
+                @Pointer.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPointer;
+                @Pointer.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPointer;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -214,6 +240,9 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
+                @Pointer.started += instance.OnPointer;
+                @Pointer.performed += instance.OnPointer;
+                @Pointer.canceled += instance.OnPointer;
             }
         }
     }
@@ -270,6 +299,7 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnClick(InputAction.CallbackContext context);
+        void OnPointer(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
