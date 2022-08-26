@@ -11,13 +11,6 @@ public class ClickAction : MonoBehaviour
     /// <param name="worker">The npc</param>
     public void ClickDetect(in Vector2 mousePos, in Worker worker)
     {
-        //RaycastHit hit;
-        //Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        //if (!Physics.Raycast(ray, out hit, 100f)) return;
-        //if (hit.transform != null)
-        //{
-
-        //}
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100f))

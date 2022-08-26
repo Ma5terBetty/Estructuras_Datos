@@ -24,7 +24,7 @@ public class Worker : MonoBehaviour
     private void MoveToTarget()
     {
         transform.position = Vector3.MoveTowards(transform.position, Target, speed * Time.deltaTime);
-        transform.forward = Vector3.SmoothDamp(transform.forward, Target, ref _velocity, speed);
+        //transform.forward = Vector3.SmoothDamp(transform.forward, Target, ref _velocity, speed);
         // Rotate thowards the position 
     }
 
