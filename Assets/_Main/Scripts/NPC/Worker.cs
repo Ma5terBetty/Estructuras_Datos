@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Worker : MonoBehaviour
+public class Worker : MonoBehaviour, IControllable
 {
     [SerializeField] private float speed = 1f;
     private Vector3 _velocity = Vector3.zero;
