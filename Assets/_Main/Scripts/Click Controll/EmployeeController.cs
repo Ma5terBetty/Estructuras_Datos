@@ -18,7 +18,6 @@ public class EmployeeController : MonoBehaviour
 
     private void SelectEmployee()
     {
-
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = worldCamera.ScreenPointToRay(Input.mousePosition);
@@ -48,6 +47,8 @@ public class EmployeeController : MonoBehaviour
             RaycastHit hitInfo;
             if (Physics.Raycast(ray, out hitInfo, 100f))
             {
+                if (hitInfo.collider.CompareTag("Employee")) return;
+
                 employee.SetTargetPosition(hitInfo.point);
                 employee = null;
             }
