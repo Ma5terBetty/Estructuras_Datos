@@ -15,5 +15,7 @@ public class ConveyorMakerEditor : Editor
         {
             data.Build(data.amount);
         }
+
+
     }
 }
