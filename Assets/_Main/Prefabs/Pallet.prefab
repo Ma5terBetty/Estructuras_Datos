@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 
+  positions: []
   IsShowingNames: 0
 --- !u!1 &605533673735007858
 GameObject:
@@ -378,6 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 
+  positions: []
   IsShowingNames: 0
 --- !u!1 &3205323839839960341
 GameObject:
@@ -428,6 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 
+  positions: []
   IsShowingNames: 1
 --- !u!1 &3387372603611127709
 GameObject:
@@ -442,8 +445,9 @@ GameObject:
   - component: {fileID: 3747734997370289736}
   - component: {fileID: 9176621881944159205}
   - component: {fileID: 6949241637085696232}
+  - component: {fileID: 924023383409282271}
   m_Layer: 0
-  m_Name: Pallete
+  m_Name: Pallet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -544,6 +548,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &924023383409282271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3387372603611127709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d927a8302df399e4585518d457503001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4135522250865962790
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,6 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: 
+  positions: []
   IsShowingNames: 0
 --- !u!1 &7127787206935051104
 GameObject:

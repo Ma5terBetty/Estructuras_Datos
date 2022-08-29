@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pallet : MonoBehaviour
 {
-    Dictionary<string, GameObject> stacks = new Dictionary<string, GameObject>();
+    Dictionary<Color, GameObject> stacks = new Dictionary<Color, GameObject>();
 
     int index = 0;
 
@@ -17,15 +17,17 @@ public class Pallet : MonoBehaviour
 
     void CheckStacks(GameObject input)
     {
-        if (stacks.ContainsKey(tempBox.color) && stacks[tempBox.color].GetComponent<PalletStack>().stack.Index() < 4)
+        var colorKey = input.GetComponent<MeshRenderer>().material.color;
+
+        if (stacks.ContainsKey(colorKey) && stacks[colorKey].GetComponent<PalletStack>().stack.Index() < 4)
         {
-            stacks[tempBox.color].GetComponent<PalletStack>().RecieveItem(input);
+            stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
         }
         else if (stacks.Count < 4)
         {
-            stacks.Add(tempBox.color, transform.GetChild(index).gameObject);
+            stacks.Add(colorKey, transform.GetChild(index).gameObject);
             index++;
-            stacks[tempBox.color].GetComponent<PalletStack>().RecieveItem(input);
+            stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
         }
         else
         { 
@@ -44,6 +46,7 @@ public class Pallet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        /*
         if (other.GetComponent<TestBox>() != null)
         { 
             tempBox = other.GetComponent<TestBox>();
@@ -53,8 +56,14 @@ public class Pallet : MonoBehaviour
                 tempBox.IsPickuble = false;
                 CheckStacks(other.gameObject);
             }
-        }
+        }*/
 
-        
+        if (other.transform.GetChild(2) != null);
+        {
+            
+            CheckStacks(other.transform.GetChild(2).gameObject);
+
+            other.gameObject.GetComponent<PickUpObj>().Drop();
+        }
     }
 }

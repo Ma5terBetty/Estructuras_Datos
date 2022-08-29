@@ -36,7 +36,10 @@ public class PickUpObj : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Object"))
+
+        if (other.CompareTag("Object"))
+        {
             PickUp(other);
+        }
     }
 }
