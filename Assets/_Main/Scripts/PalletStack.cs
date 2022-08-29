@@ -23,7 +23,7 @@ public class PalletStack : MonoBehaviour
 
     public void RecieveItem(GameObject input)
     {
-        input.transform.parent = positions[stack.Index()];
+        input.gameObject.transform.SetParent(positions[stack.Index()]);
         input.transform.position = input.transform.parent.position;
         input.transform.rotation = new Quaternion(0,0,0,0);
         stack.Push(input);

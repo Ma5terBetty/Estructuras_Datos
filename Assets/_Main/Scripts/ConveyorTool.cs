@@ -9,14 +9,15 @@ public class ConveyorTool : MonoBehaviour
 
     public int amount;
 
-    BoxCollider convColl;
+    float weirdSpacingFactor = 1.33f;
+
+    Mesh mesh;
     public void Build(int amount)
     {
         Clear();
-        convColl = conveyor.GetComponent<BoxCollider>();
-        float boxSize = convColl.size.z;
+        mesh = conveyor.transform.GetChild(2).GetComponent<MeshFilter>().sharedMesh;
+        float boxSize = mesh.bounds.size.z / weirdSpacingFactor;
         int counter = 0;
-        HeightCorrection(convColl.size.y / 2);
 
         while (counter < amount)
         {
