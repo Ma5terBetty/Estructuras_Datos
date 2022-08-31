@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     /// This just to test the npc,
     /// Need to find a way to not use dependencies
     /// </summary>
-    [SerializeField] private Worker _worker;
+    [SerializeField] private Employee _worker;
 
     private void Awake()
     {
@@ -31,6 +31,6 @@ public class Player : MonoBehaviour
 
     private void Click()
     {
-        _clickAction.ClickDetect(_input.MousePosition, _worker);
+        _clickAction.ClickDetect(_input.MousePosition);
     }
 }
