@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Worker : MonoBehaviour, IControllable
+
+public class Employee : MonoBehaviour, IControllable
 {
+    [SerializeField] private EmployeeSO data;    
     [SerializeField] private float speed = 1f;
     private Vector3 _velocity = Vector3.zero;
+    private CmdMoveTowards _moveTowards;
     public Vector3 Target { get; private set; }
+
+    public EmployeeSO GetData() => data;
+
 
 
     private void Start()
@@ -17,16 +23,12 @@ public class Worker : MonoBehaviour, IControllable
     {
         if(transform.position != Target)
         {
-            MoveToTarget();
+            _moveTowards = new CmdMoveTowards(transform, Target, speed);
+            _moveTowards.Do();
         }
     }
 
-    private void MoveToTarget()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, Target, speed * Time.deltaTime);
-        //transform.forward = Vector3.SmoothDamp(transform.forward, Target, ref _velocity, speed);
-        // Rotate thowards the position 
-    }
+   
 
     /// <summary>
     /// Sets position of the target
