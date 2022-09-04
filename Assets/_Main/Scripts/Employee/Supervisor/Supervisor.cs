@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+/// <summary>
+/// It is the sript that tells the employees what to do
+/// It utilize the Facade design pattern
+/// </summary>
+public class Supervisor : MonoBehaviour
 {
     private InputHandler _input;
     private ClickAction _clickAction;
-
-    /// <summary>
-    /// This just to test the npc,
-    /// Need to find a way to not use dependencies
-    /// </summary>
-    [SerializeField] private Employee _worker;
 
     private void Awake()
     {
