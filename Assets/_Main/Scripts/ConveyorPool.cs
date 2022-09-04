@@ -5,16 +5,21 @@ using UnityEngine;
 public class ConveyorPool : MonoBehaviour
 {
     Transform output;
+    GameObject temp;
 
     [SerializeField]
     float dropRate = 3f;
     float dropTimer = 0;
 
-    List<GameObject> packages = new List<GameObject>();
+    CustomQueue<GameObject> poolPacakges = new CustomQueue<GameObject>();
 
     private void Awake()
     {
         output = transform.GetChild(0);
+    }
+    private void Start()
+    {
+        poolPacakges.InitializeQueue();
     }
     private void Update()
     {
@@ -26,21 +31,23 @@ public class ConveyorPool : MonoBehaviour
     public void OnChildTriggerEntered(Collider other, string name)
     {
         if (name == "Input")
-        { 
-            packages.Add(other.gameObject);
+        {
+            poolPacakges.Enqueue(other.gameObject);
             other.gameObject.SetActive(false);
         }
     }
 
     void DropPackage()
     { 
-        if (packages.Count > 0)
+        if (!poolPacakges.IsQueueEmpty())
         { 
-            packages[0].gameObject.SetActive(true);
-            packages[0].gameObject.transform.position = output.position;
-            packages[0].gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            packages[0].transform.rotation = new Quaternion(0,0,0,0);
-            packages.Remove(packages[0]);
+            temp = poolPacakges.FirstInQueue();
+            temp.gameObject.SetActive(true);
+            temp.gameObject.transform.position = output.position;
+            temp.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            temp.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+            poolPacakges.Dequeue();
+            temp = null;
         }
 
         dropTimer = 0;
