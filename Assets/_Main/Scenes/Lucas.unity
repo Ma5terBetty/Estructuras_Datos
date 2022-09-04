@@ -1184,7 +1184,12 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Employee
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4885463315404986554, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 57af27ad5cb7dde48bf870f5fcebf112, type: 2}
+    m_RemovedComponents:
+    - {fileID: 4429118593519756464, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
 --- !u!4 &580030821 stripped
 Transform:
@@ -1205,7 +1210,7 @@ GameObject:
   - component: {fileID: 583713079}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1794,8 +1799,9 @@ GameObject:
   - component: {fileID: 1156808541}
   - component: {fileID: 1156808540}
   - component: {fileID: 1156808543}
+  - component: {fileID: 1156808544}
   m_Layer: 0
-  m_Name: EmployeeController
+  m_Name: Supervisor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1825,7 +1831,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb5d1e9ecf39254c9590d526ea905b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _worker: {fileID: 0}
 --- !u!4 &1156808542
 Transform:
   m_ObjectHideFlags: 0
@@ -1854,6 +1859,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentEmployee: {fileID: 0}
+--- !u!114 &1156808544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156808539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73fb108d9ea1796469c6669e528d1ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1178037123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1267194819995735658, guid: 9cc170356de9b44488d900d2ac32404d, type: 3}
@@ -2224,5 +2241,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Employee
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4885463315404986554, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 57af27ad5cb7dde48bf870f5fcebf112, type: 2}
+    m_RemovedComponents:
+    - {fileID: 4429118593519756464, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
