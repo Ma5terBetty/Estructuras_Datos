@@ -18,12 +18,16 @@ public class Employee : MonoBehaviour
     /// This will be empty by default the supervisor will assign a task
     /// </summary>
     private ICommand _currentTask;
-    private Outline selectedOutline;
+    private Outline _selectedOutline;
     public EmployeeSO GetData() => data;
 
     private void Awake()
     {
-        selectedOutline = GetComponent<Outline>();
+        _selectedOutline = GetComponent<Outline>();
+    }
+
+    private void Start()
+    {
         SetSelectedOutline(false);
     }
 
@@ -53,8 +57,8 @@ public class Employee : MonoBehaviour
 
     public void SetSelectedOutline(bool isSelected)
     {
-        if (selectedOutline != null) return;
-        selectedOutline.enabled = isSelected;
+        if (!_selectedOutline) return;
+        _selectedOutline.enabled = isSelected;
     }
 
 }

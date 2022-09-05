@@ -3327,22 +3327,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EmployeePrefab (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4885463315404986554, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: data
-      value: 
-      objectReference: {fileID: 11400000, guid: 57af27ad5cb7dde48bf870f5fcebf112, type: 2}
-    - target: {fileID: 5156643967265245608, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5156643967265245608, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: outlineMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5156643967265245608, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: outlineWidth
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
 --- !u!1 &844620391
@@ -5773,22 +5757,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EmployeePrefab
       objectReference: {fileID: 0}
-    - target: {fileID: 4885463315404986554, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: data
-      value: 
-      objectReference: {fileID: 11400000, guid: 57af27ad5cb7dde48bf870f5fcebf112, type: 2}
-    - target: {fileID: 5156643967265245608, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5156643967265245608, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: outlineMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5156643967265245608, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: outlineWidth
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
 --- !u!1 &1722403746
@@ -6409,22 +6377,6 @@ PrefabInstance:
     - target: {fileID: 4885463315404986534, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
       propertyPath: m_Name
       value: EmployeePrefab (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885463315404986554, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: data
-      value: 
-      objectReference: {fileID: 11400000, guid: 57af27ad5cb7dde48bf870f5fcebf112, type: 2}
-    - target: {fileID: 5156643967265245608, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5156643967265245608, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: outlineMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5156643967265245608, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: outlineWidth
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
