@@ -27,18 +27,13 @@ public class PauseCanvas : MonoBehaviour
 
     private void PauseGame()
     {
-        if (_isGamePaused)
-        {
-            pauseCanvas.SetActive(false);
-            _isGamePaused = false;
-            Time.timeScale = 0;
-        }
-        else
-        {
+        GameManager.Instance.ToggleGamePause();
+
+        if (GameManager.Instance.IsGamePaused)
             pauseCanvas.SetActive(true);
-            _isGamePaused = true;
-            Time.timeScale = 1;
-        }
+        else
+            pauseCanvas.SetActive(false);
+
     }
 
     private void MainMenuButtonHandler()
