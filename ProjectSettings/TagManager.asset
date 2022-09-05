@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Object
   - Employee
+  - Floor
   layers:
   - Default
   - TransparentFX
