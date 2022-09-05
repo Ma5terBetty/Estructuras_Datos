@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4885463315404986533}
-  - component: {fileID: 4429118593519756464}
   - component: {fileID: 4885463315404986554}
   - component: {fileID: 4885463315404986553}
   - component: {fileID: 4885463315404986555}
@@ -39,20 +38,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4429118593519756464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4885463315404986534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08245ba409794d8428b915ca59bc4e6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targerRenderer: {fileID: 0}
-  selectedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &4885463315404986554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,8 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5f515e20241ba4ab9c96b9d3d18c50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  speed: 5
+  data: {fileID: 11400000, guid: 57af27ad5cb7dde48bf870f5fcebf112, type: 2}
 --- !u!114 &4885463315404986553
 MonoBehaviour:
   m_ObjectHideFlags: 0

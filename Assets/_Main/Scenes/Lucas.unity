@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2237,14 +2237,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Employee
       objectReference: {fileID: 0}
-    - target: {fileID: 4885463315404986534, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: m_TagString
-      value: Employee
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885463315404986554, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: data
-      value: 
-      objectReference: {fileID: 11400000, guid: 57af27ad5cb7dde48bf870f5fcebf112, type: 2}
-    m_RemovedComponents:
-    - {fileID: 4429118593519756464, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
