@@ -12,8 +12,7 @@ public class EmployeeManager : MonoBehaviour
     
     //private List<Employee> _employees = new List<Employee>();
     private Employee _currentEmployee;
-    
-    
+   
 
     private void Awake()
     {
@@ -32,7 +31,9 @@ public class EmployeeManager : MonoBehaviour
     /// <param name="employee"></param>
     public void GetEmployee(Employee employee)
     {
+        if (_currentEmployee != null) _currentEmployee.SetSelectedOutline(false);
         _currentEmployee = employee;
+        _currentEmployee.SetSelectedOutline(true);
     }
 
     /// <summary>
@@ -60,7 +61,7 @@ public class EmployeeManager : MonoBehaviour
     /// Gives a task to the employee.
     /// </summary>
     /// <param name="target"></param>
-    /// <param name="obj"></param>
+    /// <param name="obj"></param> 
     public void SetTask(Vector3 target,GameObject obj)
     {
         _currentEmployee.GiveTask(new CmdMoveTowards(_currentEmployee.transform, target, _currentEmployee.GetData().Speed));
