@@ -29,14 +29,13 @@ public class CustomQueue<T> : ICustomQueue<T>
             firstElement = lastElement;
         }
     }
-    public void Dequeue(T input)
+    public void Dequeue()
     {
         firstElement = firstElement.next;
 
         if (firstElement == null)
         {
             lastElement = null;
-            Debug.LogWarning("La cola está vacía!");
         }
     }
     public T FirstInQueue()

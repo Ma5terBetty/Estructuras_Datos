@@ -6,7 +6,7 @@ public interface ICustomQueue<T>
 {
     void InitializeQueue();
     void Enqueue(T input);
-    void Dequeue(T input);
+    void Dequeue();
     bool IsQueueEmpty();
     T FirstInQueue();
 }
