@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pallet : MonoBehaviour
 {
-    Dictionary<Color, GameObject> stacks = new Dictionary<Color, GameObject>();
+    Dictionary<Colors, GameObject> stacks = new Dictionary<Colors, GameObject>();
 
     int index = 0;
 
@@ -17,9 +17,9 @@ public class Pallet : MonoBehaviour
 
     void CheckStacks(GameObject input)
     {
-        var colorKey = input.GetComponent<MeshRenderer>().material.color;
+        var colorKey = input.GetComponent<Package>().Data.PackageColor;
 
-        if (stacks.ContainsKey(colorKey) && stacks[colorKey].GetComponent<PalletStack>().stack.Index() < 4)
+        if (stacks.ContainsKey(colorKey) && stacks[colorKey].GetComponent<PalletStack>().stack.Index() <= 3)
         {
             stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
         }
@@ -58,12 +58,36 @@ public class Pallet : MonoBehaviour
             }
         }*/
 
+        var package = FindChildWithTag(other.transform, "Object");
+
+        if (package != null)
+        {
+            package.SetParent(package);
+
+            CheckStacks(package.gameObject);
+
+            other.GetComponent<PickUpObj>().Drop();
+        }
+        /*
         if (other.transform.GetChild(2) != null);
         {
             
             CheckStacks(other.transform.GetChild(2).gameObject);
 
             other.gameObject.GetComponent<PickUpObj>().Drop();
+        }*/
+    }
+
+    Transform FindChildWithTag(Transform parent, string tag)
+    {
+        Transform tempParent = parent;
+        foreach (Transform tr in tempParent)
+        {
+            if (tr.tag == tag)
+            { 
+                return tr.GetComponent<Transform>();
+            }
         }
+        return null;
     }
 }

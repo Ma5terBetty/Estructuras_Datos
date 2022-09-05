@@ -5,7 +5,7 @@ using UnityEngine;
 public class CustomStack<T> : ICustomStack<T>
 {
     T[] inputs;
-    int index;
+    int index = 0;
 
     public void Initialize(int range = 100)
     {

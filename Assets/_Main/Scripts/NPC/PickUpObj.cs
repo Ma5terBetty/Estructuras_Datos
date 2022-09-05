@@ -5,6 +5,7 @@ using UnityEngine;
 public class PickUpObj : MonoBehaviour
 {
     private GameObject _grabbedObject;
+    private GameObject _tempObject = null;
 
     [SerializeField] private Transform _hand;
 
@@ -30,13 +31,12 @@ public class PickUpObj : MonoBehaviour
         if (_grabbedObject == null) return;
         //_grabbedObject.GetComponent<Rigidbody>().useGravity = true;
         _grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
-        _grabbedObject.transform.SetParent(null);
-        _grabbedObject = null;
+        //_grabbedObject.transform.SetParent(null);
+        _grabbedObject = _tempObject;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.CompareTag("Object"))
         {
             PickUp(other);
