@@ -16,6 +16,6 @@ public class StartGameCanvas : MonoBehaviour
 
     private void StartGameScene()
     {
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }

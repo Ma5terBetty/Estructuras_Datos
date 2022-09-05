@@ -961,7 +961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startGame: {fileID: 2132890991}
-  sceneName: 
+  sceneName: Nico
 --- !u!1 &1067768508
 GameObject:
   m_ObjectHideFlags: 0

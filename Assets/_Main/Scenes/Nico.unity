@@ -1387,8 +1387,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 338312747}
-  - component: {fileID: 338312752}
-  - component: {fileID: 338312751}
   - component: {fileID: 338312750}
   - component: {fileID: 338312749}
   - component: {fileID: 338312748}
@@ -1483,33 +1481,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &338312751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 338312746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e832057bc0aade4d97da07b2773d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quitButton: {fileID: 1182656174}
---- !u!114 &338312752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 338312746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ece9d30cbf256440aafbeb6babf1ccc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startGame: {fileID: 2127348873}
-  sceneName: 
 --- !u!1001 &345943102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4086,7 +4057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1182656173
 RectTransform:
   m_ObjectHideFlags: 0

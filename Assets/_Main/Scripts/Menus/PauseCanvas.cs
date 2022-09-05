@@ -43,9 +43,6 @@ public class PauseCanvas : MonoBehaviour
 
     private void MainMenuButtonHandler()
     {
-        Scene mainMenu = SceneManager.GetSceneByName("MainMenu");
-        if (mainMenu == null) return;
-
-        SceneManager.SetActiveScene(mainMenu);
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 }
