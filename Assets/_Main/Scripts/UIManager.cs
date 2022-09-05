@@ -10,11 +10,6 @@ public class UIManager : MonoBehaviour
 
     public static UIManager Instance;
 
-    float testTimer = 0;
-
-    //private GameObject UIOrder;
-    //string localPath = "Assets/_Main/UI/Order.prefab"
-
     [SerializeField]
     GameObject bottomLayout;
     private void Awake()
@@ -35,14 +30,6 @@ public class UIManager : MonoBehaviour
 
         bottomLayout = transform.GetChild(0).gameObject;
 
-        if (UIOrder() == null)
-        {
-            Debug.Log("La puta");
-        }
-        else
-        {
-            Debug.Log("Success");
-        }
     }
 
     void Start()
@@ -53,23 +40,10 @@ public class UIManager : MonoBehaviour
     
     void Update()
     {
-        testTimer += Time.deltaTime;
-
-        if (testTimer > 3)
-        { 
-            var temp = Instantiate(UIOrder());
-            temp.transform.SetParent(bottomLayout.transform);
-            testTimer = 0;
-        }
     }
 
     public void AddItemsRequest()
     { 
         
-    }
-
-    private GameObject UIOrder()
-    { 
-        return Resources.Load("Order", typeof(GameObject)) as GameObject;
     }
 }
