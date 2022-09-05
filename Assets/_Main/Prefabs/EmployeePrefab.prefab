@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4885463315404986552}
   m_Layer: 0
   m_Name: EmployeePrefab
-  m_TagString: Untagged
+  m_TagString: Employee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5f515e20241ba4ab9c96b9d3d18c50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 0}
   speed: 5
 --- !u!114 &4885463315404986553
 MonoBehaviour:
