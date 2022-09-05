@@ -33,8 +33,6 @@ public class EmployeeController : MonoBehaviour
                     }
                     else Debug.Log("IControllable component was not found");
                 }
-                else
-                    Debug.Log("Nothing");
             }
         }
     }
