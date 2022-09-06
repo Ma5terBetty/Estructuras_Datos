@@ -25,9 +25,9 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void ToggleGamePause()
-    { 
-        IsGamePaused = !IsGamePaused;
+    public void SetPause(bool isPause)
+    {
+        IsGamePaused = isPause;
         Time.timeScale = IsGamePaused ? 0 : 1;
     }
 }
