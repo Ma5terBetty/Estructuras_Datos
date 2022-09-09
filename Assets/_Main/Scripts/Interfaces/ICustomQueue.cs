@@ -4,9 +4,10 @@ using UnityEngine;
 
 public interface ICustomQueue<T>
 {
+    int Count { get; }
     void InitializeQueue();
     void Enqueue(T input);
-    void Dequeue();
+    T Dequeue();
     bool IsQueueEmpty();
-    T FirstInQueue();
+    T Peek();
 }

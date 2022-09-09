@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   weight: 10
-  packageMaterial: {fileID: 2100000, guid: cad3e374a54fc094e8b970ddce565d29, type: 2}
-  packageColor: 1
+  packageColor: {r: 0.43921566, g: 0.50909096, b: 1, a: 0}
+  id: 0

@@ -7,7 +7,9 @@ public class EmployeeSO : ScriptableObject
 {
     [SerializeField] private string id = "Default";
     [SerializeField] private float speed = 5f;
+    [SerializeField] private float minTaskDistance = .3f;
 
     public string ID => id;
     public float Speed => speed;
+    public float MinTaskDistance => minTaskDistance;
 }

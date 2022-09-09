@@ -8,12 +8,9 @@ using UnityEngine;
 public class Employee : MonoBehaviour
 {
     [SerializeField] private EmployeeSO data;
-    /// <summary>
-    /// The idea is that every time the player(AKA the supervisor) tells the employee something to do it will get in a queue
-    /// We could use queue (cola) here
-    /// It is not implemented yet
-    /// </summary>
-    private List<ICommand> _pendingTasks = new List<ICommand>();
+    
+    private bool _isDoingTask;
+    private CustomQueue<TaskPoint> _pendingTasks = new();
     /// <summary>
     /// This will be empty by default the supervisor will assign a task
     /// </summary>
@@ -24,6 +21,12 @@ public class Employee : MonoBehaviour
     private void Awake()
     {
         _selectedOutline = GetComponent<Outline>();
+        TaskPoint.OnClickedTaskPoint += OnTaskPointClickedHandler;
+    }
+
+    private void OnDisable()
+    {
+        TaskPoint.OnClickedTaskPoint -= OnTaskPointClickedHandler;
     }
 
     private void Start()
@@ -33,8 +36,27 @@ public class Employee : MonoBehaviour
 
     private void Update()
     {
-        if(_currentTask == null) return;
-        _currentTask.Do();
+        if(_isDoingTask || _pendingTasks.Count < 1)
+            return;
+
+        StartCoroutine(DoTask());
+    }
+
+    private IEnumerator DoTask()
+    {
+        _isDoingTask = true;
+        var ongoingTask = _pendingTasks.Dequeue();
+        var ongoingTaskPosition = ongoingTask.transform.position;
+
+        while (Vector3.Distance(transform.position, ongoingTaskPosition) > data.MinTaskDistance)
+        {
+            var dir = ongoingTaskPosition - transform.position;
+            dir.Normalize();
+            transform.position += dir * (data.Speed * Time.deltaTime);
+            yield return null;
+        }
+
+        _isDoingTask = false;
     }
 
     /// <summary>
@@ -44,21 +66,17 @@ public class Employee : MonoBehaviour
     public void GiveTask(ICommand task)
     {
         _currentTask = task;
-        
-        // if (_currentTask == null)
-        // {
-        //     _currentTask = task;
-        // }
-        // else
-        // {
-        //     _pendingTasks.Add(task);
-        // }
     }
 
     public void SetSelectedOutline(bool isSelected)
     {
         if (!_selectedOutline) return;
         _selectedOutline.enabled = isSelected;
+    }
+
+    private void OnTaskPointClickedHandler(TaskPoint newTaskPoint)
+    {
+        _pendingTasks.Enqueue(newTaskPoint);
     }
 
 }
