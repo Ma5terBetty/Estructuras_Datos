@@ -9,26 +9,35 @@ using UnityEngine;
 public class Supervisor : MonoBehaviour
 {
     private InputHandler _input;
-    private ClickAction _clickAction;
+    private SelectEmployee _selectEmployee;
+    private AssignTask _assignTask;
 
     private void Awake()
     {
         _input = GetComponent<InputHandler>();
-        _clickAction = GetComponent<ClickAction>();
+        _selectEmployee = GetComponent<SelectEmployee>();
+        _assignTask = GetComponent<AssignTask>();
     }
 
     private void Start()
     {
-        _input.OnClick += Click;
+        _input.OnClick += AssignTask;
+        _input.OnDoubleClick += SelectEmployee;
     }
 
     private void OnDisable()
     {
-        _input.OnClick -= Click;
+        _input.OnClick -= AssignTask;
+        _input.OnDoubleClick -= SelectEmployee;
     }
 
-    private void Click()
+    private void SelectEmployee()
     {
-        _clickAction.ClickDetect(_input.MousePosition);
+        _selectEmployee.GetEmployee(_input.MousePosition);
+    }
+
+    private void AssignTask()
+    {
+        _assignTask.SetTask(_input.MousePosition);
     }
 }

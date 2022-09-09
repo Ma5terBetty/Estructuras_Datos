@@ -11,7 +11,7 @@ public class EmployeeManager : MonoBehaviour
     public static EmployeeManager Instance;
     
     //private List<Employee> _employees = new List<Employee>();
-    private Employee _currentEmployee;
+    [SerializeField] private Employee _currentEmployee;
    
 
     private void Awake()
@@ -31,7 +31,7 @@ public class EmployeeManager : MonoBehaviour
     /// <param name="employee"></param>
     public void GetEmployee(Employee employee)
     {
-        if (_currentEmployee != null) _currentEmployee.SetSelectedOutline(false);
+        RemoveEmployee();
         _currentEmployee = employee;
         _currentEmployee.SetSelectedOutline(true);
     }
@@ -67,5 +67,11 @@ public class EmployeeManager : MonoBehaviour
         _currentEmployee.GiveTask(new CmdMoveTowards(_currentEmployee.transform, target, _currentEmployee.GetData().Speed));
         // if(obj.CompareTag("Box"))
         //     _currentEmployee.GiveTask(new CmdPickUpObj());
+    }
+
+    public void RemoveEmployee()
+    {
+        if (_currentEmployee != null) _currentEmployee.SetSelectedOutline(false);
+        _currentEmployee = null;
     }
 }
