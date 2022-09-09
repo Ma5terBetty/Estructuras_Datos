@@ -6,10 +6,13 @@ public class ConveyorAction : MonoBehaviour
 {
     [SerializeField]
     float speed;
+
+    [SerializeField] private MeshRenderer belt;
     Rigidbody rb;
 
     GameObject leftWall;
     GameObject rightWall;
+    private static readonly int ScrollYSpeed = Shader.PropertyToID("_ScrollYSpeed");
 
     public bool isLeftWallEnabled = true;
     public bool isRightWallEnabled = true;
@@ -18,6 +21,7 @@ public class ConveyorAction : MonoBehaviour
     {
         leftWall = transform.GetChild(3).gameObject;
         rightWall = transform.GetChild(2).gameObject;
+        belt.material.SetFloat(ScrollYSpeed, speed);
     }
 
     void Start()
@@ -31,7 +35,7 @@ public class ConveyorAction : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 pos = rb.position;
-        rb.position += -transform.forward * speed * Time.fixedDeltaTime;
+        rb.position += -transform.forward * (speed * Time.fixedDeltaTime);
         rb.MovePosition(pos);
     }
 }
