@@ -9,24 +9,21 @@ public class Employee : MonoBehaviour
 {
     [SerializeField] private EmployeeSO data;
     
-    private bool _isDoingTask;
-    private CustomQueue<TaskPoint> _pendingTasks = new();
-    /// <summary>
-    /// This will be empty by default the supervisor will assign a task
-    /// </summary>
-    private ICommand _currentTask;
+    private CustomQueue<Task> _pendingTasks = new();
     private Outline _selectedOutline;
+    private bool _isDoingTask;
+    private bool _taskCompleted;
     public EmployeeSO GetData() => data;
 
     private void Awake()
     {
         _selectedOutline = GetComponent<Outline>();
-        TaskPoint.OnClickedTaskPoint += OnTaskPointClickedHandler;
+        
     }
 
     private void OnDisable()
     {
-        TaskPoint.OnClickedTaskPoint -= OnTaskPointClickedHandler;
+        
     }
 
     private void Start()
@@ -46,37 +43,29 @@ public class Employee : MonoBehaviour
     {
         _isDoingTask = true;
         var ongoingTask = _pendingTasks.Dequeue();
-        var ongoingTaskPosition = ongoingTask.transform.position;
+        var ongoingTaskPosition = !ongoingTask.TaskPoint ? ongoingTask.Position : ongoingTask.TaskPoint.transform.position;
 
         while (Vector3.Distance(transform.position, ongoingTaskPosition) > data.MinTaskDistance)
         {
-            var dir = ongoingTaskPosition - transform.position;
-            dir.Normalize();
-            transform.position += dir * (data.Speed * Time.deltaTime);
+            CmdMoveTowards move = new CmdMoveTowards(transform, ongoingTaskPosition, data.Speed);
+            move.Do();
+            // if (Vector3.Distance(transform.position, ongoingTaskPosition) > data.MinTaskDistance)
+            //     _taskCompleted = true;
             yield return null;
         }
 
         _isDoingTask = false;
     }
 
-    /// <summary>
-    /// Gives the a task to the worker
-    /// </summary>
-    /// <param name="objTag"></param>
-    public void GiveTask(ICommand task)
-    {
-        _currentTask = task;
-    }
-
-    public void SetSelectedOutline(bool isSelected)
+    public void SetSelectedOutline(in bool isSelected)
     {
         if (!_selectedOutline) return;
         _selectedOutline.enabled = isSelected;
     }
 
-    private void OnTaskPointClickedHandler(TaskPoint newTaskPoint)
+    public void AddTask(Task newTask)
     {
-        _pendingTasks.Enqueue(newTaskPoint);
+        _pendingTasks.Enqueue(newTask);
     }
 
 }

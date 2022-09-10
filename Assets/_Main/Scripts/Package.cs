@@ -11,6 +11,8 @@ public class Package : MonoBehaviour
     // No hace falta, si queres saber el nombre podes obtnerlo con Data.Id
     //public string ColorName { get; private set; }
 
+    
+    
     private void Awake()
     {
         meshRender = GetComponent<MeshRenderer>();
@@ -18,7 +20,7 @@ public class Package : MonoBehaviour
 
     private void Start()
     {
-        SetData(data); 
+        SetData(data);
     }
 
     public void SetData(PackageTypeSO newData) //we could use this for spawners

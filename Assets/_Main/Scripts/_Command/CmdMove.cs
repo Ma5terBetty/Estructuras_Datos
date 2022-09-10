@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CmdMoveTowards : ICommand
 {
-    private Transform _transform;
-    private Vector3 _target;
-    private float _speed;
+    private readonly Transform _transform;
+    private readonly Vector3 _target;
+    private readonly float _speed;
 
     public CmdMoveTowards(Transform transform, Vector3 target, float speed)
     {
@@ -17,6 +17,12 @@ public class CmdMoveTowards : ICommand
 
     public void Do()
     {
+        // var position = _transform.position;
+        // var dir = _target - position;
+        // dir.Normalize();
+        // position += dir * (_speed * Time.deltaTime);
+        // _transform.position = position;
+
         _transform.position = Vector3.MoveTowards(_transform.position, _target, _speed * Time.deltaTime);
     }
 }

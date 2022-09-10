@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
+public struct Task
+{
+    public Vector3 Position;
+    public TaskPoint TaskPoint;
+}
 public class TaskPoint : MonoBehaviour
 {
-    public static event Action<TaskPoint> OnClickedTaskPoint;
     private bool _isClicked;
+    
+    public static event Action<Task> OnClickedTaskPoint;
 
     private void OnMouseDown()
     {
@@ -16,6 +22,6 @@ public class TaskPoint : MonoBehaviour
 #if UNITY_EDITOR
         print("object clicked");
 #endif
-        OnClickedTaskPoint?.Invoke(this);
+        OnClickedTaskPoint?.Invoke(new Task(){ Position = transform.position, TaskPoint = this});
     }
 }

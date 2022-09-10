@@ -14,6 +14,6 @@ public class AssignTask : MonoBehaviour
         RaycastHit hit;
         if (!Physics.Raycast(ray, out hit, 100f, target)) return;
         if (!EmployeeManager.Instance.HasEmployee()) return;
-        EmployeeManager.Instance.SetTask(hit.point, hit.collider.gameObject);
+        EmployeeManager.Instance.SetTask(new Task(){Position = hit.point, TaskPoint = null});
     }
 }
