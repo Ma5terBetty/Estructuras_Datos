@@ -33,7 +33,7 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                     ""id"": ""cba54bc4-a3b5-41c1-8f2e-720011a0dccf"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -43,6 +43,15 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DobleClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""00adc302-ebe5-40f7-8a7a-e003e81a6c7d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""MultiTap(tapDelay=0.4)"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -66,6 +75,17 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pointer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df230527-b472-4d0d-8b69-a97f5797a5d6"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DobleClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -146,6 +166,7 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
         m_Player_Pointer = m_Player.FindAction("Pointer", throwIfNotFound: true);
+        m_Player_DobleClick = m_Player.FindAction("DobleClick", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -212,12 +233,14 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Click;
     private readonly InputAction m_Player_Pointer;
+    private readonly InputAction m_Player_DobleClick;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
         public PlayerActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Click => m_Wrapper.m_Player_Click;
         public InputAction @Pointer => m_Wrapper.m_Player_Pointer;
+        public InputAction @DobleClick => m_Wrapper.m_Player_DobleClick;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -233,6 +256,9 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                 @Pointer.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPointer;
                 @Pointer.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPointer;
                 @Pointer.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPointer;
+                @DobleClick.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDobleClick;
+                @DobleClick.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDobleClick;
+                @DobleClick.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDobleClick;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -243,6 +269,9 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
                 @Pointer.started += instance.OnPointer;
                 @Pointer.performed += instance.OnPointer;
                 @Pointer.canceled += instance.OnPointer;
+                @DobleClick.started += instance.OnDobleClick;
+                @DobleClick.performed += instance.OnDobleClick;
+                @DobleClick.canceled += instance.OnDobleClick;
             }
         }
     }
@@ -300,6 +329,7 @@ public partial class @PlayerController : IInputActionCollection2, IDisposable
     {
         void OnClick(InputAction.CallbackContext context);
         void OnPointer(InputAction.CallbackContext context);
+        void OnDobleClick(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
