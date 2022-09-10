@@ -9,16 +9,16 @@ public class Employee : MonoBehaviour
 {
     [SerializeField] private EmployeeSO data;
     
-    private CustomQueue<Task> _pendingTasks = new();
     private Outline _selectedOutline;
+    private PickUpObj _pickUpObj;
+    private CustomQueue<Task> _pendingTasks = new();
     private bool _isDoingTask;
-    private bool _taskCompleted;
     public EmployeeSO GetData() => data;
 
     private void Awake()
     {
         _selectedOutline = GetComponent<Outline>();
-        
+        _pickUpObj = GetComponent<PickUpObj>();
     }
 
     private void OnDisable()
@@ -43,14 +43,18 @@ public class Employee : MonoBehaviour
     {
         _isDoingTask = true;
         var ongoingTask = _pendingTasks.Dequeue();
-        var ongoingTaskPosition = !ongoingTask.TaskPoint ? ongoingTask.Position : ongoingTask.TaskPoint.transform.position;
+        var ongoingTaskPosition = ongoingTask.Position;
 
         while (Vector3.Distance(transform.position, ongoingTaskPosition) > data.MinTaskDistance)
         {
             CmdMoveTowards move = new CmdMoveTowards(transform, ongoingTaskPosition, data.Speed);
             move.Do();
-            // if (Vector3.Distance(transform.position, ongoingTaskPosition) > data.MinTaskDistance)
-            //     _taskCompleted = true;
+
+            if (_pickUpObj.GrabbedObject)
+            {
+                break;
+            }
+            
             yield return null;
         }
 
