@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pallet : MonoBehaviour
 {
-    Dictionary<Colors, GameObject> stacks = new Dictionary<Colors, GameObject>();
+    Dictionary<PackageId, GameObject> stacks = new Dictionary<PackageId, GameObject>();
 
     int index = 0;
 
@@ -17,7 +17,7 @@ public class Pallet : MonoBehaviour
 
     void CheckStacks(GameObject input)
     {
-        var colorKey = input.GetComponent<Package>().Data.PackageColor;
+        var colorKey = input.GetComponent<Package>().Data.Id;
 
         if (stacks.ContainsKey(colorKey) && stacks[colorKey].GetComponent<PalletStack>().stack.Index() <= 3)
         {
