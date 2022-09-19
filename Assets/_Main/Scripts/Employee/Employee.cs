@@ -72,4 +72,14 @@ public class Employee : MonoBehaviour
         _pendingTasks.Enqueue(newTask);
     }
 
+    private void OnMouseOver()
+    {
+        var name = data.ID;
+        UIManager.Instance.ShowName($"Employee: {name}");
+    }
+
+    private void OnMouseExit()
+    {
+        UIManager.Instance.TurnOffName();
+    }
 }
