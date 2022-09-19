@@ -4,45 +4,60 @@ using UnityEngine;
 
 public class Pallet : MonoBehaviour
 {
-    Dictionary<Colors, GameObject> stacks = new Dictionary<Colors, GameObject>();
+    Dictionary<PackageId, GameObject> stacks = new Dictionary<PackageId, GameObject>();
 
     int index = 0;
 
     TestBox tempBox;
-    Order currentOrder = new Order();
 
     private void Start()
     {
-        OrdersManager.Instance.pallets.Add(this);
+        
     }
 
     void CheckStacks(GameObject input)
     {
-        var package = input.GetComponent<Package>();
-        var colorKey = package.Data.PackageColor;
+        var colorKey = input.GetComponent<Package>().Data.Id;
 
         if (stacks.ContainsKey(colorKey) && stacks[colorKey].GetComponent<PalletStack>().stack.Index() <= 3)
         {
             stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
-            currentOrder.Add(package.ColorName);
-            CheckOrders();
         }
         else if (stacks.Count < 4)
         {
             stacks.Add(colorKey, transform.GetChild(index).gameObject);
             index++;
             stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
-            currentOrder.Add(package.ColorName);
-            CheckOrders();
         }
         else
-        {
+        { 
             //Pallet lleno
         }
 
     }
+    void AssignStack()
+    { 
+    
+    }
+    void AddToStack()
+    { 
+        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
+        /*
+        if (other.GetComponent<TestBox>() != null)
+        { 
+            tempBox = other.GetComponent<TestBox>();
+
+            if (tempBox.IsPickuble)
+            { 
+                tempBox.IsPickuble = false;
+                CheckStacks(other.gameObject);
+            }
+        }*/
+
         var package = FindChildWithTag(other.transform, "Object");
 
         if (package != null)
@@ -53,6 +68,14 @@ public class Pallet : MonoBehaviour
 
             other.GetComponent<PickUpObj>().Drop();
         }
+        /*
+        if (other.transform.GetChild(2) != null);
+        {
+            
+            CheckStacks(other.transform.GetChild(2).gameObject);
+
+            other.gameObject.GetComponent<PickUpObj>().Drop();
+        }*/
     }
 
     Transform FindChildWithTag(Transform parent, string tag)
@@ -61,27 +84,10 @@ public class Pallet : MonoBehaviour
         foreach (Transform tr in tempParent)
         {
             if (tr.tag == tag)
-            {
+            { 
                 return tr.GetComponent<Transform>();
             }
         }
         return null;
-    }
-
-    void CheckOrders()
-    {
-        var orders = OrdersManager.Instance.currentOrders;
-
-        for (int i = 0; i < orders.Count; i++)
-        {
-            if (currentOrder.redAmount == orders[i].redAmount &&
-                currentOrder.blueAmount == orders[i].blueAmount &&
-                currentOrder.greenAmount == orders[i].greenAmount &&
-                currentOrder.yellowAmount == orders[i].yellowAmount)
-            {
-                Debug.Log("OrderCompleted");
-                OrdersManager.Instance.DepartPallet(this, currentOrder);
-            }
-        }
     }
 }

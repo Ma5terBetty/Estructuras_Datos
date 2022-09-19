@@ -9,17 +9,17 @@ public class PackageTypeSO : ScriptableObject
     [SerializeField] private float health = 100;
     [Tooltip("Maybe we won't use this...")]
     [SerializeField] private float weight = 10;
-    [SerializeField] private Material packageMaterial;
+    [SerializeField] private Color packageColor;
     [Tooltip("Could be usefull to identify colors")]
-    [SerializeField] private Colors packageColor;
+    [SerializeField] private PackageId id;
 
     public float Health => health;
     public float Weight => weight;
-    public Material MaterialColor => packageMaterial;
-    public Colors PackageColor => packageColor;
+    public Color Color => packageColor;
+    public PackageId Id => id;
 }
 
-public enum Colors
+public enum PackageId
 { 
     red,
     blue,

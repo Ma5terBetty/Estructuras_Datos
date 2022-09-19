@@ -8,8 +8,11 @@ public class Package : MonoBehaviour
     [SerializeField] private PackageTypeSO data;
     private MeshRenderer meshRender;
     public PackageTypeSO Data { get; private set; }
-    public string ColorName { get; private set; }
+    // No hace falta, si queres saber el nombre podes obtnerlo con Data.Id
+    //public string ColorName { get; private set; }
 
+    
+    
     private void Awake()
     {
         meshRender = GetComponent<MeshRenderer>();
@@ -17,7 +20,7 @@ public class Package : MonoBehaviour
 
     private void Start()
     {
-        SetData(data); 
+        SetData(data);
     }
 
     public void SetData(PackageTypeSO newData) //we could use this for spawners
@@ -25,8 +28,8 @@ public class Package : MonoBehaviour
         if (newData == null) return;
 
         Data = newData;
-        meshRender.material = data.MaterialColor;
-        ColorName = Data.PackageColor.ToString();
+        meshRender.sharedMaterial.color = data.Color;
+        //ColorName = Data.Id.ToString();
     }
 
     private void OnMouseOver()

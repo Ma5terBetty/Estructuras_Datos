@@ -7,20 +7,10 @@ using UnityEngine;
 /// </summary>
 public class CmdPickUpObj : ICommand
 {
-    /// <summary>
-    /// My position
-    /// </summary>
     private Transform _transform;
-    /// <summary>
-    /// My speed
-    /// </summary>
     private float _speed;
-    /// <summary>
-    /// The object
-    /// </summary>
     private GameObject _grabbedObj;
 
-    //private Collider _objCollider;
     private Transform _hand;
     
     public void Do()
