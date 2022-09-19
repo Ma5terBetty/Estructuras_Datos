@@ -12,6 +12,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     GameObject bottomLayout;
+
+    [SerializeField]
+    public GameObject NameShow;
     private void Awake()
     {
         if (Instance == null)
@@ -37,13 +40,14 @@ public class UIManager : MonoBehaviour
         
     }
 
-    
-    void Update()
-    {
+    public void ShowName(string name)
+    { 
+        NameShow.SetActive(true);
+        NameShow.GetComponentInChildren<Text>().text = name;
     }
 
-    public void AddItemsRequest()
-    { 
-        
+    public void TurnOffName()
+    {
+        NameShow.SetActive(false);
     }
 }

@@ -28,4 +28,15 @@ public class Package : MonoBehaviour
         meshRender.material = data.MaterialColor;
         ColorName = Data.PackageColor.ToString();
     }
+
+    private void OnMouseOver()
+    {
+        var name = Data.PackageColor.ToString();
+        UIManager.Instance.ShowName($"{name} package");
+    }
+
+    private void OnMouseExit()
+    {
+        UIManager.Instance.TurnOffName();
+    }
 }
