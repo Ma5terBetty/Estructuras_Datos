@@ -4,30 +4,35 @@ using UnityEngine;
 
 public class PickUpObj : MonoBehaviour
 {
+    public GameObject _grabbedObject;
     private GameObject _tempObject = null;
 
     [SerializeField] private Transform _hand;
-    public GameObject GrabbedObject { get; private set; }
-    
+
+    [SerializeField] private float _radius = 1f;
+    [SerializeField] private float _offsetY = .7f;
+
+    [SerializeField] private LayerMask _layerIndex;
+
+    [SerializeField] protected Collider[] _hitColliders;
 
     public void PickUp(Collider other)
     {
-        if (GrabbedObject) return;
-        GrabbedObject = other.gameObject;
-        GrabbedObject.GetComponent<Rigidbody>().isKinematic = true;
-        GrabbedObject.transform.position = _hand.position;
-        GrabbedObject.transform.rotation = transform.rotation;
-        GrabbedObject.transform.SetParent(transform);
-        //ObjGrabbed = false;
+        if (_grabbedObject != null) return;
+        _grabbedObject = other.gameObject;
+        _grabbedObject.GetComponent<Rigidbody>().isKinematic = true;
+        _grabbedObject.transform.position = _hand.position;
+        _grabbedObject.transform.rotation = transform.rotation;
+        _grabbedObject.transform.SetParent(transform);
     }
 
     public void Drop()
     {
-        if (!GrabbedObject) return;
+        if (_grabbedObject == null) return;
         //_grabbedObject.GetComponent<Rigidbody>().useGravity = true;
-        GrabbedObject.GetComponent<Rigidbody>().isKinematic = false;
-        //_grabbedObject.transform.SetParent(null);
-        GrabbedObject = _tempObject;
+        _grabbedObject.GetComponent<Rigidbody>().isKinematic = false;
+        _grabbedObject.transform.parent = null;
+        _grabbedObject = _tempObject;
     }
 
     private void OnTriggerEnter(Collider other)

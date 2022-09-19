@@ -8,22 +8,25 @@ using UnityEngine;
 public class Employee : MonoBehaviour
 {
     [SerializeField] private EmployeeSO data;
-    
+    /// <summary>
+    /// The idea is that every time the player(AKA the supervisor) tells the employee something to do it will get in a queue
+    /// We could use queue (cola) here
+    /// It is not implemented yet
+    /// </summary>
+    private List<ICommand> _pendingTasks = new List<ICommand>();
+    /// <summary>
+    /// This will be empty by default the supervisor will assign a task
+    /// </summary>
+    private ICommand _currentTask;
     private Outline _selectedOutline;
-    private PickUpObj _pickUpObj;
-    private CustomQueue<Task> _pendingTasks = new();
-    private bool _isDoingTask;
     public EmployeeSO GetData() => data;
+
+    Rigidbody rb;
 
     private void Awake()
     {
         _selectedOutline = GetComponent<Outline>();
-        _pickUpObj = GetComponent<PickUpObj>();
-    }
-
-    private void OnDisable()
-    {
-        
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -33,43 +36,43 @@ public class Employee : MonoBehaviour
 
     private void Update()
     {
-        if(_isDoingTask || _pendingTasks.Count < 1)
-            return;
-
-        StartCoroutine(DoTask());
+        if(_currentTask == null) return;
+        _currentTask.Do();
     }
 
-    private IEnumerator DoTask()
+    /// <summary>
+    /// Gives the a task to the worker
+    /// </summary>
+    /// <param name="objTag"></param>
+    public void GiveTask(ICommand task)
     {
-        _isDoingTask = true;
-        var ongoingTask = _pendingTasks.Dequeue();
-        var ongoingTaskPosition = ongoingTask.Position;
-
-        while (Vector3.Distance(transform.position, ongoingTaskPosition) > data.MinTaskDistance)
-        {
-            CmdMoveTowards move = new CmdMoveTowards(transform, ongoingTaskPosition, data.Speed);
-            move.Do();
-
-            if (_pickUpObj.GrabbedObject)
-            {
-                break;
-            }
-            
-            yield return null;
-        }
-
-        _isDoingTask = false;
+        _currentTask = task;
+        
+        // if (_currentTask == null)
+        // {
+        //     _currentTask = task;
+        // }
+        // else
+        // {
+        //     _pendingTasks.Add(task);
+        // }
     }
 
-    public void SetSelectedOutline(in bool isSelected)
+    public void SetSelectedOutline(bool isSelected)
     {
         if (!_selectedOutline) return;
         _selectedOutline.enabled = isSelected;
     }
 
-    public void AddTask(Task newTask)
+    private void OnMouseOver()
     {
-        _pendingTasks.Enqueue(newTask);
+        var name = data.ID;
+        UIManager.Instance.ShowName($"Employee: {name}");
+    }
+
+    private void OnMouseExit()
+    {
+        UIManager.Instance.TurnOffName();
     }
 
 }
