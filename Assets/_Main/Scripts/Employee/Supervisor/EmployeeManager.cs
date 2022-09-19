@@ -36,16 +36,6 @@ public class EmployeeManager : MonoBehaviour
         TaskPoint.OnClickedTaskPoint += SetTask;
     }
 
-    private void Start()
-    {
-        TaskPoint.OnClickedTaskPoint += SetTask;
-    }
-
-    private void OnDisable()
-    {
-        TaskPoint.OnClickedTaskPoint += SetTask;
-    }
-
     /// <summary>
     /// Assigns current employee to the elected employee
     /// </summary>
