@@ -21,9 +21,12 @@ public class Employee : MonoBehaviour
     private Outline _selectedOutline;
     public EmployeeSO GetData() => data;
 
+    Rigidbody rb;
+
     private void Awake()
     {
         _selectedOutline = GetComponent<Outline>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
