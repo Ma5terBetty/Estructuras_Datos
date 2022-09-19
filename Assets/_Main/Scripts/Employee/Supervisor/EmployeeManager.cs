@@ -8,23 +8,8 @@ using UnityEngine;
 /// </summary>
 public class EmployeeManager : MonoBehaviour
 {
-    //ToDo: Get rid of it
-    public static EmployeeManager Instance;
-
     //private List<Employee> _employees = new List<Employee>();
     [SerializeField] private Employee _currentEmployee;
-
-
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-    }
     
     private void Start()
     {
@@ -55,7 +40,7 @@ public class EmployeeManager : MonoBehaviour
     {
         return _currentEmployee;
     }
-
+    
     /// <summary>
     /// Checks if an object is an employee.
     /// It gets the component employee, if the object doesn't have it, it isn't an employee

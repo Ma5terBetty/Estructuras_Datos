@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PickUpObj : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PickUpObj : MonoBehaviour
     [SerializeField] private Transform _hand;
     public GameObject GrabbedObject { get; private set; }
 
+    public UnityAction OnPackageChange;
+    
 
     public void PickUp(Collider other)
     {
@@ -19,6 +22,7 @@ public class PickUpObj : MonoBehaviour
         GrabbedObject.transform.rotation = transform.rotation;
         GrabbedObject.transform.SetParent(transform);
         //ObjGrabbed = false;
+        OnPackageChange.Invoke();
     }
 
     public void Drop()
@@ -28,6 +32,7 @@ public class PickUpObj : MonoBehaviour
         GrabbedObject.GetComponent<Rigidbody>().isKinematic = false;
         //_grabbedObject.transform.SetParent(null);
         GrabbedObject = _tempObject;
+        OnPackageChange.Invoke();
     }
 
     private void OnTriggerEnter(Collider other)
