@@ -8,21 +8,32 @@ using UnityEngine;
 /// </summary>
 public class EmployeeManager : MonoBehaviour
 {
+    //ToDo: Get rid of it
     public static EmployeeManager Instance;
-    
+
     //private List<Employee> _employees = new List<Employee>();
     [SerializeField] private Employee _currentEmployee;
-   
+
 
     private void Awake()
     {
-        if(Instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
 
         Instance = this;
+    }
+
+    private void Start()
+    {
+        TaskPoint.OnClickedTaskPoint += SetTask;
+    }
+
+    private void OnDisable()
+    {
+        TaskPoint.OnClickedTaskPoint += SetTask;
     }
 
     /// <summary>
@@ -44,7 +55,7 @@ public class EmployeeManager : MonoBehaviour
     {
         return _currentEmployee;
     }
-    
+
     /// <summary>
     /// Checks if an object is an employee.
     /// It gets the component employee, if the object doesn't have it, it isn't an employee
@@ -62,11 +73,20 @@ public class EmployeeManager : MonoBehaviour
     /// </summary>
     /// <param name="target"></param>
     /// <param name="obj"></param> 
-    public void SetTask(Vector3 target,GameObject obj)
+    public void SetTask(Task newTask)
     {
-        _currentEmployee.GiveTask(new CmdMoveTowards(_currentEmployee.transform, target, _currentEmployee.GetData().Speed));
-        // if(obj.CompareTag("Box"))
-        //     _currentEmployee.GiveTask(new CmdPickUpObj());
+#if UNITY_EDITOR
+        Debug.Log(">>>>>>>>>>>>>>Set task");
+#endif
+        if (_currentEmployee)
+        {
+#if UNITY_EDITOR
+            Debug.Log("<<<<<<<<<<<<<<<Set task");
+#endif
+            _currentEmployee.AddTask(newTask);
+        }
+
+
     }
 
     public void RemoveEmployee()

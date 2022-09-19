@@ -41,7 +41,7 @@ public class ConveyorPool : MonoBehaviour
     { 
         if (!poolPacakges.IsQueueEmpty())
         { 
-            temp = poolPacakges.FirstInQueue();
+            temp = poolPacakges.Peek();
             temp.gameObject.SetActive(true);
             temp.gameObject.transform.position = output.position;
             temp.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;

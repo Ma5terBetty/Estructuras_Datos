@@ -15,9 +15,9 @@ public class ConveyorDropper : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PickUpObj>() != null && other.GetComponent<PickUpObj>()._grabbedObject != null)
+        if (other.GetComponent<PickUpObj>() != null && other.GetComponent<PickUpObj>().GrabbedObject != null)
         {
-            other.GetComponent<PickUpObj>()._grabbedObject.transform.position = _dropPosition;
+            other.GetComponent<PickUpObj>().GrabbedObject.transform.position = _dropPosition;
             other.GetComponent<PickUpObj>().Drop();
         }
     }
