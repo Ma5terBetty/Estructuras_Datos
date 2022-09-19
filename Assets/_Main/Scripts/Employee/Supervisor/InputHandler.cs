@@ -22,6 +22,9 @@ public class InputHandler : MonoBehaviour
     /// </summary>
     public Vector3 MousePosition => _mousePosition;
 
+    public Action OnLeftClick;
+    public Action OnRightClick;
+
 
     private void OnEnable()
     {
@@ -31,6 +34,8 @@ public class InputHandler : MonoBehaviour
             _inputActions.Player.Pointer.performed += i => _mousePosition = i.ReadValue<Vector2>();
             _inputActions.Player.Click.performed += i => OnClick?.Invoke();
             _inputActions.Player.DobleClick.performed += i => OnDoubleClick?.Invoke();
+            _inputActions.Player.RightClick.performed += i => OnRightClick?.Invoke();
+            _inputActions.Player.LeftClick.performed += i => OnLeftClick?.Invoke();
         }
 
         _inputActions.Enable();

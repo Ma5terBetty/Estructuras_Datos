@@ -11,17 +11,28 @@ public class SelectEmployee : MonoBehaviour
     /// If you select another employee, it changes the selected employee
     /// </summary>
     /// <param name="mousePos">Current mouse position</param>
+    ///
+    
+    private EmployeeManager _employeeManager;
+
+    private void Awake()
+    {
+        _employeeManager = GetComponent<EmployeeManager>();
+    }
+    
     public void GetEmployee(in Vector2 mousePos)
     {
+        if(!_employeeManager) return;
+        
         var ray = Camera.main.ScreenPointToRay(mousePos);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100f, target))
         {
-            EmployeeManager.Instance.GetEmployee(hit.collider.gameObject.GetComponent<Employee>());
+            _employeeManager.GetEmployee(hit.collider.gameObject.GetComponent<Employee>());
         }
         else
         {
-            EmployeeManager.Instance.RemoveEmployee();
+            _employeeManager.RemoveEmployee();
         }
     }
 }

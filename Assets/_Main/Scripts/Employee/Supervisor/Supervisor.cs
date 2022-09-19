@@ -21,14 +21,20 @@ public class Supervisor : MonoBehaviour
 
     private void Start()
     {
-        _input.OnClick += AssignTask;
-        _input.OnDoubleClick += SelectEmployee;
+        _input.OnRightClick += AssignTask;
+        _input.OnLeftClick += SelectEmployee;
+        
+        /*_input.OnClick += AssignTask;
+        _input.OnDoubleClick += SelectEmployee;*/
     }
 
     private void OnDisable()
     {
-        _input.OnClick -= AssignTask;
-        _input.OnDoubleClick -= SelectEmployee;
+        _input.OnRightClick -= AssignTask;
+        _input.OnLeftClick -= SelectEmployee;
+        
+        /*_input.OnClick -= AssignTask;
+        _input.OnDoubleClick -= SelectEmployee;*/
     }
 
     private void SelectEmployee()

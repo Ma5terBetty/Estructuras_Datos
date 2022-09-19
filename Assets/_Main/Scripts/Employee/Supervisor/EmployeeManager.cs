@@ -8,23 +8,8 @@ using UnityEngine;
 /// </summary>
 public class EmployeeManager : MonoBehaviour
 {
-    //ToDo: Get rid of it
-    public static EmployeeManager Instance;
-    
     //private List<Employee> _employees = new List<Employee>();
     [SerializeField] private Employee _currentEmployee;
-   
-
-    private void Awake()
-    {
-        if(Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-    }
     
     private void Start()
     {
