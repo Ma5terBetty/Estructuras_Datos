@@ -25,6 +25,16 @@ public class EmployeeManager : MonoBehaviour
 
         Instance = this;
     }
+    
+    private void Start()
+    {
+        TaskPoint.OnClickedTaskPoint += SetTask;
+    }
+
+    private void OnDisable()
+    {
+        TaskPoint.OnClickedTaskPoint += SetTask;
+    }
 
     private void Start()
     {
