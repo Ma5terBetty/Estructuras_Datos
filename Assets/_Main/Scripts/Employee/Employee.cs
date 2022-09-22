@@ -30,14 +30,41 @@ public class Employee : MonoBehaviour
     private void Start()
     {
         SetSelectedOutline(false);
+        StartCoroutine(DoTask2());
     }
 
     private void Update()
     {
-        if(_isDoingTask || _pendingTasks.Count < 1)
+        /*if(_isDoingTask || _pendingTasks.Count < 1)
             return;
 
-        StartCoroutine(DoTask());
+        StartCoroutine(DoTask());*/
+    }
+
+    private IEnumerator DoTask2()
+    {
+        while (true)
+        {
+            if (!_isDoingTask && _pendingTasks.Count >= 1)
+            {
+                            
+                _isDoingTask = true;
+                var ongoingTask = _pendingTasks.Dequeue();
+                var ongoingTaskPosition = ongoingTask.Position;
+
+                while (Vector3.Distance(transform.position, ongoingTaskPosition) > data.MinTaskDistance && _isDoingTask)
+                {
+                    CmdMoveTowards move = new CmdMoveTowards(transform, ongoingTaskPosition, data.Speed);
+                    move.Do();
+            
+                    yield return null;
+                }
+
+                _isDoingTask = false;
+            }
+            
+            yield return null;
+        }
     }
 
     private IEnumerator DoTask()
