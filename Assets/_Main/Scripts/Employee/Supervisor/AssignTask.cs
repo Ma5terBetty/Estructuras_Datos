@@ -6,14 +6,21 @@ using UnityEngine;
 public class AssignTask : MonoBehaviour
 {
     [SerializeField] private LayerMask target;
+    private EmployeeManager _employeeManager;
 
+    private void Awake()
+    {
+        _employeeManager = GetComponent<EmployeeManager>();
+    }
 
     public void SetTask(in Vector2 mousePos)
     {
+        if(!_employeeManager) return;
+
         var ray = Camera.main.ScreenPointToRay(mousePos);
         RaycastHit hit;
         if (!Physics.Raycast(ray, out hit, 100f, target)) return;
-        if (!EmployeeManager.Instance.HasEmployee()) return;
-        EmployeeManager.Instance.SetTask(new Task(){Position = hit.point, TaskPoint = null});
+        if (!_employeeManager.HasEmployee()) return;
+        _employeeManager.SetTask(new Task(){Position = hit.point, TaskPoint = null});
     }
 }

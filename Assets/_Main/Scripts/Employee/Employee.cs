@@ -19,6 +19,7 @@ public class Employee : MonoBehaviour
     {
         _selectedOutline = GetComponent<Outline>();
         _pickUpObj = GetComponent<PickUpObj>();
+        _pickUpObj.OnPackageChange += OnPackageChangeHandler;
     }
 
     private void OnDisable()
@@ -50,7 +51,7 @@ public class Employee : MonoBehaviour
             CmdMoveTowards move = new CmdMoveTowards(transform, ongoingTaskPosition, data.Speed);
             move.Do();
 
-            if (_pickUpObj.GrabbedObject)
+            if (!_isDoingTask)
             {
                 break;
             }
@@ -72,14 +73,9 @@ public class Employee : MonoBehaviour
         _pendingTasks.Enqueue(newTask);
     }
 
-    private void OnMouseOver()
+    private void OnPackageChangeHandler()
     {
-        var name = data.ID;
-        UIManager.Instance.ShowName($"Employee: {name}");
+        _isDoingTask = false;
     }
 
-    private void OnMouseExit()
-    {
-        UIManager.Instance.TurnOffName();
-    }
 }

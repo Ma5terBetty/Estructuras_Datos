@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -43,7 +44,7 @@ public class UIManager : MonoBehaviour
     public void ShowName(string name)
     { 
         NameShow.SetActive(true);
-        NameShow.GetComponentInChildren<Text>().text = name;
+        NameShow.GetComponentInChildren<TMP_Text>().text = name;
     }
 
     public void TurnOffName()
