@@ -79,11 +79,11 @@ public class OrdersManager : MonoBehaviour
         }
         Order orderData = new Order(temp[0], temp[1], temp[2], temp[3]);
 
-        GameObject order = Instantiate(orderUIPrefab);
+        GameObject order = Instantiate(orderUIPrefab, rightUIPanel.transform);
 
         order.GetComponent<OrderUI>().data = orderData;
         order.GetComponent<OrderUI>().SetInfo();
-        order.transform.SetParent(rightUIPanel.transform);
+        //order.transform.SetParent(rightUIPanel.transform);
         order.transform.localScale = Vector3.one;
 
         currentOrders.Add(orderData);
@@ -94,11 +94,11 @@ public class OrdersManager : MonoBehaviour
     {
         Order orderData = new Order(1, 1, 1, 1);
 
-        GameObject order = Instantiate(orderUIPrefab);
+        GameObject order = Instantiate(orderUIPrefab, rightUIPanel.transform);
 
         order.GetComponent<OrderUI>().data = orderData;
         order.GetComponent<OrderUI>().SetInfo();
-        order.transform.SetParent(rightUIPanel.transform);
+        //order.transform.SetParent(rightUIPanel.transform);
         order.transform.localScale = Vector3.one;
 
         currentOrders.Add(orderData);

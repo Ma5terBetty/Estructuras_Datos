@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class OrderUI : MonoBehaviour
 {
@@ -24,10 +25,10 @@ public class OrderUI : MonoBehaviour
     }
     public void SetInfo()
     { 
-        redBox.GetComponentInChildren<Text>().text = data.redAmount.ToString();
-        greenBox.GetComponentInChildren<Text>().text = data.greenAmount.ToString();
-        blueBox.GetComponentInChildren<Text>().text = data.blueAmount.ToString();
-        yellowBox.GetComponentInChildren<Text>().text = data.yellowAmount.ToString();
+        redBox.GetComponentInChildren<TMP_Text>().text = data.redAmount.ToString();
+        greenBox.GetComponentInChildren<TMP_Text>().text = data.greenAmount.ToString();
+        blueBox.GetComponentInChildren<TMP_Text>().text = data.blueAmount.ToString();
+        yellowBox.GetComponentInChildren<TMP_Text>().text = data.yellowAmount.ToString();
 
         if (data.redAmount == 0) redBox.SetActive(false);
         if (data.greenAmount == 0) greenBox.SetActive(false);
