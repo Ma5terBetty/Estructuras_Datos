@@ -23,6 +23,7 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
+        //ToDo: crear un bool en el gameManager isGameOver, posible error de ejecutarce el evento de ontimeended multiples veces
         DecreaseTimer();
         DisplayTime();
         if (_currentTime < PercentageOf(time, yellowPercentage) && _currentTime > PercentageOf(time, redPercentage))
