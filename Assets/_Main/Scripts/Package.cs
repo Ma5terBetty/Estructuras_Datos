@@ -31,4 +31,15 @@ public class Package : MonoBehaviour
         meshRender.sharedMaterial.color = data.Color;
         //ColorName = Data.Id.ToString();
     }
+
+    private void OnMouseOver()
+    {
+        var name = Data.Id.ToString();
+        UIManager.Instance.ShowName($"{name} package");
+    }
+
+    private void OnMouseExit()
+    {
+        UIManager.Instance.TurnOffName();
+    }
 }

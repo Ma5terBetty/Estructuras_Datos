@@ -9,21 +9,19 @@ public class ConveyorTool : MonoBehaviour
 
     public int amount;
 
-    float weirdSpacingFactor = 1.33f;
-
     Mesh mesh;
     public void Build(int amount)
     {
         Clear();
         mesh = conveyor.transform.GetChild(2).GetComponent<MeshFilter>().sharedMesh;
-        float boxSize = mesh.bounds.size.z / weirdSpacingFactor;
+        float boxSize = mesh.bounds.size.z;
         int counter = 0;
 
         while (counter < amount)
         {
             Vector3 position = transform.position;
-            Vector3 finalPosition = new Vector3(position.x, position.y, position.z + (boxSize * counter));
-            GameObject temp = Instantiate(conveyor, finalPosition, Quaternion.identity);
+            Vector3 finalPosition = new Vector3(position.x + (boxSize * counter * transform.forward.x), position.y, position.z + (boxSize * counter* transform.forward.z));
+            GameObject temp = Instantiate(conveyor, finalPosition, Quaternion.Euler(transform.rotation.eulerAngles));
             temp.transform.parent = transform;
             counter++;
         }
