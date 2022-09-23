@@ -8,6 +8,8 @@ public class Timer : MonoBehaviour
 
     [Header("Timer")]
     [SerializeField] private float time = 200f;
+    [SerializeField] private float yellowPercentage = 40f;
+    [SerializeField] private float redPercentage = 20f;
     
     [Header("UI elements")]
     [SerializeField] private TMP_Text timeText;
@@ -23,10 +25,12 @@ public class Timer : MonoBehaviour
     {
         DecreaseTimer();
         DisplayTime();
-        if (_currentTime < (time/4) && _currentTime > (time/7))
+        if (_currentTime < PercentageOf(time, yellowPercentage) && _currentTime > PercentageOf(time, redPercentage))
             ChangeTextColor(Color.yellow);
-        else if (_currentTime < (time/7))
+        else if (_currentTime < PercentageOf(time, redPercentage))
             ChangeTextColor(Color.red);
+        else
+            ChangeTextColor(Color.white);
     }
 
     private void DecreaseTimer()
@@ -49,4 +53,6 @@ public class Timer : MonoBehaviour
     }
 
     private void ChangeTextColor(in Color color) => timeText.color = color;
+
+    private float PercentageOf(in float x, in float percentage) => x * (percentage / 100);
 }
