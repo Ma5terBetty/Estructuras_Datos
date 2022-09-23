@@ -3872,7 +3872,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1118835755, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
       propertyPath: time
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4436845226353604286, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
       propertyPath: m_RootOrder
