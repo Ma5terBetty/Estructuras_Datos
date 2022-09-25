@@ -15,4 +15,4 @@ MonoBehaviour:
   health: 100
   weight: 10
   packageColor: {r: 0.43921566, g: 0.50909096, b: 1, a: 0}
-  id: 0
+  id: 1
