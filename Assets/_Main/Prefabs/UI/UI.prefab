@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99922b0ca7f5654687c394fde03a0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 200
+  time: 30
   yellowPercentage: 40
   redPercentage: 20
   timeText: {fileID: 1367234853}
