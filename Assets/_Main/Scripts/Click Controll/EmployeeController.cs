@@ -7,6 +7,10 @@ public class EmployeeController : MonoBehaviour
     [SerializeField] private Camera worldCamera;
     private IControllable employee;
 
+    private void Start()
+    {
+        worldCamera = Camera.main;
+    }
 
     private void Update()
     {
