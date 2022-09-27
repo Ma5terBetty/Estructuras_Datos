@@ -24,17 +24,42 @@ public struct MyBackground
     public Color Color => color;
     public Material Material => material;
 }
+
+[System.Serializable]
+public struct MyButtonColors
+{
+    [SerializeField] private Color normal;
+    [SerializeField] private Color highlighted;
+    [SerializeField] private Color pressed;
+    [SerializeField] private Color selected;
+    [SerializeField] private Color disable;
+    
+    public Color Normal => normal;
+    public Color Highlighted => highlighted;
+    public Color Pressed => pressed;
+    public Color Selected => selected;
+    public Color Disable => disable;
+}
+
 [CreateAssetMenu(menuName = "UI", fileName = "Screen/GameOver", order = 0)]
 public class GameOverSO : ScriptableObject
 {
-    [Header("Text")]
+    [Header("Texts")]
     [SerializeField] private MyText tittle;
     [SerializeField] private MyText message;
     
     [Header("Background")]
     [SerializeField] private MyBackground background;
+    
+    [Header("Buttons")]
+    [SerializeField] private MyText buttonOne;
+    [SerializeField] private MyText buttonTwo;
+    [SerializeField] private MyButtonColors buttonColors;
 
     public MyText Tittle => tittle;
     public MyText Message => message;
     public MyBackground Background => background;
+    public MyText ButtonOne => buttonOne;
+    public MyText ButtonTwo => buttonTwo;
+    public MyButtonColors ButtonColors => buttonColors;
 }

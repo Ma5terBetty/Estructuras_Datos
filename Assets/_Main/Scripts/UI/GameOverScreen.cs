@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class GameOverScreen : MonoBehaviour
 {
-    [SerializeField] private GameOverSO screenData;
     private Image _background;
-    public TMP_Text[] _texts;
+    [SerializeField] private GameOverSO screenData;
+    [SerializeField] private TMP_Text[] texts;
+    [SerializeField] public Button[] buttons;
 
     private void Awake()
     {
@@ -18,8 +19,10 @@ public class GameOverScreen : MonoBehaviour
     private void Start()
     {
         SetBackgroundData(ref _background, screenData.Background);
-        SetTextData(ref _texts[0], screenData.Tittle);
-        SetTextData(ref _texts[1], screenData.Message);
+        SetTextData(ref texts[0], screenData.Tittle);
+        SetTextData(ref texts[1], screenData.Message);
+        SetTextData(ref texts[2], screenData.ButtonOne);
+        SetTextData(ref texts[3], screenData.ButtonTwo);
     }
 
     private void SetTextData(ref TMP_Text text, in MyText textData)
@@ -35,4 +38,5 @@ public class GameOverScreen : MonoBehaviour
         background.color = textData.Color;
         background.material = textData.Material;
     }
+
 }

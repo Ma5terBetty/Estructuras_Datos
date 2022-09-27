@@ -13,11 +13,28 @@ MonoBehaviour:
   m_Name: GameOver
   m_EditorClassIdentifier: 
   tittle:
-    text: 
-    font: {fileID: 0}
-    color: {r: 0, g: 0, b: 0, a: 0}
+    text: Game over
+    font: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
   message:
-    text: 
-    font: {fileID: 0}
-    color: {r: 0, g: 0, b: 0, a: 0}
-  backround: {r: 0, g: 0, b: 0, a: 1}
+    text: You lost, now you're going to be a cartonero
+    font: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+    color: {r: 1, g: 1, b: 1, a: 1}
+  background:
+    image: {fileID: 0}
+    color: {r: 0, g: 0, b: 0, a: 0.68235296}
+    material: {fileID: 0}
+  buttonOne:
+    text: Restart
+    font: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+    color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+  buttonTwo:
+    text: Main Menu
+    font: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+    color: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
+  buttonColors:
+    normal: {r: 1, g: 1, b: 1, a: 1}
+    highlighted: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
+    pressed: {r: 0.7264151, g: 0, b: 0, a: 1}
+    selected: {r: 0.9339623, g: 0.15419187, b: 0.39992929, a: 1}
+    disable: {r: 1, g: 0.6179246, b: 0.6179246, a: 0.62352943}
