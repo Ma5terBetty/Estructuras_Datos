@@ -45,7 +45,6 @@ public class Pallet : MonoBehaviour
         if (package != null)
         {
             package.SetParent(package);
-
             CheckStacks(package.gameObject);
 
             other.GetComponent<PickUpObj>().Drop();
