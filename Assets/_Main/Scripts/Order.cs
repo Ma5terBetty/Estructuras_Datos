@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Order : MonoBehaviour
+public class Order
 {
     public int redAmount;
     public int greenAmount;
@@ -33,6 +33,11 @@ public class Order : MonoBehaviour
                 break;
         }
 
+        Debug.Log($"Color counter is: R:{redAmount} / G: {greenAmount} / B:{blueAmount} / Y:{yellowAmount}");
+    }
+
+    public void Print()
+    {
         Debug.Log($"Color counter is: R:{redAmount} / G: {greenAmount} / B:{blueAmount} / Y:{yellowAmount}");
     }
 }
