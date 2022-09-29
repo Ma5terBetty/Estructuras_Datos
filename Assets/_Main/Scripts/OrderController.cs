@@ -15,12 +15,12 @@ public class OrderController : MonoBehaviour
     Order palletOrder;
     Order currentOrder;
     Dictionary<Order, GameObject> ordersUI = new Dictionary<Order, GameObject>();
-    float timer = 0f;
-    float orderTime;
+    //float timer = 0f;
+    //float orderTime;
 
     private void Start()
     {
-        GameManager.Instance.OrderController = this;
+        GameManager.Instance.orderController = this;
         
         currentOrder = new Order();
         palletOrder = palletObject.GetComponentInChildren<Pallet>().currentOrder;
@@ -46,7 +46,7 @@ public class OrderController : MonoBehaviour
             }
             else
             {
-                GameManager.Instance.GameOver();
+                GameManager.Instance.GameOver(false);
             }
         }
         else
@@ -96,7 +96,7 @@ public class OrderController : MonoBehaviour
     public void GenerateOrder()
     {
         palletObject.SetActive(true);
-        orderTime = 0;
+        //orderTime = 0;
 
         Order orderData = new Order(1, 0, 0, 0);
         currentOrder = orderData;
@@ -111,8 +111,9 @@ public class OrderController : MonoBehaviour
         //currentOrders.Add(orderData);
         ordersUI.Add(orderData, order);
 
-        orderTime = 10f;
-        GameManager.Instance.UIManager.SetTimer(orderTime);
+        //Por que lo harcordearias a 10 segundos?
+        // orderTime = 10f;
+        // GameManager.Instance.UIManager.SetTimer(orderTime);
     }
 
     

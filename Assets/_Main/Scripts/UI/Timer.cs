@@ -10,8 +10,6 @@ public class Timer : MonoBehaviour
     [SerializeField] private float _time = 200f;
     [SerializeField] private float yellowPercentage = 40f;
     [SerializeField] private float redPercentage = 20f;
-
-    bool isRunning;
     
     [Header("UI elements")]
     [SerializeField] private TMP_Text timeText;
@@ -19,16 +17,11 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         _currentTime = _time;
-
-        GameManager.OnDefeat += StopTimer;
-        GameManager.OnVictory += StopTimer;
     }
 
     private void Update()
     {
-        //ToDo: crear un bool en el gameManager isGameOver, posible error de ejecutarce el evento de ontimeended multiples veces
-
-        if (isRunning)
+        if (!GameManager.Instance.IsGameOver)
         {
             DecreaseTimer();
             DisplayTime();
@@ -46,7 +39,7 @@ public class Timer : MonoBehaviour
         if (_currentTime < 0.1f)
         {
             _currentTime = 0;
-            GameManager.Instance.OrderController.CheckForOrder(true);
+            GameManager.Instance.orderController.CheckForOrder(true);
             return;
         }
         _currentTime -= Time.deltaTime;
@@ -64,18 +57,18 @@ public class Timer : MonoBehaviour
 
     private float PercentageOf(in float x, in float percentage) => x * (percentage / 100);
 
-    public void SetInit(float time)
-    { 
-        _time = time;
-        _currentTime = _time;
-        isRunning = true;
-    }
+    // public void SetInit(float time)
+    // { 
+    //     _time = time;
+    //     _currentTime = _time;
+    //     isRunning = true;
+    // }
 
-    public void StopTimer()
-    {
-        isRunning = false;
-#if UNITY_EDITOR
-        Debug.Log("ZAWARUDO TOKIO TOMARE");
-#endif
-    }
+//     private void StopTimer()
+//     {
+//         isRunning = false;
+// #if UNITY_EDITOR
+//         Debug.Log("ZAWARUDO TOKIO TOMARE");
+// #endif
+//     }
 }

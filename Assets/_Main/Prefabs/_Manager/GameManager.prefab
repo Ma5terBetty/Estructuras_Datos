@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6edf488f8368b6b43b19123deae269f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OrderController: {fileID: 0}
-  UIManager: {fileID: 0}
-  Truck: {fileID: 0}
+  gameOverScreen: {fileID: 4713738805967036708, guid: 1031aee334e2d8a49b9fbdc2f3c5ccf3, type: 3}
+  gameLostData: {fileID: 11400000, guid: a6001e0e287a6c045acdeac66e9fbbb3, type: 2}
+  gameWonData: {fileID: 11400000, guid: ad460470cec9d1042ae1b6e7f29f3dbe, type: 2}
+  orderController: {fileID: 0}
+  uiManager: {fileID: 0}
+  truck: {fileID: 0}

@@ -23,7 +23,7 @@ public class Pallet : MonoBehaviour
         {
             stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
             currentOrder.Add(colorKey.ToString());
-            GameManager.Instance.OrderController.CheckForOrder();
+            GameManager.Instance.orderController.CheckForOrder();
         }
         else if (stacks.Count < 4)
         {
@@ -31,7 +31,7 @@ public class Pallet : MonoBehaviour
             index++;
             stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
             currentOrder.Add(colorKey.ToString());
-            GameManager.Instance.OrderController.CheckForOrder();
+            GameManager.Instance.orderController.CheckForOrder();
         }
         else
         { 

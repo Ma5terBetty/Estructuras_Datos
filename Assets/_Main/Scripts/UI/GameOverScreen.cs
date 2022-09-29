@@ -39,4 +39,6 @@ public class GameOverScreen : MonoBehaviour
         background.material = textData.Material;
     }
 
+    public void SetData(GameOverSO data) => screenData = data;
+
 }

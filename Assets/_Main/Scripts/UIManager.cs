@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.UIManager = this;
+        GameManager.Instance.uiManager = this;
     }
 
     public void ShowName(string name)
@@ -55,8 +55,8 @@ public class UIManager : MonoBehaviour
         NameShow.SetActive(false);
     }
 
-    public void SetTimer(float time)
-    { 
-        timer.SetInit(time);
-    }
+    // public void SetTimer(float time)
+    // { 
+    //     timer.SetInit(time);
+    // }
 }

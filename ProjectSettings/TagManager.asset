@@ -8,6 +8,7 @@ TagManager:
   - Employee
   - Floor
   - Box
+  - Canvas
   layers:
   - Default
   - TransparentFX
