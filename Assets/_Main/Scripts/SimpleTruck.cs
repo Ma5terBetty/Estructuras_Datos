@@ -10,23 +10,49 @@ public class SimpleTruck : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
-    void Start()
+
+    private void Start()
     {
-        
+        OnEnable();
+    }
+    private void Update()
+    {
+        Test();
     }
 
+    void StartPallet()
+    {
+        GameManager.Instance.TruckArrived();
+        GameManager.Instance.OrderController.GenerateOrder();
+    }
     public void ChangeToIdle()
     {
+        OnDisable();
         animator.SetBool("IsWaiting", true);
     }
-
     public void ChangeToLeaving()
     {
         animator.SetBool("IsWaiting", false);
+        OnEnable();
     }
-    // Update is called once per frame
-    void Update()
+
+    void Test()
     {
-        
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            animator.SetBool("IsWaiting", false);
+        }
+    }
+
+    private void OnEnable()
+    {
+        GameManager.OnTruckArrives += ChangeToIdle;
+        GameManager.OnTruckArrives -= ChangeToLeaving;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnTruckLeaves -= ChangeToIdle;
+        GameManager.OnTruckLeaves += ChangeToLeaving;
     }
 }

@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
 
     public static UIManager Instance;
 
+    private Timer timer;
+
     [SerializeField]
     GameObject bottomLayout;
 
@@ -33,12 +35,13 @@ public class UIManager : MonoBehaviour
         }
 
         bottomLayout = transform.GetChild(0).gameObject;
+        timer = GetComponentInChildren<Timer>();
 
     }
 
     void Start()
     {
-        
+        GameManager.Instance.UIManager = this;
     }
 
     public void ShowName(string name)
@@ -50,5 +53,10 @@ public class UIManager : MonoBehaviour
     public void TurnOffName()
     {
         NameShow.SetActive(false);
+    }
+
+    public void SetTimer(float time)
+    { 
+        timer.SetInit(time);
     }
 }
