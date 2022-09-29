@@ -16,8 +16,6 @@ public class Timer : MonoBehaviour
     [Header("UI elements")]
     [SerializeField] private TMP_Text timeText;
 
-    public Action OnTimeEnded { get; private set; }
-
     private void Start()
     {
         _currentTime = _time;
@@ -48,7 +46,6 @@ public class Timer : MonoBehaviour
         if (_currentTime < 0.1f)
         {
             _currentTime = 0;
-            OnTimeEnded?.Invoke();
             GameManager.Instance.OrderController.CheckForOrder(true);
             return;
         }
@@ -77,7 +74,8 @@ public class Timer : MonoBehaviour
     public void StopTimer()
     {
         isRunning = false;
-
+#if UNITY_EDITOR
         Debug.Log("ZAWARUDO TOKIO TOMARE");
+#endif
     }
 }

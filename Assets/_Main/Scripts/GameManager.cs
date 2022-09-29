@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameOverSO gameLostData;
+    [SerializeField] private GameOverSO gameWonData;
+    
     public static GameManager Instance { get; private set; }
     public bool IsGamePaused { get; private set; }
 
@@ -30,6 +34,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         MakeSingleton();
+        IsGameOver = false;
     }
 
     private void MakeSingleton()
@@ -58,13 +63,13 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         OnDefeat?.Invoke();
-        Debug.Log("Derrota");
+        IsGameOver = true;
     }
 
     public void LevelSucceded()
     { 
         OnVictory?.Invoke();
-        Debug.Log("Victoria");
+        IsGameOver = true;
     }
 
     public void OrderCompleted()
