@@ -48,7 +48,7 @@ public class Pallet : MonoBehaviour
 
             CheckStacks(package.gameObject);
 
-            other.GetComponent<PickUpObj>().Drop();
+            other.GetComponent<PackageCollector>().Drop();
         }
     }
 
@@ -59,6 +59,7 @@ public class Pallet : MonoBehaviour
         for (int i = 0; i < packages.Length; i++)
         {
             Destroy(packages[i].gameObject);
+            stacks.Clear();
         }
     }
 
