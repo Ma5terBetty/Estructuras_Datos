@@ -9,7 +9,8 @@ using UnityEngine;
 public class EmployeeManager : MonoBehaviour
 {
     //private List<Employee> _employees = new List<Employee>();
-    [SerializeField] private Employee _currentEmployee;
+    //[SerializeField] private Employee _currentEmployee;
+    [SerializeField] private EmployeeContrl _currentEmployee;
     
     private void Start()
     {
@@ -25,11 +26,11 @@ public class EmployeeManager : MonoBehaviour
     /// Assigns current employee to the elected employee
     /// </summary>
     /// <param name="employee"></param>
-    public void GetEmployee(Employee employee)
+    public void GetEmployee(EmployeeContrl employee)
     {
         RemoveEmployee();
         _currentEmployee = employee;
-        _currentEmployee.SetSelectedOutline(true);
+        _currentEmployee.EmployeeView.SetSelectedOutline(true);
     }
 
     /// <summary>
@@ -76,7 +77,7 @@ public class EmployeeManager : MonoBehaviour
 
     public void RemoveEmployee()
     {
-        if (_currentEmployee != null) _currentEmployee.SetSelectedOutline(false);
+        if (_currentEmployee != null) _currentEmployee.EmployeeView.SetSelectedOutline(false);
         _currentEmployee = null;
     }
 }
