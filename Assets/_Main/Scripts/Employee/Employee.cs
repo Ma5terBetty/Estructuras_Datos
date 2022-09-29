@@ -10,18 +10,16 @@ public class Employee : MonoBehaviour
     [SerializeField] private EmployeeSO data;
     
     private Outline _selectedOutline;
-    //private PickUpObj _pickUpObj;
+    private PackageCollector _packageCollector;
     private CustomQueue<Task> _pendingTasks = new();
     private bool _isDoingTask;
     public EmployeeSO GetData() => data;
 
-    private PackageCollector _packageCollector;
+
 
     private void Awake()
     {
         _selectedOutline = GetComponent<Outline>();
-        /*_pickUpObj = GetComponent<PickUpObj>();
-        _pickUpObj.OnPackageChange += OnPackageChangeHandler;*/
 
         _packageCollector = GetComponent<PackageCollector>();
         _packageCollector.OnPackageChange += OnPackageChangeHandler;

@@ -7,13 +7,13 @@ public class PackageShelfController : MonoBehaviour
 {
     [SerializeField] private Package package;
     [SerializeField] private PackageTypeSO type;
-    [Range(1, 9)] [SerializeField] private int ammount;
+    [Range(1, 9)] [SerializeField] private int amount;
     [SerializeField] private Transform placesBox;
 
     private CustomQueue<Package> _packageQueue = new CustomQueue<Package>();
 
 
-    private void Awake()
+    private void Start()
     {
         InitShelf();
     }
@@ -24,16 +24,16 @@ public class PackageShelfController : MonoBehaviour
         
         if(placesBox.childCount < 1) return;
 
-        FillShelf();
+        FillShelf(amount);
     }
 
-    public void FillShelf()
+    public void FillShelf(int amountToFill)
     {
-        for (int i = 0; i < placesBox.childCount; i++)
+        for (int i = 0; i < amountToFill; i++)
         {
             var currentPlace = placesBox.GetChild(i);
             if(currentPlace.childCount > 1) continue;
-            var newPackage = Instantiate(package);
+            var newPackage = Instantiate(package, currentPlace);
             newPackage.SetData(type);
             newPackage.SetInShelf(currentPlace);
             _packageQueue.Enqueue(newPackage);

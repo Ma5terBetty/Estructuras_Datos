@@ -59,6 +59,7 @@ public class Pallet : MonoBehaviour
         for (int i = 0; i < packages.Length; i++)
         {
             Destroy(packages[i].gameObject);
+            stacks.Clear();
         }
     }
 

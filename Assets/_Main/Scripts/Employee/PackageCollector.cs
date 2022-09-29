@@ -18,15 +18,13 @@ public class PackageCollector : MonoBehaviour
         if (HasPackageInHand) return;
 
         PackageInHand = other.transform.parent.GetComponent<PackageShelfController>().GivePackage();
-        PackageInHand.PickUp(transform, hand);
+        if(PackageInHand)
+            PackageInHand.PickUp(transform, hand);
         OnPackageChange?.Invoke();
-
     }
 
     public void Drop()
     {
-        Debug.Log("Trying To Drop");
-        
         if(!HasPackageInHand) return;
         
         PackageInHand.Drop();

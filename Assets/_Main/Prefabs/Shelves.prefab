@@ -112,8 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   package: {fileID: 3929238288164798642, guid: b0464fd3dcc0b6445b9650eed3e88ac6, type: 3}
-  type: {fileID: 11400000, guid: 5d8dfbf66000202449207ba076e60f93, type: 2}
-  ammount: 9
+  type: {fileID: 11400000, guid: c8f7649724003f242a044a010b9e314e, type: 2}
+  amount: 4
   placesBox: {fileID: 8023005297050776359}
 --- !u!1 &8023005296002551877
 GameObject:
