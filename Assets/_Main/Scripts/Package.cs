@@ -54,6 +54,14 @@ public class Package : MonoBehaviour
         _canUse = false;
     }
 
+    public void SetInShelf(Transform place)
+    {
+        _rigidbody.isKinematic = true;
+        transform.position = place.position;
+        transform.rotation = place.rotation;
+        transform.SetParent(place);
+    }
+
     public void SetCanUse(bool input) => _canUse = input;
 
     private void OnMouseOver()

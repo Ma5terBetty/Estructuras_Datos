@@ -6,18 +6,21 @@ public class EmployeeContrl : MonoBehaviour
 {
     EmployeeModel employeeModel;
     EmployeeView employeeView;
-    PickUpObj _pickUpObj;
+    //PickUpObj _pickUpObj;
+    private PackageCollector _packgeCollector;
 
     public EmployeeModel EmployeeModel { get => employeeModel; set { employeeModel = value; } }
     public EmployeeView EmployeeView { get => employeeView; set { employeeView = value;} }
-    public PickUpObj PickUpObj { get => _pickUpObj; set { _pickUpObj = value; } }
+    //public PickUpObj PickUpObj { get => _pickUpObj; set { _pickUpObj = value; } }
 
     private void Awake()
     {
         employeeModel = GetComponent<EmployeeModel>();
         employeeView = GetComponent<EmployeeView>();
-        _pickUpObj = GetComponent<PickUpObj>();
-        _pickUpObj.OnPackageChange += OnPackageChangeHandler;
+        /*_pickUpObj = GetComponent<PickUpObj>();
+        _pickUpObj.OnPackageChange += OnPackageChangeHandler;*/
+        _packgeCollector = GetComponent<PackageCollector>();
+        _packgeCollector.OnPackageChange += OnPackageChangeHandler;
     }
 
     void Start()
