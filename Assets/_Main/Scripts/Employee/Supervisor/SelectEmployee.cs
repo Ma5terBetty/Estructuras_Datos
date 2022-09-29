@@ -28,7 +28,7 @@ public class SelectEmployee : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100f, target))
         {
-            _employeeManager.GetEmployee(hit.collider.gameObject.GetComponent<Employee>());
+            _employeeManager.GetEmployee(hit.collider.gameObject.GetComponent<EmployeeContrl>());
         }
         else
         {

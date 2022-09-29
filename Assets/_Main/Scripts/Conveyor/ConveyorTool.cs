@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class ConveyorTool : MonoBehaviour
 {
@@ -21,7 +22,10 @@ public class ConveyorTool : MonoBehaviour
         {
             Vector3 position = transform.position;
             Vector3 finalPosition = new Vector3(position.x + (boxSize * counter * transform.forward.x), position.y, position.z + (boxSize * counter* transform.forward.z));
-            GameObject temp = Instantiate(conveyor, finalPosition, Quaternion.Euler(transform.rotation.eulerAngles));
+            //GameObject temp = Instantiate(conveyor, finalPosition, Quaternion.Euler(transform.rotation.eulerAngles));
+            var temp = (GameObject)PrefabUtility.InstantiatePrefab(conveyor);
+            temp.transform.position = finalPosition;
+            temp.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles);
             temp.transform.parent = transform;
             counter++;
         }

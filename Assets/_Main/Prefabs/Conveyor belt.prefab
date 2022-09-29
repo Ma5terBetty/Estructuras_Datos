@@ -134,6 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.5
   belt: {fileID: 8567154426357667486}
+  leftWall: {fileID: 5841869941779365652}
+  rightWall: {fileID: 5620028375130944004}
   isLeftWallEnabled: 1
   isRightWallEnabled: 1
 --- !u!54 &6763318998867154500

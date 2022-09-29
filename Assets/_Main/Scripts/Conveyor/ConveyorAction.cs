@@ -9,9 +9,6 @@ public class ConveyorAction : MonoBehaviour
 
     [SerializeField] private MeshRenderer belt;
     Rigidbody rb;
-
-    GameObject leftWall;
-    GameObject rightWall;
     private static readonly int ScrollYSpeed = Shader.PropertyToID("_ScrollYSpeed");
 
     public bool isLeftWallEnabled = true;
@@ -19,17 +16,12 @@ public class ConveyorAction : MonoBehaviour
 
     private void Awake()
     {
-        leftWall = transform.GetChild(3).gameObject;
-        rightWall = transform.GetChild(2).gameObject;
         belt.material.SetFloat(ScrollYSpeed, speed);
     }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        if (!isLeftWallEnabled) leftWall.SetActive(false);
-        if (!isRightWallEnabled) rightWall.SetActive(false);
     }
 
     private void FixedUpdate()
