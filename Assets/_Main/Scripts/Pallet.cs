@@ -11,8 +11,6 @@ public class Pallet : MonoBehaviour
 
     private void Start()
     {
-        currentOrder = new Order();
-
         OnEnable();
     }
     void CheckStacks(GameObject input)
@@ -78,7 +76,7 @@ public class Pallet : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.OnTruckArrives += Reset;
+        GameManager.OnTruckLeaves += Reset;
     }
 
     private void OnDisable()
