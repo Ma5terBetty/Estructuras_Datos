@@ -15,23 +15,21 @@ public class OrderController : MonoBehaviour
     Order palletOrder;
     Order currentOrder;
     Dictionary<Order, GameObject> ordersUI = new Dictionary<Order, GameObject>();
+
+    Order cleanOder = new Order();
+    Order tempOrder = new Order();
+
     //float timer = 0f;
     //float orderTime;
 
     private void Start()
     {
+        OnEnable();
+
         GameManager.Instance.orderController = this;
-        
         currentOrder = new Order();
-        palletOrder = palletObject.GetComponentInChildren<Pallet>().currentOrder;
-        palletObject.SetActive(false);
-
+        TurnPalletOff();    
     }
-    void Update()
-    {
-        
-    }
-
     public void CheckForOrder(bool isTimeOver = false)
     {
         if (isTimeOver)
@@ -51,6 +49,9 @@ public class OrderController : MonoBehaviour
         }
         else
         {
+            if (currentOrder == null) Debug.Log("Se rompio order");
+            if (palletOrder == null) Debug.Log("Se rompio pallet");
+
             if (currentOrder.redAmount == palletOrder.redAmount
             && currentOrder.greenAmount == palletOrder.greenAmount
             && currentOrder.blueAmount == palletOrder.blueAmount
@@ -61,6 +62,16 @@ public class OrderController : MonoBehaviour
                 GameManager.Instance.TruckLeaves();
             }
         }
+    }
+
+    void TurnPalletOff()
+    {
+        palletObject.SetActive(false);
+    }
+
+    void TurnPalletOn()
+    {
+        palletObject.SetActive(true);
     }
 
     /*public void GenerateOrder()
@@ -95,7 +106,7 @@ public class OrderController : MonoBehaviour
     // TESTING
     public void GenerateOrder()
     {
-        palletObject.SetActive(true);
+        //palletObject.SetActive(true);
         //orderTime = 0;
 
         Order orderData = new Order(1, 0, 0, 0);
@@ -114,7 +125,28 @@ public class OrderController : MonoBehaviour
         //Por que lo harcordearias a 10 segundos?
         // orderTime = 10f;
         // GameManager.Instance.UIManager.SetTimer(orderTime);
+
+        if (currentOrder == null)
+        {
+            Debug.Log("La puta madre");
+        }
+
+        tempOrder = cleanOder;
+        palletObject.GetComponent<Pallet>().currentOrder = tempOrder;
+        palletOrder = palletObject.gameObject.GetComponent<Pallet>().currentOrder;
+        if (palletOrder == null) Debug.Log("Se rompio pallet");
     }
 
-    
+    private void OnEnable()
+    {
+        GameManager.OnTruckArrives += TurnPalletOn;
+        GameManager.OnTruckLeaves += TurnPalletOff;
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+
+
 }
