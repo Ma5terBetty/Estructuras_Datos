@@ -36,7 +36,7 @@ public class Timer : MonoBehaviour
 
     private void DecreaseTimer()
     {
-        if (_currentTime < 0.1f)
+        if (_currentTime <= 0f)
         {
             _currentTime = 0;
             GameManager.Instance.orderController.CheckForOrder(true);
@@ -57,18 +57,18 @@ public class Timer : MonoBehaviour
 
     private float PercentageOf(in float x, in float percentage) => x * (percentage / 100);
 
-    // public void SetInit(float time)
-    // { 
-    //     _time = time;
-    //     _currentTime = _time;
-    //     isRunning = true;
-    // }
+    public void SetInit(float time)
+    {
+        _time = time;
+        _currentTime = _time;
+        //isRunning = true;
+    }
 
-//     private void StopTimer()
-//     {
-//         isRunning = false;
-// #if UNITY_EDITOR
-//         Debug.Log("ZAWARUDO TOKIO TOMARE");
-// #endif
-//     }
+    //     private void StopTimer()
+    //     {
+    //         isRunning = false;
+    // #if UNITY_EDITOR
+    //         Debug.Log("ZAWARUDO TOKIO TOMARE");
+    // #endif
+    //     }
 }

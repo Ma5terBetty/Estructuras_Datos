@@ -55,8 +55,8 @@ public class UIManager : MonoBehaviour
         NameShow.SetActive(false);
     }
 
-    // public void SetTimer(float time)
-    // { 
-    //     timer.SetInit(time);
-    // }
+    public void SetTimer(float time)
+    {
+        timer.SetInit(time);
+    }
 }

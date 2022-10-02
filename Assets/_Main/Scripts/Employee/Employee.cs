@@ -10,6 +10,7 @@ public class Employee : MonoBehaviour
     [SerializeField] private EmployeeSO data;
     
     private Outline _selectedOutline;
+    Rigidbody _rb;
     private PackageCollector _packageCollector;
     private CustomQueue<Task> _pendingTasks = new();
     private bool _isDoingTask;
@@ -20,7 +21,7 @@ public class Employee : MonoBehaviour
     private void Awake()
     {
         _selectedOutline = GetComponent<Outline>();
-
+        _rb = GetComponent<Rigidbody>();
         _packageCollector = GetComponent<PackageCollector>();
         _packageCollector.OnPackageChange += OnPackageChangeHandler;
     }
@@ -58,7 +59,7 @@ public class Employee : MonoBehaviour
 
                 while (Vector3.Distance(transform.position, ongoingTaskPosition) > data.MinTaskDistance && _isDoingTask)
                 {
-                    CmdMoveTowards move = new CmdMoveTowards(transform, ongoingTaskPosition, data.Speed);
+                    CmdMoveTowards move = new CmdMoveTowards(_rb, ongoingTaskPosition, data.Speed);
                     move.Do();
             
                     yield return null;
@@ -79,7 +80,7 @@ public class Employee : MonoBehaviour
 
         while (Vector3.Distance(transform.position, ongoingTaskPosition) > data.MinTaskDistance)
         {
-            CmdMoveTowards move = new CmdMoveTowards(transform, ongoingTaskPosition, data.Speed);
+            CmdMoveTowards move = new CmdMoveTowards(_rb, ongoingTaskPosition, data.Speed);
             move.Do();
 
             if (!_isDoingTask)

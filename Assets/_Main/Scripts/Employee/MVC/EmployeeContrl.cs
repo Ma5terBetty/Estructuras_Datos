@@ -6,6 +6,7 @@ public class EmployeeContrl : MonoBehaviour
 {
     EmployeeModel employeeModel;
     EmployeeView employeeView;
+    Rigidbody rb;
     private PackageCollector _packgeCollector;
 
     public EmployeeModel EmployeeModel { get => employeeModel; set { employeeModel = value; } }
@@ -13,6 +14,7 @@ public class EmployeeContrl : MonoBehaviour
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody>();
         employeeModel = GetComponent<EmployeeModel>();
         employeeView = GetComponent<EmployeeView>();
         _packgeCollector = GetComponent<PackageCollector>();
@@ -25,6 +27,14 @@ public class EmployeeContrl : MonoBehaviour
     }
     
     void Update()
+    {
+        /*if (employeeModel.IsDoingTask || employeeModel.PendingTasks.Count < 1)
+            return;
+
+        StartCoroutine(DoTask());*/
+    }
+
+    private void FixedUpdate()
     {
         if (employeeModel.IsDoingTask || employeeModel.PendingTasks.Count < 1)
             return;
@@ -39,7 +49,7 @@ public class EmployeeContrl : MonoBehaviour
 
         while (Vector3.Distance(transform.position, ongoingTaskPosition) > employeeModel.Data.MinTaskDistance)
         {
-            CmdMoveTowards move = new CmdMoveTowards(transform, ongoingTaskPosition, employeeModel.Data.Speed);
+            CmdMoveTowards move = new CmdMoveTowards(rb, ongoingTaskPosition, employeeModel.Data.Speed);
             move.Do();
 
             if (!employeeModel.IsDoingTask)

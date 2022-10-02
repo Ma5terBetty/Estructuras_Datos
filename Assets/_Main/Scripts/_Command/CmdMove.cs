@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CmdMoveTowards : ICommand
 {
-    private readonly Transform _transform;
+    private readonly Rigidbody _rigidBody;
     private readonly Vector3 _target;
     private readonly float _speed;
 
-    public CmdMoveTowards(Transform transform, Vector3 target, float speed)
+    public CmdMoveTowards(Rigidbody rigidBody, Vector3 target, float speed)
     {
-        _transform = transform;
+        _rigidBody = rigidBody;
         _target = target;
         _speed = speed;
     }
@@ -24,6 +24,6 @@ public class CmdMoveTowards : ICommand
         // position += dir * (_speed * Time.deltaTime);
         // _transform.position = position;
 
-        _transform.position = Vector3.MoveTowards(_transform.position, _target, _speed * Time.deltaTime);
+        _rigidBody.position = Vector3.MoveTowards(_rigidBody.position, _target, _speed * Time.deltaTime);
     }
 }
