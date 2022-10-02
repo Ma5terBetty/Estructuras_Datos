@@ -44,6 +44,8 @@ public struct MyButtonColors
 [CreateAssetMenu(menuName = "UI", fileName = "Screen/GameOver", order = 0)]
 public class GameOverSO : ScriptableObject
 {
+    [SerializeField] private bool isGameOver;
+    
     [Header("Texts")]
     [SerializeField] private MyText tittle;
     [SerializeField] private MyText message;
@@ -56,6 +58,7 @@ public class GameOverSO : ScriptableObject
     [SerializeField] private MyText buttonTwo;
     [SerializeField] private MyButtonColors buttonColors;
 
+    public bool IsGameOver => isGameOver;
     public MyText Tittle => tittle;
     public MyText Message => message;
     public MyBackground Background => background;

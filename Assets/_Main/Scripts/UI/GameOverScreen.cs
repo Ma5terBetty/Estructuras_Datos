@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverScreen : MonoBehaviour
@@ -21,8 +23,8 @@ public class GameOverScreen : MonoBehaviour
         SetBackgroundData(ref _background, screenData.Background);
         SetTextData(ref texts[0], screenData.Tittle);
         SetTextData(ref texts[1], screenData.Message);
-        SetTextData(ref texts[2], screenData.ButtonOne);
-        SetTextData(ref texts[3], screenData.ButtonTwo);
+        
+        StartCoroutine(screenData.IsGameOver == true? ResetLevelAfter(5f) : LoadNextLevelAfter(5f));
     }
 
     private void SetTextData(ref TMP_Text text, in MyText textData)
@@ -40,5 +42,18 @@ public class GameOverScreen : MonoBehaviour
     }
 
     public void SetData(GameOverSO data) => screenData = data;
+
+    private IEnumerator ResetLevelAfter(float time)
+    {
+        yield return new WaitForSeconds(time);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    private IEnumerator LoadNextLevelAfter(float time)
+    {
+        yield return new WaitForSeconds(time);
+        var currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount ? currentScene : currentScene + 1);
+    }
 
 }

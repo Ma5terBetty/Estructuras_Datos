@@ -7,7 +7,7 @@ public class PackageShelfController : MonoBehaviour
 {
     [SerializeField] private Package package;
     [SerializeField] private PackageTypeSO type;
-    [Range(1, 9)] [SerializeField] private int amount;
+    [Range(1, 20)] [SerializeField] private int amount;
     [SerializeField] private Transform placesBox;
 
     private CustomQueue<Package> _packageQueue = new CustomQueue<Package>();
