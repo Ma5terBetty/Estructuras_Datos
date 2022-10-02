@@ -36,7 +36,7 @@ public class Timer : MonoBehaviour
 
     private void DecreaseTimer()
     {
-        if (_currentTime < 0.1f)
+        if (_currentTime <= 0f)
         {
             _currentTime = 0;
             GameManager.Instance.orderController.CheckForOrder(true);
