@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DobleClick",
+                    "name": "DobleRightClick",
                     "type": "Button",
                     "id": "00adc302-ebe5-40f7-8a7a-e003e81a6c7d",
                     "expectedControlType": "Button",
@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Right Click",
+                    "name": "RightClick",
                     "type": "Button",
                     "id": "ee6ca322-3d8a-42d0-9876-025730ebde3c",
                     "expectedControlType": "Button",
@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Left Click",
+                    "name": "LeftClick",
                     "type": "Button",
                     "id": "a9e11bbe-d313-4266-96e5-faceb970fbe3",
                     "expectedControlType": "Button",
@@ -77,11 +77,11 @@
                 {
                     "name": "",
                     "id": "df230527-b472-4d0d-8b69-a97f5797a5d6",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DobleClick",
+                    "action": "DobleRightClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -92,7 +92,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Right Click",
+                    "action": "RightClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -103,7 +103,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Left Click",
+                    "action": "LeftClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
