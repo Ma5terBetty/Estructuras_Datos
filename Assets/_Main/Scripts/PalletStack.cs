@@ -24,7 +24,6 @@ public class PalletStack : MonoBehaviour
     public void RecieveItem(GameObject input)
     {
         input.gameObject.transform.SetParent(positions[stack.Index()]);
-        Debug.Log("asd");
         input.transform.position = input.transform.parent.position;
         input.transform.rotation = new Quaternion(0,0,0,0);
         stack.Push(input);
@@ -42,5 +41,15 @@ public class PalletStack : MonoBehaviour
         {
             positions[i] = transform.GetChild(i);
         }
+    }
+
+    void RestartStacks()
+    {
+        stack.Initialize(transform.childCount);
+    }
+
+    private void OnEnable()
+    {
+        GameManager.OnTruckLeaves += RestartStacks;
     }
 }
