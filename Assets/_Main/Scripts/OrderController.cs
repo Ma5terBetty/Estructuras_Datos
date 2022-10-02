@@ -16,7 +16,7 @@ public class OrderController : MonoBehaviour
     Order currentOrder;
     Dictionary<Order, GameObject> ordersUI = new Dictionary<Order, GameObject>();
 
-    Order cleanOder = new Order();
+    Order cleanOder = new Order(0,0,0,0);
     Order tempOrder = new Order();
 
     [SerializeField]
@@ -102,9 +102,12 @@ public class OrderController : MonoBehaviour
         totalOrderTime = individualOrderTime * 12f;
         UIManager.Instance.SetTimer(totalOrderTime);
 
-        tempOrder = cleanOder;
-        palletObject.GetComponent<Pallet>().currentOrder = tempOrder;
+        /*tempOrder = cleanOder;
+        palletObject.GetComponent<Pallet>().currentOrder = cleanOder;
+        palletOrder = palletObject.gameObject.GetComponent<Pallet>().currentOrder;*/
+        palletObject.GetComponent<Pallet>().currentOrder = cleanOder;
         palletOrder = palletObject.gameObject.GetComponent<Pallet>().currentOrder;
+        palletObject.gameObject.GetComponent<Pallet>().currentOrder.Reset();
     }
 
 

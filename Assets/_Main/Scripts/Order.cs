@@ -36,6 +36,14 @@ public class Order
         Debug.Log($"Color counter is: R:{redAmount} / G: {greenAmount} / B:{blueAmount} / Y:{yellowAmount}");
     }
 
+    public void Reset()
+    { 
+        redAmount=0;
+        greenAmount=0;
+        blueAmount=0;
+        yellowAmount=0;
+    }
+
     public void Print()
     {
         Debug.Log($"Color counter is: R:{redAmount} / G: {greenAmount} / B:{blueAmount} / Y:{yellowAmount}");
