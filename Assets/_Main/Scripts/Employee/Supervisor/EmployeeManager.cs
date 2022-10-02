@@ -75,6 +75,11 @@ public class EmployeeManager : MonoBehaviour
 
     }
 
+    public void OverrideTask()
+    {
+        _currentEmployee.OverrideTask();
+    }
+
     public void RemoveEmployee()
     {
         if (_currentEmployee != null) _currentEmployee.EmployeeView.SetSelectedOutline(false);

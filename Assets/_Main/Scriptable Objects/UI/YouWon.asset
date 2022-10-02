@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f7abd77cc6281346bc6df7a2defab5e, type: 3}
-  m_Name: Testing
+  m_Name: YouWon
   m_EditorClassIdentifier: 
   tittle:
-    text: Hello there
-    font: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-    color: {r: 0.5471698, g: 0, b: 0, a: 1}
+    text: You Won
+    font: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
+    color: {r: 0, g: 0, b: 0, a: 1}
   message:
-    text: You lose
-    font: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-    color: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
+    text: You won, take a bonus of 200 pesos
+    font: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    color: {r: 0, g: 0, b: 0, a: 1}
   background:
     image: {fileID: 0}
-    color: {r: 1, g: 1, b: 1, a: 1}
+    color: {r: 1, g: 1, b: 1, a: 0.68235296}
     material: {fileID: 0}

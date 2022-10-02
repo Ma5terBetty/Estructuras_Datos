@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class CmdPickUpObj : ICommand
 {
-    private Transform _transform;
+    private Rigidbody _rb;
     private float _speed;
     private GameObject _grabbedObj;
 
@@ -16,7 +16,7 @@ public class CmdPickUpObj : ICommand
     public void Do()
     {
         if (_grabbedObj != null) return;
-        CmdMoveTowards moveToObj = new CmdMoveTowards(_transform, _grabbedObj.transform.position, _speed);
+        CmdMoveTowards moveToObj = new CmdMoveTowards(_rb, _grabbedObj.transform.position, _speed);
         GrabObj();
     }
 

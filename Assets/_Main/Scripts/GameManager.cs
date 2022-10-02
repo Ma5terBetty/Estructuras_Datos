@@ -1,35 +1,50 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private int _ordersToComplete = 3;
+    
+    [Header("GameOver screen")]
+    private GameObject _canvas;
+    [SerializeField] private GameOverScreen gameOverScreen;
+    [SerializeField] private GameOverSO gameLostData;
+    [SerializeField] private GameOverSO gameWonData;
+    
     public static GameManager Instance { get; private set; }
     public bool IsGamePaused { get; private set; }
+    public bool IsGameOver { get; private set; }
 
-    public delegate void VictoryHandler();
-    public static event VictoryHandler OnVictory;
+    [Header("Order Controller")]
+    public OrderController orderController;
+    
+    [Header("UI Manager")]
+    private UIManager _uiManager;
+    
+    [Header("Truck")]
+    public GameObject truck;
 
-    public delegate void DefeatHandler();
-    public static event DefeatHandler OnDefeat;
+    public delegate void GameOverHandler(bool hasWon);
+    public static event GameOverHandler OnGameOver;
 
     public delegate void TruckArrivesHandler();
     public static event TruckArrivesHandler OnTruckArrives;
 
     public delegate void TruckLeavesHandler();
     public static event TruckLeavesHandler OnTruckLeaves;
-    public bool IsGameOver { get; private set; }
-
-    public OrderController OrderController;
-    public UIManager UIManager;
-
-    public GameObject Truck;
-
-    int _ordersToComplete = 3;
-
+    
     private void Awake()
     {
         MakeSingleton();
+        IsGameOver = false;
+        //SetUIManager();
+    }
+
+    private void Start()
+    {
+        OnGameOver += InitGameOverScreen;
     }
 
     private void MakeSingleton()
@@ -52,19 +67,25 @@ public class GameManager : MonoBehaviour
 
     public void GenerateNewOrder()
     { 
-        OrderController.GenerateOrder();
+        orderController.GenerateOrder();
     }
 
-    public void GameOver()
+    public void GameOver(bool hasWon)
     {
-        OnDefeat?.Invoke();
-        Debug.Log("Derrota");
-    }
-
-    public void LevelSucceded()
-    { 
-        OnVictory?.Invoke();
-        Debug.Log("Victoria");
+        IsGameOver = true;
+        OnGameOver?.Invoke(hasWon);
+        if (hasWon == true)
+        {
+#if UNITY_EDITOR
+            Debug.Log("Has won");
+#endif
+        }
+        else
+        {
+#if UNITY_EDITOR
+            Debug.Log("Has lost");
+#endif
+        }
     }
 
     public void OrderCompleted()
@@ -72,7 +93,7 @@ public class GameManager : MonoBehaviour
         _ordersToComplete--;
         if (_ordersToComplete == 0)
         {
-            LevelSucceded();
+            GameOver(true);
         }
         else
         {
@@ -89,4 +110,12 @@ public class GameManager : MonoBehaviour
     { 
         OnTruckLeaves?.Invoke();
     }
+
+    private void InitGameOverScreen(bool hasWon)
+    {
+        gameOverScreen.SetData(hasWon? gameWonData : gameLostData);
+        Instantiate(gameOverScreen, _canvas.transform);
+    }
+    
+    public void SetUIManager() => _canvas = UIManager.Instance.gameObject;
 }

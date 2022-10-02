@@ -4,45 +4,55 @@ using UnityEngine;
 
 public class EmployeeContrl : MonoBehaviour
 {
-    EmployeeModel employeeModel;
-    EmployeeView employeeView;
+    private EmployeeModel _employeeModel;
+    private EmployeeView _employeeView;
+    private Rigidbody _rigidbody;
     private PackageCollector _packgeCollector;
 
-    public EmployeeModel EmployeeModel { get => employeeModel; set { employeeModel = value; } }
-    public EmployeeView EmployeeView { get => employeeView; set { employeeView = value;} }
+    public EmployeeModel EmployeeModel { get => _employeeModel; set { _employeeModel = value; } }
+    public EmployeeView EmployeeView { get => _employeeView; set { _employeeView = value;} }
 
     private void Awake()
     {
-        employeeModel = GetComponent<EmployeeModel>();
-        employeeView = GetComponent<EmployeeView>();
+        _rigidbody = GetComponent<Rigidbody>();
+        _employeeModel = GetComponent<EmployeeModel>();
+        _employeeView = GetComponent<EmployeeView>();
         _packgeCollector = GetComponent<PackageCollector>();
         _packgeCollector.OnPackageChange += OnPackageChangeHandler;
     }
 
     void Start()
     {
-        employeeView.SetSelectedOutline(false);
+        _employeeView.SetSelectedOutline(false);
     }
     
     void Update()
     {
-        if (employeeModel.IsDoingTask || employeeModel.PendingTasks.Count < 1)
+        /*if (employeeModel.IsDoingTask || employeeModel.PendingTasks.Count < 1)
+            return;
+
+        StartCoroutine(DoTask());*/
+    }
+
+    private void FixedUpdate()
+    {
+        if (_employeeModel.IsDoingTask || _employeeModel.PendingTasks.Count < 1)
             return;
 
         StartCoroutine(DoTask());
     }
     private IEnumerator DoTask()
     {
-        employeeModel.IsDoingTask = true;
-        var ongoingTask = employeeModel.PendingTasks.Dequeue();
+        _employeeModel.IsDoingTask = true;
+        var ongoingTask = _employeeModel.PendingTasks.Dequeue();
         var ongoingTaskPosition = ongoingTask.Position;
 
-        while (Vector3.Distance(transform.position, ongoingTaskPosition) > employeeModel.Data.MinTaskDistance)
+        while (Vector3.Distance(transform.position, ongoingTaskPosition) > _employeeModel.Data.MinTaskDistance)
         {
-            CmdMoveTowards move = new CmdMoveTowards(transform, ongoingTaskPosition, employeeModel.Data.Speed);
+            CmdMoveTowards move = new CmdMoveTowards(_rigidbody, ongoingTaskPosition, _employeeModel.Data.Speed);
             move.Do();
 
-            if (!employeeModel.IsDoingTask)
+            if (!_employeeModel.IsDoingTask)
             {
                 break;
             }
@@ -50,15 +60,21 @@ public class EmployeeContrl : MonoBehaviour
             yield return null;
         }
 
-        employeeModel.IsDoingTask = false;
+        _employeeModel.IsDoingTask = false;
     }
     public void AddTask(Task newTask)
     {
-        employeeModel.PendingTasks.Enqueue(newTask);
+        _employeeModel.PendingTasks.Enqueue(newTask);
+    }
+
+    public void OverrideTask()
+    {
+        _employeeModel.IsDoingTask = false;
+        _employeeModel.PendingTasks.Dequeue();
     }
 
     public void OnPackageChangeHandler()
     {
-        employeeModel.IsDoingTask = false;
+        _employeeModel.IsDoingTask = false;
     }
 }

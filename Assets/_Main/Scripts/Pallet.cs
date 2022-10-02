@@ -11,8 +11,6 @@ public class Pallet : MonoBehaviour
 
     private void Start()
     {
-        currentOrder = new Order();
-
         OnEnable();
     }
     void CheckStacks(GameObject input)
@@ -23,7 +21,8 @@ public class Pallet : MonoBehaviour
         {
             stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
             currentOrder.Add(colorKey.ToString());
-            GameManager.Instance.OrderController.CheckForOrder();
+            GameManager.Instance.orderController.CheckForOrder();
+            Debug.Log("La Key ya existe!");
         }
         else if (stacks.Count < 4)
         {
@@ -31,13 +30,21 @@ public class Pallet : MonoBehaviour
             index++;
             stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
             currentOrder.Add(colorKey.ToString());
-            GameManager.Instance.OrderController.CheckForOrder();
+            GameManager.Instance.orderController.CheckForOrder();
+
+            Debug.Log("No tenía esta key!");
         }
         else
         { 
             //La nada misma
         }
     }
+
+    private void Update()
+    {
+            Debug.Log(stacks.Count);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         var package = FindChildWithTag(other.transform, "Object");
@@ -61,6 +68,12 @@ public class Pallet : MonoBehaviour
             Destroy(packages[i].gameObject);
             stacks.Clear();
         }
+
+        index = 0;
+        currentOrder = new Order();
+
+        Debug.Log("stacks reseteados");
+        Debug.Log(stacks.Count);
     }
 
     Transform FindChildWithTag(Transform parent, string tag)
@@ -78,7 +91,7 @@ public class Pallet : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.OnTruckArrives += Reset;
+        GameManager.OnTruckLeaves += Reset;
     }
 
     private void OnDisable()

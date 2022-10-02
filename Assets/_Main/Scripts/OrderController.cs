@@ -15,23 +15,22 @@ public class OrderController : MonoBehaviour
     Order palletOrder;
     Order currentOrder;
     Dictionary<Order, GameObject> ordersUI = new Dictionary<Order, GameObject>();
-    float timer = 0f;
-    float orderTime;
+
+    Order cleanOder = new Order(0,0,0,0);
+    Order tempOrder = new Order();
+
+    [SerializeField]
+    float individualOrderTime = 12f;
+    float totalOrderTime;
 
     private void Start()
     {
-        GameManager.Instance.OrderController = this;
-        
+        OnEnable();
+
+        GameManager.Instance.orderController = this;
         currentOrder = new Order();
-        palletOrder = palletObject.GetComponentInChildren<Pallet>().currentOrder;
-        palletObject.SetActive(false);
-
+        TurnPalletOff();    
     }
-    void Update()
-    {
-        
-    }
-
     public void CheckForOrder(bool isTimeOver = false)
     {
         if (isTimeOver)
@@ -46,11 +45,14 @@ public class OrderController : MonoBehaviour
             }
             else
             {
-                GameManager.Instance.GameOver();
+                GameManager.Instance.GameOver(false);
             }
         }
         else
         {
+            if (currentOrder == null) Debug.Log("Se rompio order");
+            if (palletOrder == null) Debug.Log("Se rompio pallet");
+
             if (currentOrder.redAmount == palletOrder.redAmount
             && currentOrder.greenAmount == palletOrder.greenAmount
             && currentOrder.blueAmount == palletOrder.blueAmount
@@ -63,16 +65,27 @@ public class OrderController : MonoBehaviour
         }
     }
 
-    /*public void GenerateOrder()
+    void TurnPalletOff()
+    {
+        palletObject.SetActive(false);
+    }
+
+    void TurnPalletOn()
     {
         palletObject.SetActive(true);
-        orderTime = 0;
+    }
+
+
+    public void GenerateOrder()
+    {
+        palletObject.SetActive(true);
+        totalOrderTime = 0;
 
         int[] temp = new int[4];
         for (int i = 0; i < temp.Length; i++)
         { 
             temp[i] = Mathf.RoundToInt(Random.Range(0, 4));
-            orderTime += temp[i];
+            individualOrderTime += temp[i];
         }
         Order orderData = new Order(temp[0], temp[1], temp[2], temp[3]);
 
@@ -86,17 +99,23 @@ public class OrderController : MonoBehaviour
 
         ordersUI.Add(orderData, order);
 
-        orderTime = orderTime * 12f;
-        GameManager.Instance.UIManager.SetTimer(orderTime);
-        
-    }*/
+        totalOrderTime = individualOrderTime * 12f;
+        UIManager.Instance.SetTimer(totalOrderTime);
+
+        /*tempOrder = cleanOder;
+        palletObject.GetComponent<Pallet>().currentOrder = cleanOder;
+        palletOrder = palletObject.gameObject.GetComponent<Pallet>().currentOrder;*/
+        palletObject.GetComponent<Pallet>().currentOrder = cleanOder;
+        palletOrder = palletObject.gameObject.GetComponent<Pallet>().currentOrder;
+        palletObject.gameObject.GetComponent<Pallet>().currentOrder.Reset();
+    }
 
 
     // TESTING
-    public void GenerateOrder()
+    /*public void GenerateOrder()
     {
-        palletObject.SetActive(true);
-        orderTime = 0;
+        //palletObject.SetActive(true);
+        //orderTime = 0;
 
         Order orderData = new Order(1, 0, 0, 0);
         currentOrder = orderData;
@@ -111,9 +130,27 @@ public class OrderController : MonoBehaviour
         //currentOrders.Add(orderData);
         ordersUI.Add(orderData, order);
 
-        orderTime = 10f;
-        GameManager.Instance.UIManager.SetTimer(orderTime);
+        //Por que lo harcordearias a 10 segundos?
+        //-Porque es la sección de Testing, el generador posta lo hace solito.
+        // orderTime = 10f;
+        // GameManager.Instance.UIManager.SetTimer(orderTime);
+
+        tempOrder = cleanOder;
+        palletObject.GetComponent<Pallet>().currentOrder = tempOrder;
+        palletOrder = palletObject.gameObject.GetComponent<Pallet>().currentOrder;
+        if (palletOrder == null) Debug.Log("Se rompio pallet");
+    }*/
+
+    private void OnEnable()
+    {
+        GameManager.OnTruckArrives += TurnPalletOn;
+        GameManager.OnTruckLeaves += TurnPalletOff;
     }
 
-    
+    private void OnDisable()
+    {
+        
+    }
+
+
 }
