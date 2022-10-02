@@ -100,7 +100,7 @@ public class OrderController : MonoBehaviour
         ordersUI.Add(orderData, order);
 
         totalOrderTime = individualOrderTime * 12f;
-        //UIManager.Instance.SetTimer(totalOrderTime);
+        UIManager.Instance.SetTimer(totalOrderTime);
 
         /*tempOrder = cleanOder;
         palletObject.GetComponent<Pallet>().currentOrder = cleanOder;
