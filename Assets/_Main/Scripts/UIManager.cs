@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.uiManager = this;
+        GameManager.Instance.SetUIManager();
     }
 
     public void ShowName(string name)

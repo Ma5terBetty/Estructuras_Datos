@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public OrderController orderController;
     
     [Header("UI Manager")]
-    public UIManager uiManager;
+    private UIManager _uiManager;
     
     [Header("Truck")]
     public GameObject truck;
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     {
         MakeSingleton();
         IsGameOver = false;
-        _canvas = UIManager.Instance.gameObject;
+        //SetUIManager();
     }
 
     private void Start()
@@ -116,4 +116,6 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetData(hasWon? gameWonData : gameLostData);
         Instantiate(gameOverScreen, _canvas.transform);
     }
+    
+    public void SetUIManager() => _canvas = UIManager.Instance.gameObject;
 }
