@@ -40,6 +40,11 @@ public class Pallet : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+            Debug.Log(stacks.Count);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         var package = FindChildWithTag(other.transform, "Object");
@@ -66,6 +71,9 @@ public class Pallet : MonoBehaviour
 
         index = 0;
         currentOrder = new Order();
+
+        Debug.Log("stacks reseteados");
+        Debug.Log(stacks.Count);
     }
 
     Transform FindChildWithTag(Transform parent, string tag)
