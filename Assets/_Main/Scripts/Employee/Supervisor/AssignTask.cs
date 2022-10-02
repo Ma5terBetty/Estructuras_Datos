@@ -23,4 +23,9 @@ public class AssignTask : MonoBehaviour
         if (!_employeeManager.HasEmployee()) return;
         _employeeManager.SetTask(new Task(){Position = hit.point, TaskPoint = null});
     }
+
+    public void OverrideTask()
+    {
+        _employeeManager.OverrideTask();
+    }
 }
