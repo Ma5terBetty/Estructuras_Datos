@@ -19,8 +19,9 @@ public class OrderController : MonoBehaviour
     Order cleanOder = new Order();
     Order tempOrder = new Order();
 
-    //float timer = 0f;
-    //float orderTime;
+    [SerializeField]
+    float individualOrderTime = 12f;
+    float totalOrderTime;
 
     private void Start()
     {
@@ -74,16 +75,17 @@ public class OrderController : MonoBehaviour
         palletObject.SetActive(true);
     }
 
-    /*public void GenerateOrder()
+
+    public void GenerateOrder()
     {
         palletObject.SetActive(true);
-        orderTime = 0;
+        totalOrderTime = 0;
 
         int[] temp = new int[4];
         for (int i = 0; i < temp.Length; i++)
         { 
             temp[i] = Mathf.RoundToInt(Random.Range(0, 4));
-            orderTime += temp[i];
+            individualOrderTime += temp[i];
         }
         Order orderData = new Order(temp[0], temp[1], temp[2], temp[3]);
 
@@ -97,14 +99,17 @@ public class OrderController : MonoBehaviour
 
         ordersUI.Add(orderData, order);
 
-        orderTime = orderTime * 12f;
-        GameManager.Instance.UIManager.SetTimer(orderTime);
-        
-    }*/
+        totalOrderTime = individualOrderTime * 12f;
+        UIManager.Instance.SetTimer(totalOrderTime);
+
+        tempOrder = cleanOder;
+        palletObject.GetComponent<Pallet>().currentOrder = tempOrder;
+        palletOrder = palletObject.gameObject.GetComponent<Pallet>().currentOrder;
+    }
 
 
     // TESTING
-    public void GenerateOrder()
+    /*public void GenerateOrder()
     {
         //palletObject.SetActive(true);
         //orderTime = 0;
@@ -123,19 +128,15 @@ public class OrderController : MonoBehaviour
         ordersUI.Add(orderData, order);
 
         //Por que lo harcordearias a 10 segundos?
+        //-Porque es la sección de Testing, el generador posta lo hace solito.
         // orderTime = 10f;
         // GameManager.Instance.UIManager.SetTimer(orderTime);
-
-        if (currentOrder == null)
-        {
-            Debug.Log("La puta madre");
-        }
 
         tempOrder = cleanOder;
         palletObject.GetComponent<Pallet>().currentOrder = tempOrder;
         palletOrder = palletObject.gameObject.GetComponent<Pallet>().currentOrder;
         if (palletOrder == null) Debug.Log("Se rompio pallet");
-    }
+    }*/
 
     private void OnEnable()
     {

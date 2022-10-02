@@ -57,18 +57,18 @@ public class Timer : MonoBehaviour
 
     private float PercentageOf(in float x, in float percentage) => x * (percentage / 100);
 
-    // public void SetInit(float time)
-    // { 
-    //     _time = time;
-    //     _currentTime = _time;
-    //     isRunning = true;
-    // }
+    public void SetInit(float time)
+    {
+        _time = time;
+        _currentTime = _time;
+        //isRunning = true;
+    }
 
-//     private void StopTimer()
-//     {
-//         isRunning = false;
-// #if UNITY_EDITOR
-//         Debug.Log("ZAWARUDO TOKIO TOMARE");
-// #endif
-//     }
+    //     private void StopTimer()
+    //     {
+    //         isRunning = false;
+    // #if UNITY_EDITOR
+    //         Debug.Log("ZAWARUDO TOKIO TOMARE");
+    // #endif
+    //     }
 }
