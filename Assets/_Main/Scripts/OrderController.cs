@@ -101,7 +101,7 @@ public class OrderController : MonoBehaviour
 
         ordersUI.Add(orderData, order);
 
-        totalOrderTime = individualOrderTime * 12f;
+        totalOrderTime = individualOrderTime * 3f;
         UIManager.Instance.SetTimer(totalOrderTime);
         //UIManager.Instance.SetTimer(5);
 
