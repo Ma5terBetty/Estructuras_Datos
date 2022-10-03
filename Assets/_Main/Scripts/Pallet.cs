@@ -36,10 +36,8 @@ public class Pallet : MonoBehaviour
             Debug.Log("No ten�a esta key!");
             return true;
         }
-        else
-        {
-            return false;
-        }
+        
+        return false;
     }
 
     private void Update()

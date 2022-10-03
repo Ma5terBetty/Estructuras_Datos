@@ -44,9 +44,8 @@ public class PalletStack : MonoBehaviour
         }
     }
 
-    void RestartStacks()
+    public void RestartStacks()
     {
-        Debug.Log("Pallet Childs: " + transform.childCount);
         stack.Initialize(transform.childCount);
     }
 

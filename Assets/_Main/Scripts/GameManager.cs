@@ -113,7 +113,13 @@ public class GameManager : MonoBehaviour
         OnChangedScene?.Invoke();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    
+
+    public void ResetLevel()
+    {
+        OnChangedScene?.Invoke();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+    }
+
     public IEnumerator LoadNextLevelAfter(float time)
     {
         yield return new WaitForSeconds(time);
