@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetData(hasWon? gameWonData : gameLostData);
         Instantiate(gameOverScreen, _canvas.transform);
     }
-    public void SetUIManager() => _canvas = UIManager.Instance.gameObject;
+    public void SetUIManager(UIManager uiManager) => _uiManager = uiManager;
     public void SetOrderController(OrderController orderController) => OrderController = orderController;
 
     private void ResetValue()
