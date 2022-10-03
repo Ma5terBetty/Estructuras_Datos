@@ -25,7 +25,7 @@ public class OrderController : MonoBehaviour
 
     private void Start()
     {
-        OnEnable();
+        Suscribe();
 
         GameManager.Instance.SetOrderController(this);
         currentOrder = new Order();
@@ -144,15 +144,17 @@ public class OrderController : MonoBehaviour
         if (palletOrder == null) Debug.Log("Se rompio pallet");
     }*/
 
-    private void OnEnable()
+    private void Suscribe()
     {
         GameManager.OnTruckArrives += TurnPalletOn;
         GameManager.OnTruckLeaves += TurnPalletOff;
+        GameManager.OnChangedScene += Unsuscribe;
     }
 
-    private void OnDisable()
+    private void Unsuscribe()
     {
-        
+        GameManager.OnTruckArrives -= TurnPalletOn;
+        GameManager.OnTruckLeaves -= TurnPalletOff;
     }
 
 

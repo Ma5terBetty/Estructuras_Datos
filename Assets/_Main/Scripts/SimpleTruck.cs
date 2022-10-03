@@ -13,7 +13,7 @@ public class SimpleTruck : MonoBehaviour
 
     private void Start()
     {
-        OnEnable();
+        Suscribe();
     }
     private void Update()
     {
@@ -27,7 +27,7 @@ public class SimpleTruck : MonoBehaviour
     }
     public void ChangeToIdle()
     {
-        OnDisable();
+        Unsuscribe();
         if(animator)
             animator.SetBool("IsWaiting", true);
     }
@@ -35,7 +35,7 @@ public class SimpleTruck : MonoBehaviour
     {
         if(animator)
             animator.SetBool("IsWaiting", false);
-        OnEnable();
+        Suscribe();
     }
 
     void Test()
@@ -46,13 +46,13 @@ public class SimpleTruck : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void Suscribe()
     {
         GameManager.OnTruckArrives += ChangeToIdle;
         GameManager.OnTruckArrives -= ChangeToLeaving;
     }
 
-    private void OnDisable()
+    private void Unsuscribe()
     {
         GameManager.OnTruckLeaves -= ChangeToIdle;
         GameManager.OnTruckLeaves += ChangeToLeaving;
