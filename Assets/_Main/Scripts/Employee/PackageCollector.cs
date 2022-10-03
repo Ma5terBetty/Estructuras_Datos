@@ -33,11 +33,11 @@ public class PackageCollector : MonoBehaviour
         OnPackageChange?.Invoke();
     }
 
-    public void Drop()
+    public void Drop(bool canUse = true)
     {
         if(!HasPackageInHand) return;
         
-        PackageInHand.Drop();
+        PackageInHand.Drop(canUse);
         PackageInHand = null;
         OnPackageChange?.Invoke();
     }

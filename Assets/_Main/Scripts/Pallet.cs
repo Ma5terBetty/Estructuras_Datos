@@ -55,7 +55,7 @@ public class Pallet : MonoBehaviour
 
             CheckStacks(package.gameObject);
 
-            other.GetComponent<PackageCollector>().Drop();
+            other.GetComponent<PackageCollector>().Drop(false);
         }
     }
 

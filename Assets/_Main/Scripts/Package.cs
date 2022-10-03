@@ -34,10 +34,10 @@ public class Package : MonoBehaviour
         transform.SetParent(employee);
     }
 
-    public void Drop()
+    public void Drop(bool canUse)
     {
+        _canUse = canUse;
         _rigidbody.isKinematic = false;
-        _canUse = false;
     }
 
     public void SetInShelf(Transform place)
