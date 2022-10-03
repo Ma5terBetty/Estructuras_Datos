@@ -17,6 +17,7 @@ public class CustomStack<T> : ICustomStack<T>
         inputs[index] = input;
         index++;
     }
+
     public T Pop()
     {
         index--;

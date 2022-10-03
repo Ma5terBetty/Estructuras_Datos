@@ -170,9 +170,9 @@ GameObject:
   - component: {fileID: 31741772}
   - component: {fileID: 31741771}
   - component: {fileID: 31741770}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Wall
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -394,9 +394,9 @@ GameObject:
   - component: {fileID: 103783812}
   - component: {fileID: 103783811}
   - component: {fileID: 103783810}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Wall
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -974,9 +974,9 @@ GameObject:
   - component: {fileID: 573204488}
   - component: {fileID: 573204487}
   - component: {fileID: 573204486}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Wall
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1703,9 +1703,9 @@ GameObject:
   - component: {fileID: 973643284}
   - component: {fileID: 973643283}
   - component: {fileID: 973643282}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Wall
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2896,6 +2896,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EmployeePrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 4885463315404986555, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
 --- !u!1 &1718283452 stripped
@@ -3041,9 +3045,9 @@ GameObject:
   - component: {fileID: 1892027512}
   - component: {fileID: 1892027511}
   - component: {fileID: 1892027510}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Wall
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3144,9 +3148,9 @@ GameObject:
   - component: {fileID: 2030006640}
   - component: {fileID: 2030006639}
   - component: {fileID: 2030006638}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Wall
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3350,8 +3354,69 @@ PrefabInstance:
       propertyPath: _time
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 2845038407638935177, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -165.86061
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
+--- !u!1001 &3945698075448647588
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3945698075570067819, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
+      propertyPath: m_Name
+      value: Toser
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945698075570067830, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945698075570067830, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945698075570067830, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945698075570067830, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -19.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945698075570067830, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945698075570067830, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945698075570067830, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945698075570067830, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945698075570067830, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945698075570067830, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945698075570067830, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 61ee441e1f5339e4a99d76d36fa59274, type: 3}
 --- !u!1 &4436845225595423819 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2845038407694932874, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}

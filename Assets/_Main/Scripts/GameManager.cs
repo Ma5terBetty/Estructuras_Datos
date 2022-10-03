@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     public OrderController OrderController { get; private set; }
     
-    [SerializeField] private UIManager _uiManager;
+    private UIManager _uiManager;
 
     public delegate void GameOverHandler(bool hasWon);
     public static event GameOverHandler OnGameOver;
@@ -105,8 +105,7 @@ public class GameManager : MonoBehaviour
     private void InitGameOverScreen(bool hasWon)
     {
         gameOverScreen.SetData(hasWon? gameWonData : gameLostData);
-        if(_canvas)
-            Instantiate(gameOverScreen, _canvas.transform);
+        Instantiate(gameOverScreen, _canvas.transform);
     }
     public void SetUIManager(UIManager uiManager) => _uiManager = uiManager;
     public void SetOrderController(OrderController orderController) => OrderController = orderController;
@@ -117,16 +116,17 @@ public class GameManager : MonoBehaviour
     }
     
     #region SceneManagement
-    public void ResetLevel()
-    {
-        OnChangedScene?.Invoke();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
     public IEnumerator ResetLevelAfter(float time)
     {
         yield return new WaitForSeconds(time);
         OnChangedScene?.Invoke();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ResetLevel()
+    {
+        OnChangedScene?.Invoke();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
     public IEnumerator LoadNextLevelAfter(float time)
