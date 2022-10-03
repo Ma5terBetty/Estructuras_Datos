@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 
@@ -32,12 +33,13 @@ public class UIManager : MonoBehaviour
 
         bottomLayout = transform.GetChild(0).gameObject;
         timer = GetComponentInChildren<Timer>();
+        
 
     }
 
-    void Start()
+    private void Start()
     {
-        GameManager.Instance.SetUIManager();
+        GameManager.Instance.SetUIManager(this);
     }
 
     public void ShowName(string name)
