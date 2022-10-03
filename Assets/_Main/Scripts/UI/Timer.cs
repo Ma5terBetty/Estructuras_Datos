@@ -10,6 +10,8 @@ public class Timer : MonoBehaviour
     [SerializeField] private float _time = 200f;
     [SerializeField] private float yellowPercentage = 40f;
     [SerializeField] private float redPercentage = 20f;
+
+    bool isRunning;
     
     [Header("UI elements")]
     [SerializeField] private TMP_Text timeText;
@@ -17,11 +19,13 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         _currentTime = _time;
+        isRunning = false;
+        Suscribe();
     }
 
     private void Update()
     {
-        if (!GameManager.Instance.IsGameOver)
+        if (!GameManager.Instance.IsGameOver && isRunning)
         {
             DecreaseTimer();
             DisplayTime();
@@ -65,11 +69,29 @@ public class Timer : MonoBehaviour
         //isRunning = true;
     }
 
-    //     private void StopTimer()
-    //     {
-    //         isRunning = false;
-    // #if UNITY_EDITOR
-    //         Debug.Log("ZAWARUDO TOKIO TOMARE");
-    // #endif
-    //     }
+    private void StopTimer()
+    {
+        isRunning = false;
+#if UNITY_EDITOR
+        Debug.Log("ZAWARUDO TOKIO TOMARE");
+#endif
+    }
+
+    void StartTimer()
+    {
+        isRunning = true;
+    }
+
+    void Suscribe()
+    {
+        GameManager.OnTruckLeaves += StopTimer;
+        GameManager.OnChangedScene += Unsuscribe;
+        GameManager.OnTruckArrives += StartTimer;
+    }
+
+    void Unsuscribe()
+    { 
+        GameManager.OnTruckLeaves -= StopTimer;
+        GameManager.OnTruckArrives -= StartTimer;
+    }
 }

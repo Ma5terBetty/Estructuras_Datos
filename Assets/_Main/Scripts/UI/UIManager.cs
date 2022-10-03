@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
 
             if (dontDestroyOnLoad)
             { 
-                DontDestroyOnLoad(gameObject);
+                //DontDestroyOnLoad(gameObject);
             }
         }
         else
