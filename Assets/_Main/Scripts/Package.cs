@@ -5,7 +5,7 @@ using UnityEngine;
 public class Package : MonoBehaviour
 {
     private Rigidbody _rigidbody;
-    private bool _canUse = true;
+    [SerializeField] private bool _canUse = true;
 
     public PackageTypeSO Data { get; private set; }
     public bool CanUse => _canUse;

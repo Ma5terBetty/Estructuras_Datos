@@ -22,7 +22,7 @@ public class GameOverScreen : MonoBehaviour
         SetTextData(ref texts[0], screenData.Tittle);
         SetTextData(ref texts[1], screenData.Message);
         
-        StartCoroutine(screenData.IsGameOver == true? ResetLevelAfter(5f) : LoadNextLevelAfter(5f));
+        StartCoroutine(screenData.IsGameOver == true? GameManager.Instance.ResetLevelAfter(5f) : GameManager.Instance.LoadNextLevelAfter(5f));
     }
 
     private void SetTextData(ref TMP_Text text, in MyText textData)
@@ -41,17 +41,17 @@ public class GameOverScreen : MonoBehaviour
 
     public void SetData(GameOverSO data) => screenData = data;
 
-    private IEnumerator ResetLevelAfter(float time)
-    {
-        yield return new WaitForSeconds(time);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-    
-    private IEnumerator LoadNextLevelAfter(float time)
-    {
-        yield return new WaitForSeconds(time);
-        var currentScene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount + 1 ? currentScene : currentScene + 1);
-    }
+    // private IEnumerator ResetLevelAfter(float time)
+    // {
+    //     yield return new WaitForSeconds(time);
+    //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    // }
+    //
+    // private IEnumerator LoadNextLevelAfter(float time)
+    // {
+    //     yield return new WaitForSeconds(time);
+    //     var currentScene = SceneManager.GetActiveScene().buildIndex;
+    //     SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount + 1 ? currentScene : currentScene + 1);
+    // }
 
 }

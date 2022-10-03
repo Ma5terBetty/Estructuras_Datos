@@ -67,12 +67,14 @@ public class OrderController : MonoBehaviour
 
     void TurnPalletOff()
     {
-        palletObject.SetActive(false);
+        if(palletObject)
+            palletObject.SetActive(false);
     }
 
     void TurnPalletOn()
     {
-        palletObject.SetActive(true);
+        if(palletObject)
+            palletObject.SetActive(true);
     }
 
 
@@ -100,8 +102,8 @@ public class OrderController : MonoBehaviour
         ordersUI.Add(orderData, order);
 
         totalOrderTime = individualOrderTime * 12f;
-        //UIManager.Instance.SetTimer(totalOrderTime);
-        UIManager.Instance.SetTimer(5);
+        UIManager.Instance.SetTimer(totalOrderTime);
+        //UIManager.Instance.SetTimer(5);
 
         /*tempOrder = cleanOder;
         palletObject.GetComponent<Pallet>().currentOrder = cleanOder;

@@ -1,7 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,34 +14,31 @@ public class GameManager : MonoBehaviour
     
     public static GameManager Instance { get; private set; }
     public bool IsGamePaused { get; private set; }
-    public bool IsGameOver { get; private set; }
+    public bool IsGameOver;
 
     public OrderController OrderController { get; private set; }
     
     private UIManager _uiManager;
-    
-    //[Header("Truck")]
-    //public GameObject truck;
 
     public delegate void GameOverHandler(bool hasWon);
     public static event GameOverHandler OnGameOver;
-
     public delegate void TruckArrivesHandler();
     public static event TruckArrivesHandler OnTruckArrives;
-
     public delegate void TruckLeavesHandler();
     public static event TruckLeavesHandler OnTruckLeaves;
+    public delegate void ChangeSceneHandler();
+    public static event ChangeSceneHandler OnChangedScene;
     
     private void Awake()
     {
         MakeSingleton();
         IsGameOver = false;
-        //SetUIManager();
     }
 
     private void Start()
     {
         OnGameOver += InitGameOverScreen;
+        OnChangedScene += ResetValue;
     }
 
     private void MakeSingleton()
@@ -72,18 +68,6 @@ public class GameManager : MonoBehaviour
     {
         IsGameOver = true;
         OnGameOver?.Invoke(hasWon);
-        if (hasWon == true)
-        {
-#if UNITY_EDITOR
-            Debug.Log("Has won");
-#endif
-        }
-        else
-        {
-#if UNITY_EDITOR
-            Debug.Log("Has lost");
-#endif
-        }
     }
 
     public void OrderCompleted()
@@ -114,8 +98,30 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetData(hasWon? gameWonData : gameLostData);
         Instantiate(gameOverScreen, _canvas.transform);
     }
-    
     public void SetUIManager() => _canvas = UIManager.Instance.gameObject;
-
     public void SetOrderController(OrderController orderController) => OrderController = orderController;
+
+    private void ResetValue()
+    {
+        IsGameOver = false;
+    }
+    
+    #region SceneManagement
+    public IEnumerator ResetLevelAfter(float time)
+    {
+        yield return new WaitForSeconds(time);
+        OnChangedScene?.Invoke();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    public IEnumerator LoadNextLevelAfter(float time)
+    {
+        yield return new WaitForSeconds(time);
+        var currentScene = SceneManager.GetActiveScene().buildIndex;
+        OnChangedScene?.Invoke();
+        SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount + 1 ? currentScene : currentScene + 1);
+    }
+    #endregion
+    
+    
 }

@@ -39,7 +39,8 @@ public class Timer : MonoBehaviour
         if (_currentTime <= 0f)
         {
             _currentTime = 0;
-            GameManager.Instance.OrderController.CheckForOrder(true);
+            GameManager.Instance.GameOver(false);
+            //GameManager.Instance.OrderController.CheckForOrder(true);
             return;
         }
         _currentTime -= Time.deltaTime;
