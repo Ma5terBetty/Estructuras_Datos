@@ -23,7 +23,7 @@ public class CmdMoveTowards : ICommand
         // dir.Normalize();
         // position += dir * (_speed * Time.deltaTime);
         // _transform.position = position;
-
+    
         _rigidBody.position = Vector3.MoveTowards(_rigidBody.position, _target, _speed * Time.deltaTime);
     }
 }
