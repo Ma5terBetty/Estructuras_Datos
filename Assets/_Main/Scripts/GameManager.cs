@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     private int _ordersToComplete = 3;
     
     [Header("GameOver screen")]
+    [SerializeField]
     private GameObject _canvas;
     [SerializeField] private GameOverScreen gameOverScreen;
     [SerializeField] private GameOverSO gameLostData;
@@ -35,6 +36,14 @@ public class GameManager : MonoBehaviour
         IsGameOver = false;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            InitGameOverScreen(true);
+        }
+    }
+
     private void Start()
     {
         OnGameOver += InitGameOverScreen;
@@ -50,7 +59,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     public void SetPause(bool isPause)
@@ -119,7 +128,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         var currentScene = SceneManager.GetActiveScene().buildIndex;
         OnChangedScene?.Invoke();
-        SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount + 1 ? currentScene : currentScene + 1);
+        SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount + 1 ? currentScene : currentScene + 1, LoadSceneMode.Single);
     }
     #endregion
     
