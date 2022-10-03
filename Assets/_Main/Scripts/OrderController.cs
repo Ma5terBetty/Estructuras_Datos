@@ -27,7 +27,7 @@ public class OrderController : MonoBehaviour
     {
         OnEnable();
 
-        GameManager.Instance.orderController = this;
+        GameManager.Instance.SetOrderController(this);
         currentOrder = new Order();
         TurnPalletOff();    
     }
@@ -67,12 +67,14 @@ public class OrderController : MonoBehaviour
 
     void TurnPalletOff()
     {
-        palletObject.SetActive(false);
+        if(palletObject)
+            palletObject.SetActive(false);
     }
 
     void TurnPalletOn()
     {
-        palletObject.SetActive(true);
+        if(palletObject)
+            palletObject.SetActive(true);
     }
 
 
@@ -101,6 +103,7 @@ public class OrderController : MonoBehaviour
 
         totalOrderTime = individualOrderTime * 12f;
         UIManager.Instance.SetTimer(totalOrderTime);
+        //UIManager.Instance.SetTimer(5);
 
         /*tempOrder = cleanOder;
         palletObject.GetComponent<Pallet>().currentOrder = cleanOder;
