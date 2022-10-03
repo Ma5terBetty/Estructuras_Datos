@@ -17,14 +17,12 @@ public class GameManager : MonoBehaviour
     public bool IsGamePaused { get; private set; }
     public bool IsGameOver { get; private set; }
 
-    [Header("Order Controller")]
-    public OrderController orderController;
+    public OrderController OrderController { get; private set; }
     
-    [Header("UI Manager")]
     private UIManager _uiManager;
     
-    [Header("Truck")]
-    public GameObject truck;
+    //[Header("Truck")]
+    //public GameObject truck;
 
     public delegate void GameOverHandler(bool hasWon);
     public static event GameOverHandler OnGameOver;
@@ -67,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     public void GenerateNewOrder()
     { 
-        orderController.GenerateOrder();
+        OrderController.GenerateOrder();
     }
 
     public void GameOver(bool hasWon)
@@ -118,4 +116,6 @@ public class GameManager : MonoBehaviour
     }
     
     public void SetUIManager() => _canvas = UIManager.Instance.gameObject;
+
+    public void SetOrderController(OrderController orderController) => OrderController = orderController;
 }

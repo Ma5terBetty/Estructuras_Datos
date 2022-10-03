@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -11,7 +9,7 @@ public class GameOverScreen : MonoBehaviour
     private Image _background;
     [SerializeField] private GameOverSO screenData;
     [SerializeField] private TMP_Text[] texts;
-    [SerializeField] public Button[] buttons;
+    //[SerializeField] public Button[] buttons;
 
     private void Awake()
     {
@@ -53,7 +51,7 @@ public class GameOverScreen : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         var currentScene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount ? currentScene : currentScene + 1);
+        SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount + 1 ? currentScene : currentScene + 1);
     }
 
 }

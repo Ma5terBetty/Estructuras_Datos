@@ -21,7 +21,7 @@ public class Pallet : MonoBehaviour
         {
             stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
             currentOrder.Add(colorKey.ToString());
-            GameManager.Instance.orderController.CheckForOrder();
+            GameManager.Instance.OrderController.CheckForOrder();
             Debug.Log("La Key ya existe!");
         }
         else if (stacks.Count < 4)
@@ -30,9 +30,9 @@ public class Pallet : MonoBehaviour
             index++;
             stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
             currentOrder.Add(colorKey.ToString());
-            GameManager.Instance.orderController.CheckForOrder();
+            GameManager.Instance.OrderController.CheckForOrder();
 
-            Debug.Log("No tenía esta key!");
+            Debug.Log("No tenï¿½a esta key!");
         }
         else
         { 
@@ -42,7 +42,7 @@ public class Pallet : MonoBehaviour
 
     private void Update()
     {
-            Debug.Log(stacks.Count);
+        //Debug.Log(stacks.Count);
     }
 
     private void OnTriggerEnter(Collider other)

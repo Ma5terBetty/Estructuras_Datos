@@ -23,7 +23,7 @@ public class SimpleTruck : MonoBehaviour
     void StartPallet()
     {
         GameManager.Instance.TruckArrived();
-        GameManager.Instance.orderController.GenerateOrder();
+        GameManager.Instance.OrderController.GenerateOrder();
     }
     public void ChangeToIdle()
     {
