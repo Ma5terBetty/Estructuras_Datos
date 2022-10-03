@@ -41,6 +41,13 @@ public class Package : MonoBehaviour
         _rigidbody.isKinematic = false;
     }
 
+    public void DropInPallet()
+    {
+        _rigidbody.isKinematic = true;
+        _canUse = false;
+        SetCanInteract(false);
+    }
+
     public void SetInShelf(Transform place)
     {
         _rigidbody.isKinematic = true;

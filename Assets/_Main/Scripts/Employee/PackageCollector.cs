@@ -47,6 +47,17 @@ public class PackageCollector : MonoBehaviour
         OnPackageChange?.Invoke();
     }
 
+    public void DropInPallet()
+    {
+        if(!HasPackageInHand) return;
+        
+        Debug.Log("Package Droped in Pallet");
+        
+        PackageInHand.DropInPallet();
+        PackageInHand = null;
+        OnPackageChange?.Invoke();
+    }
+
     public void SaveInShelf(PackageShelfController shelf)
     {
         if(!HasPackageInHand) return;

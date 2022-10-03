@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,7 +48,7 @@ public class PalletStack : MonoBehaviour
         }
     }
 
-    void RestartStacks()
+    public void RestartStacks()
     {
         stack.Initialize(transform.childCount);
     }

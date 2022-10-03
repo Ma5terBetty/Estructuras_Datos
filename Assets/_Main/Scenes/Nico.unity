@@ -1270,7 +1270,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 61.2, y: 0, z: 0}
 --- !u!1 &721440350 stripped
 GameObject:
@@ -1585,9 +1585,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6edf488f8368b6b43b19123deae269f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OrderController: {fileID: 0}
-  UIManager: {fileID: 0}
-  Truck: {fileID: 0}
+  gameOverScreen: {fileID: 0}
+  gameLostData: {fileID: 0}
+  gameWonData: {fileID: 0}
+  IsGameOver: 0
 --- !u!4 &928546828
 Transform:
   m_ObjectHideFlags: 0
@@ -1859,6 +1860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb69914a46658e84e9e3cb4b851acc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &1044250678
 GameObject:
   m_ObjectHideFlags: 0
@@ -2356,6 +2358,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2845038407638935177, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -165.86061
+      objectReference: {fileID: 0}
     - target: {fileID: 4436845226353604286, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -2931,11 +2937,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e082979a473bb914ab8af10a5d754993, type: 3}
---- !u!1 &1830797514 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4436845226957289934, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
-  m_PrefabInstance: {fileID: 1462629765}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1842996645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2966,8 +2967,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   palletObject: {fileID: 1373532898}
-  rightUIPanel: {fileID: 1830797514}
+  rightUIPanel: {fileID: 0}
   orderUIPrefab: {fileID: 3566271613684916463, guid: ccab746a0fc448a42b47ae8552d1e615, type: 3}
+  individualOrderTime: 12
 --- !u!4 &1842996647
 Transform:
   m_ObjectHideFlags: 0

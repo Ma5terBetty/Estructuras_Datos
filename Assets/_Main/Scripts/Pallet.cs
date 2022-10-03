@@ -15,7 +15,7 @@ public class Pallet : MonoBehaviour
         stacks = new Dictionary<PackageId, GameObject>();
         index = 0;
     }
-    void CheckStacks(GameObject input)
+    private bool CheckStacks(GameObject input)
     {
         var colorKey = input.GetComponent<Package>().Data.Id;
 
@@ -25,6 +25,7 @@ public class Pallet : MonoBehaviour
             currentOrder.Add(colorKey.ToString());
             GameManager.Instance.OrderController.CheckForOrder();
             Debug.Log("La Key ya existe!");
+            return true;
         }
         else if (stacks.Count < 4)
         {
@@ -35,11 +36,10 @@ public class Pallet : MonoBehaviour
             GameManager.Instance.OrderController.CheckForOrder();
 
             Debug.Log("No ten�a esta key!");
+            return true;
         }
-        else
-        { 
-            //La nada misma
-        }
+        
+        return false;
     }
 
     private void Update()
@@ -55,9 +55,11 @@ public class Pallet : MonoBehaviour
         {
             package.SetParent(package);
 
-            CheckStacks(package.gameObject);
+            if (!CheckStacks(package.gameObject)) return;
+            
+            other.GetComponent<PackageCollector>().DropInPallet();
 
-            other.GetComponent<PackageCollector>().Drop(false);
+
         }
     }
 
