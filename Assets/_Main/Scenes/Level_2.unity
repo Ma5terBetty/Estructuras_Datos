@@ -381,6 +381,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shelves (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8023005295902373269, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
 --- !u!1 &61710805 stripped
@@ -4211,10 +4215,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8023005295902373268, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
-      propertyPath: amount
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 8023005295902373269, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
       propertyPath: m_Name
       value: Shelves
@@ -5567,6 +5567,10 @@ PrefabInstance:
     - target: {fileID: 8023005295902373269, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
       propertyPath: m_Name
       value: Shelves (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8023005295902373269, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
@@ -7391,6 +7395,10 @@ PrefabInstance:
     - target: {fileID: 8023005295902373269, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
       propertyPath: m_Name
       value: Shelves (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8023005295902373269, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
@@ -10008,6 +10016,10 @@ PrefabInstance:
     - target: {fileID: 1939165099880739137, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2845038407638935177, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -165.86061
       objectReference: {fileID: 0}
     - target: {fileID: 4713738805981534566, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
       propertyPath: m_AnchorMax.y

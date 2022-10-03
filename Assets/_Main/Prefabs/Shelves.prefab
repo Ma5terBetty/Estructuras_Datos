@@ -724,7 +724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   package: {fileID: 3929238288164798642, guid: b0464fd3dcc0b6445b9650eed3e88ac6, type: 3}
   type: {fileID: 11400000, guid: c8f7649724003f242a044a010b9e314e, type: 2}
-  amount: 19
+  amount: 20
   placesBox: {fileID: 4434105369010203627}
 --- !u!1 &8809511290007799125
 GameObject:
@@ -769,8 +769,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.8550725, y: 2.2721446, z: 12.504604}
-  m_Center: {x: -1.2291753, y: 1.0508927, z: -0.066423416}
+  m_Size: {x: 1.1358757, y: 2.2721446, z: 8.35}
+  m_Center: {x: -1.5700302, y: 1.0508927, z: -0.066423416}
 --- !u!1001 &8541191791404802
 PrefabInstance:
   m_ObjectHideFlags: 0

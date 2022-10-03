@@ -27,6 +27,7 @@ public class Package : MonoBehaviour
     public void PickUp(Transform employee, Transform hand)
     {
         if(!_canUse) return;
+        if (!transform.CompareTag("Object")) transform.tag = "Object";
         
         _rigidbody.isKinematic = true;
         transform.position = hand.position;
@@ -46,6 +47,7 @@ public class Package : MonoBehaviour
         transform.position = place.position;
         transform.rotation = place.rotation;
         transform.SetParent(place);
+        transform.tag = "Untagged";
     }
 
     public void SetCanUse(bool input) => _canUse = input;
