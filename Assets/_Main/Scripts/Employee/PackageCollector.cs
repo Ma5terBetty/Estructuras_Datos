@@ -41,8 +41,7 @@ public class PackageCollector : MonoBehaviour
         if(!HasPackageInHand) return;
         
         Debug.Log("Package Droped");
-
-        PackageInHand.transform.SetParent(null);
+        
         PackageInHand.Drop(canUse);
         PackageInHand = null;
         OnPackageChange?.Invoke();
