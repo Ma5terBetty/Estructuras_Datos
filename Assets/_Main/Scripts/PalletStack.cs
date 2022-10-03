@@ -14,12 +14,16 @@ public class PalletStack : MonoBehaviour
 
     private void Awake()
     {
-        GetChildTransforms();
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
     {
+        GetChildTransforms();
+
+        if (stack == null) stack = new CustomStack<GameObject>();
         stack.Initialize(transform.childCount);
+        Suscribe();
     }
 
     public void RecieveItem(GameObject input)
@@ -49,8 +53,15 @@ public class PalletStack : MonoBehaviour
         stack.Initialize(transform.childCount);
     }
 
-    private void OnEnable()
+    private void Suscribe()
     {
-        GameManager.OnTruckLeaves += RestartStacks;
+        if (stack != null) Debug.Log("NO ES NULO");
+       GameManager.OnTruckArrives += RestartStacks;
+        GameManager.OnChangedScene += Unsuscribe;
+    }
+
+    private void Unsuscribe()
+    {
+        GameManager.OnTruckArrives -= RestartStacks;
     }
 }

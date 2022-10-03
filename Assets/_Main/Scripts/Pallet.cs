@@ -11,7 +11,9 @@ public class Pallet : MonoBehaviour
 
     private void Start()
     {
-        OnEnable();
+        Suscribe();
+        stacks = new Dictionary<PackageId, GameObject>();
+        index = 0;
     }
     private bool CheckStacks(GameObject input)
     {
@@ -91,12 +93,13 @@ public class Pallet : MonoBehaviour
         return null;
     }
 
-    private void OnEnable()
+    private void Suscribe()
     {
-        GameManager.OnTruckLeaves += Reset;
+        GameManager.OnTruckArrives += Reset;
+        GameManager.OnChangedScene += Unsucribe;
     }
 
-    private void OnDisable()
+    private void Unsucribe()
     {
         GameManager.OnTruckArrives -= Reset;
     }
