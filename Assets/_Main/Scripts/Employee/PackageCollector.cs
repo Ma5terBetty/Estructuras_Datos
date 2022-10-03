@@ -13,11 +13,21 @@ public class PackageCollector : MonoBehaviour
     public bool HasPackageInHand => PackageInHand != null;
     public UnityAction OnPackageChange;
 
-    public void PickUp(Collider other)
+    public void PickUp(PackageShelfController shelf)
     {
-        if (HasPackageInHand) return;
+        if (HasPackageInHand || shelf == null) return;
 
-        PackageInHand = other.transform.parent.GetComponent<PackageShelfController>().GivePackage();
+        PackageInHand = shelf.GivePackage();
+        if(PackageInHand)
+            PackageInHand.PickUp(transform, hand);
+        OnPackageChange?.Invoke();
+    }
+
+    public void PickUp(Package package)
+    {
+        if (HasPackageInHand || package == null) return;
+        
+        PackageInHand = package;
         if(PackageInHand)
             PackageInHand.PickUp(transform, hand);
         OnPackageChange?.Invoke();
@@ -47,9 +57,14 @@ public class PackageCollector : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Shelf"))
         {
             if(!HasPackageInHand)
-                PickUp(other);
+                PickUp(other.GetComponent<PackageShelfController>());
             else
                 Save(other);
+        }
+        else if (other.gameObject.CompareTag("Object"))
+        {
+            if(!HasPackageInHand)
+                PickUp(other.GetComponent<Package>());
         }
     }
 }
