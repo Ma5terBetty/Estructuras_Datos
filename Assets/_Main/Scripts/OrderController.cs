@@ -60,7 +60,6 @@ public class OrderController : MonoBehaviour
             {
                 Debug.Log("Se termina");
                 GameManager.Instance.OrderCompleted();
-                GameManager.Instance.TruckLeaves();
             }
         }
     }

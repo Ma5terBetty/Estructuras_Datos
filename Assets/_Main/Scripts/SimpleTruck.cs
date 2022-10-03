@@ -25,6 +25,7 @@ public class SimpleTruck : MonoBehaviour
         GameManager.Instance.TruckArrived();
         GameManager.Instance.OrderController.GenerateOrder();
     }
+    
     public void ChangeToIdle()
     {
         OnDisable();
