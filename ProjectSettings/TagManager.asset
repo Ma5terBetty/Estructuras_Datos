@@ -9,6 +9,7 @@ TagManager:
   - Floor
   - Box
   - Canvas
+  - Shelv
   layers:
   - Default
   - TransparentFX

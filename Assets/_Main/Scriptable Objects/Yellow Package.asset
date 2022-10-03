@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   weight: 10
-  packageColor: {r: 0.9811321, g: 0.95069635, b: 0.38412246, a: 0}
+  packageColor: {r: 0.9811321, g: 0.95069635, b: 0.38412246, a: 1}
   id: 3

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Package : MonoBehaviour
 {
     private Rigidbody _rigidbody;
-    private bool _canUse = true;
+    [SerializeField] private bool _canUse = true;
 
     public PackageTypeSO Data { get; private set; }
     public bool CanUse => _canUse;
@@ -27,6 +27,7 @@ public class Package : MonoBehaviour
     public void PickUp(Transform employee, Transform hand)
     {
         if(!_canUse) return;
+        if (!transform.CompareTag("Object")) SetCanInteract(true);
         
         _rigidbody.isKinematic = true;
         transform.position = hand.position;
@@ -34,10 +35,10 @@ public class Package : MonoBehaviour
         transform.SetParent(employee);
     }
 
-    public void Drop()
+    public void Drop(bool canUse)
     {
+        _canUse = canUse;
         _rigidbody.isKinematic = false;
-        _canUse = false;
     }
 
     public void SetInShelf(Transform place)
@@ -46,9 +47,18 @@ public class Package : MonoBehaviour
         transform.position = place.position;
         transform.rotation = place.rotation;
         transform.SetParent(place);
+        SetCanInteract(false);
     }
 
-    public void SetCanUse(bool input) => _canUse = input;
+    public void SetCanUse(bool input)
+    {
+        _canUse = input;
+    }
+
+    public void SetCanInteract(bool input)
+    {
+        transform.tag = input ? "Object" : "Untagged";
+    }
 
     private void OnMouseOver()
     {

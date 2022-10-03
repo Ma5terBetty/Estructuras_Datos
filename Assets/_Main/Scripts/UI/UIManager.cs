@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEditor;
 using TMPro;
 
 public class UIManager : MonoBehaviour

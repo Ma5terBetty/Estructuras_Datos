@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleTruck : MonoBehaviour
-{
-    Animator animator;
+{ 
+    [SerializeField] private Animator animator;
 
     private void Awake()
     {
@@ -20,19 +20,21 @@ public class SimpleTruck : MonoBehaviour
         Test();
     }
 
-    void StartPallet()
+    public void StartPallet()
     {
         GameManager.Instance.TruckArrived();
-        GameManager.Instance.orderController.GenerateOrder();
+        GameManager.Instance.OrderController.GenerateOrder();
     }
     public void ChangeToIdle()
     {
         OnDisable();
-        animator.SetBool("IsWaiting", true);
+        if(animator)
+            animator.SetBool("IsWaiting", true);
     }
     public void ChangeToLeaving()
     {
-        animator.SetBool("IsWaiting", false);
+        if(animator)
+            animator.SetBool("IsWaiting", false);
         OnEnable();
     }
 

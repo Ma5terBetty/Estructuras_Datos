@@ -50,6 +50,11 @@ public class PackageShelfController : MonoBehaviour
         return packageToGive;
     }
 
+    public bool CanReturnPackage(Package input)
+    {
+        return input.Data == type;
+    }
+
     public void ReturnPackage(Package input)
     {
         if(input.Data != type) return;

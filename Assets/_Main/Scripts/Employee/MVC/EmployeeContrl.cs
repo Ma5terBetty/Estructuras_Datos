@@ -70,7 +70,6 @@ public class EmployeeContrl : MonoBehaviour
     public void OverrideTask()
     {
         _employeeModel.IsDoingTask = false;
-        _employeeModel.PendingTasks.Dequeue();
     }
 
     public void OnPackageChangeHandler()
