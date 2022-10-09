@@ -10,7 +10,7 @@ public class EmployeeManager : MonoBehaviour
 {
     //private List<Employee> _employees = new List<Employee>();
     //[SerializeField] private Employee _currentEmployee;
-    [SerializeField] private EmployeeContrl _currentEmployee;
+    [SerializeField] private Employee _currentEmployee;
     
     private void Start()
     {
@@ -19,18 +19,18 @@ public class EmployeeManager : MonoBehaviour
 
     private void OnDisable()
     {
-        TaskPoint.OnClickedTaskPoint += SetTask;
+        TaskPoint.OnClickedTaskPoint -= SetTask;
     }
 
     /// <summary>
     /// Assigns current employee to the elected employee
     /// </summary>
     /// <param name="employee"></param>
-    public void GetEmployee(EmployeeContrl employee)
+    public void GetEmployee(Employee employee)
     {
         RemoveEmployee();
         _currentEmployee = employee;
-        _currentEmployee.EmployeeView.SetSelectedOutline(true);
+        _currentEmployee.SetOutline(true);
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class EmployeeManager : MonoBehaviour
     /// <returns></returns>
     public bool CheckEmployee(GameObject obj)
     {
-        var employee = obj.GetComponent<Employee>();
+        var employee = obj.GetComponent<EmployeeOld>();
         return employee;
     }
 
@@ -82,7 +82,7 @@ public class EmployeeManager : MonoBehaviour
 
     public void RemoveEmployee()
     {
-        if (_currentEmployee != null) _currentEmployee.EmployeeView.SetSelectedOutline(false);
+        if (_currentEmployee != null) _currentEmployee.SetOutline(false);
         _currentEmployee = null;
     }
 }

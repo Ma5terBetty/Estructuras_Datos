@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class Employee : MonoBehaviour
+public class EmployeeOld : MonoBehaviour
 {
     [SerializeField] private EmployeeSO data;
     
