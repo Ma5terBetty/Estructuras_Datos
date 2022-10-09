@@ -2896,10 +2896,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EmployeePrefab
       objectReference: {fileID: 0}
-    - target: {fileID: 4885463315404986555, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
 --- !u!1 &1718283452 stripped
@@ -3356,7 +3352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2845038407638935177, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -165.86061
+      value: -165.86063
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
