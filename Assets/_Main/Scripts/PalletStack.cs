@@ -39,6 +39,16 @@ public class PalletStack : MonoBehaviour
         return stack.Pop();
     }
 
+    private void RemovePackage(PackageCollector collector)
+    {
+        if (collector == null) return;
+
+        var package = RemoveItem().GetComponent<Package>();
+        
+        package.TakeOutFromShelf();
+        collector.PickUpPackage(package);
+    }
+
     void GetChildTransforms()
     {
         positions = new Transform[transform.childCount];
@@ -63,5 +73,17 @@ public class PalletStack : MonoBehaviour
     private void Unsuscribe()
     {
         GameManager.OnTruckArrives -= RestartStacks;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.TryGetComponent(out PackageCollector collector)) return;
+
+        if (collector.HasPackageInHand) return;
+
+        if (stack.IsStackEmpty()) return;
+        
+        Debug.Log("Can Recive Package");
+        RemovePackage(collector);
     }
 }
