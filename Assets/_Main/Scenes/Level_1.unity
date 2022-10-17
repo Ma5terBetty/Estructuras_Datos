@@ -1563,6 +1563,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 546113786}
     m_Modifications:
+    - target: {fileID: 7701155071826281932, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
+      propertyPath: type
+      value: 
+      objectReference: {fileID: 11400000, guid: c8f7649724003f242a044a010b9e314e, type: 2}
     - target: {fileID: 8023005295902373267, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2250,6 +2254,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 924023383409282271, guid: aca7500f546283a468968bfa29440e51, type: 3}
+      propertyPath: stacksColor.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 924023383409282271, guid: aca7500f546283a468968bfa29440e51, type: 3}
+      propertyPath: stacksColor.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 924023383409282271, guid: aca7500f546283a468968bfa29440e51, type: 3}
+      propertyPath: stacksColor.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 924023383409282271, guid: aca7500f546283a468968bfa29440e51, type: 3}
+      propertyPath: stacksColor.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2614776927366530343, guid: aca7500f546283a468968bfa29440e51, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -2540,7 +2560,7 @@ PrefabInstance:
     - target: {fileID: 7701155071826281932, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
       propertyPath: type
       value: 
-      objectReference: {fileID: 11400000, guid: c8f7649724003f242a044a010b9e314e, type: 2}
+      objectReference: {fileID: 11400000, guid: 10e09859a89baa8439a69109075c9325, type: 2}
     - target: {fileID: 8023005295902373267, guid: 194895eb55648684aa7e1ccd4b19bba5, type: 3}
       propertyPath: m_RootOrder
       value: 3

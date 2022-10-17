@@ -44,7 +44,13 @@ public class PackageCollector : MonoBehaviour
     {
         if (!HasPackageInHand) return;
         
-        PackageInHand.DropInPallet();
+        //PackageInHand.DropInPallet();
+        PackageInHand = null;
+        OnPackageChange?.Invoke();
+    }
+
+    public void ClearHand()
+    {
         PackageInHand = null;
         OnPackageChange?.Invoke();
     }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Employee
   m_EditorClassIdentifier: 
   id: Robert
-  speed: 20
+  speed: 30
   minTaskDistance: 0.3
   pickUpDistance: 1

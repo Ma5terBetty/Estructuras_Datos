@@ -36,6 +36,29 @@ public class Order
         Debug.Log($"Color counter is: R:{redAmount} / G: {greenAmount} / B:{blueAmount} / Y:{yellowAmount}");
     }
 
+    public void UpdateAmounts(string colorName, int amount)
+    {
+        switch (colorName)
+        {
+            case "red":
+                redAmount = amount;
+                break;
+            case "blue":
+                blueAmount = amount;
+                break;
+            case "green":
+                greenAmount = amount;
+                break;
+            case "yellow":
+                yellowAmount = amount;
+                break;
+            default: Debug.LogError("The name of the color is null or is nor from RGBY");
+                break;
+        }
+
+        Debug.Log($"Color counter is: R:{redAmount} / G: {greenAmount} / B:{blueAmount} / Y:{yellowAmount}");
+    }
+
     public void Reset()
     { 
         redAmount=0;

@@ -56,6 +56,16 @@ public class Package : MonoBehaviour
         transform.SetParent(transform);
     }
 
+    public void DropInPallet(Transform place)
+    {
+        transform.SetParent(place);
+        canUse = false;
+        _collider.enabled = false;
+        _rigidbody.isKinematic = true;
+        transform.position = place.position;
+        transform.rotation = place.rotation;
+    }
+
     public void SetInShelf(Transform place)
     {
         _rigidbody.isKinematic = true;

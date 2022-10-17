@@ -6,16 +6,24 @@ using System.Linq;
 
 public class PalletStack : MonoBehaviour
 {
+    public PackageId StackColor { get; private set; }
+
     public string color;
     public Transform[] positions;
     public CustomStack<GameObject> stack = new CustomStack<GameObject>();
 
     public bool IsShowingNames;
+    public int StackAmount { get; private set; }
+    public string Color => StackColor.ToString();
+    
+    //Test
+    private float maxTime = 2f;
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
     }
+    
 
     private void Start()
     {
@@ -24,6 +32,19 @@ public class PalletStack : MonoBehaviour
         if (stack == null) stack = new CustomStack<GameObject>();
         stack.Initialize(transform.childCount);
         Suscribe();
+    }
+
+    public void SetValues(PackageId newColor)
+    {
+        StackColor = newColor;
+    }
+
+    public void RecieveItem(Package input)
+    {
+        input.DropInPallet(positions[stack.Index()]);
+        stack.Push(input.gameObject);
+        StackAmount++;
+        Debug.Log("Package Left In Pallet");
     }
 
     public void RecieveItem(GameObject input)
@@ -35,7 +56,9 @@ public class PalletStack : MonoBehaviour
     }
 
     GameObject RemoveItem()
-    { 
+    {
+        StackAmount--;
+        transform.parent.GetComponent<Pallet>().OnStackChange?.Invoke(this);
         return stack.Pop();
     }
 
@@ -47,6 +70,7 @@ public class PalletStack : MonoBehaviour
         
         package.TakeOutFromShelf();
         collector.PickUpPackage(package);
+        Debug.Log("Package Taken From Pallet");
     }
 
     void GetChildTransforms()
@@ -61,11 +85,12 @@ public class PalletStack : MonoBehaviour
     public void RestartStacks()
     {
         stack.Initialize(transform.childCount);
+        StackAmount = 0;
     }
 
     private void Suscribe()
     {
-        if (stack != null) Debug.Log("NO ES NULO");
+        if (stack != null) //Debug.Log("NO ES NULO");
        GameManager.OnTruckArrives += RestartStacks;
         GameManager.OnChangedScene += Unsuscribe;
     }
@@ -83,7 +108,6 @@ public class PalletStack : MonoBehaviour
 
         if (stack.IsStackEmpty()) return;
         
-        Debug.Log("Can Recive Package");
         RemovePackage(collector);
     }
 }

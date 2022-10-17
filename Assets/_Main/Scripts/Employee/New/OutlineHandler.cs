@@ -17,7 +17,7 @@ public class OutlineHandler : MonoBehaviour
     private void Start()
     {
         _selectionOutline.enabled = false;
-        Debug.Log("eee");
+        //Debug.Log("eee");
     }
     public void SetSelectedOutline(in bool isSelected)
     {
