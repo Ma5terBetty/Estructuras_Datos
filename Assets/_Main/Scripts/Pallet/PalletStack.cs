@@ -6,24 +6,19 @@ using System.Linq;
 
 public class PalletStack : MonoBehaviour
 {
+    private Pallet _pallet;
     public PackageId StackColor { get; private set; }
-
-    public string color;
-    public Transform[] positions;
+    public Transform[] Positions { get; private set; }
     public CustomStack<GameObject> stack = new CustomStack<GameObject>();
-
-    public bool IsShowingNames;
     public int StackAmount { get; private set; }
     public string Color => StackColor.ToString();
     
-    //Test
-    private float maxTime = 2f;
 
     private void Awake()
     {
+        _pallet = transform.parent.GetComponent<Pallet>();
         DontDestroyOnLoad(this.gameObject);
     }
-    
 
     private void Start()
     {
@@ -41,44 +36,36 @@ public class PalletStack : MonoBehaviour
 
     public void RecieveItem(Package input)
     {
-        input.DropInPallet(positions[stack.Index()]);
+        input.DropInPallet(Positions[stack.Index()]);
         stack.Push(input.gameObject);
         StackAmount++;
         Debug.Log("Package Left In Pallet");
     }
 
-    public void RecieveItem(GameObject input)
-    {
-        input.gameObject.transform.SetParent(positions[stack.Index()]);
-        input.transform.position = input.transform.parent.position;
-        input.transform.rotation = new Quaternion(0,0,0,0);
-        stack.Push(input);
-    }
-
-    GameObject RemoveItem()
+    private GameObject RemoveItem()
     {
         StackAmount--;
-        transform.parent.GetComponent<Pallet>().OnStackChange?.Invoke(this);
         return stack.Pop();
     }
 
-    private void RemovePackage(PackageCollector collector)
+    public void RemovePackage(PackageCollector collector)
     {
-        if (collector == null) return;
+        if (stack.IsStackEmpty()) return;
 
         var package = RemoveItem().GetComponent<Package>();
         
         package.TakeOutFromShelf();
         collector.PickUpPackage(package);
+        _pallet.OnStackChange.Invoke(this);
         Debug.Log("Package Taken From Pallet");
     }
 
     void GetChildTransforms()
     {
-        positions = new Transform[transform.childCount];
-        for (int i = 0; i < positions.Length; i++)
+        Positions = new Transform[transform.childCount];
+        for (int i = 0; i < Positions.Length; i++)
         {
-            positions[i] = transform.GetChild(i);
+            Positions[i] = transform.GetChild(i);
         }
     }
 
@@ -88,26 +75,30 @@ public class PalletStack : MonoBehaviour
         StackAmount = 0;
     }
 
+    public void ClearStack()
+    {
+        if (transform.childCount == 0) return;
+
+        var packages = GetComponentsInChildren<Package>();
+        
+        for (int i = 0; i < packages.Length; i++)
+        {
+            Destroy(packages[i].gameObject);
+        }
+        
+        stack.Initialize(transform.childCount);
+        StackAmount = 0;
+    }
+
     private void Suscribe()
     {
         if (stack != null) //Debug.Log("NO ES NULO");
-       GameManager.OnTruckArrives += RestartStacks;
+       GameManager.OnTruckArrives += RestartStacks; 
         GameManager.OnChangedScene += Unsuscribe;
     }
 
     private void Unsuscribe()
     {
         GameManager.OnTruckArrives -= RestartStacks;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.TryGetComponent(out PackageCollector collector)) return;
-
-        if (collector.HasPackageInHand) return;
-
-        if (stack.IsStackEmpty()) return;
-        
-        RemovePackage(collector);
     }
 }

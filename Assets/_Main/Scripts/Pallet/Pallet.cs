@@ -6,118 +6,49 @@ using UnityEngine.Events;
 
 public class Pallet : MonoBehaviour
 {
-    [SerializeField] private PackageId stacksColor;
-    
-    Dictionary<PackageId, GameObject> stacks = new Dictionary<PackageId, GameObject>();
-    Dictionary<PackageId, PalletStack> palletStacks = new Dictionary<PackageId, PalletStack>();
-    public Order currentOrder;
-    TestBox tempBox;
-    int index = 0;
-    public UnityAction<PalletStack> OnStackChange;
+    private readonly PackageId _stacksColor;
+    private Dictionary<PackageId, PalletStack> _palletStacks = new Dictionary<PackageId, PalletStack>();
+    private int index = 0;
+    private GameObject[] _stacksTest;
 
+    public Order CurrentOrder { get; private set; }
+
+    public UnityAction<PalletStack> OnStackChange;
+    
     private void Start()
     {
         Suscribe();
-        stacks = new Dictionary<PackageId, GameObject>();
-        index = 0;
-        
         InitPalletStack();
     }
-    
-    private bool CheckStacks(GameObject input)
-    {
-        var colorKey = input.GetComponent<Package>().Data.Id;
 
-        if (stacks.ContainsKey(colorKey) && stacks[colorKey].GetComponent<PalletStack>().stack.Index() <= 3)
-        {
-            stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
-            currentOrder.Add(colorKey.ToString());
-            GameManager.Instance.OrderController.CheckForOrder();
-            Debug.Log("La Key ya existe!");
-            return true;
-        }
-        else if (stacks.Count < 4)
-        {
-            stacks.Add(colorKey, transform.GetChild(index).gameObject);
-            index++;
-            stacks[colorKey].GetComponent<PalletStack>().RecieveItem(input);
-            currentOrder.Add(colorKey.ToString());
-            GameManager.Instance.OrderController.CheckForOrder();
-
-            Debug.Log("No ten�a esta key!");
-            return true;
-        }
-        
-        return false;
-    }
-
-
-    private bool CheckStack2(Package input)
+    private bool CheckStack(Package input)
     {
         var packageColor = input.Data.Id;
 
-        if (!palletStacks.TryGetValue(packageColor, out var stack)) return false;
+        if (!_palletStacks.TryGetValue(packageColor, out var stack)) return false;
 
         if (stack.StackAmount == 4) return false;
         
         stack.RecieveItem(input);
-        GameManager.Instance.OrderController.CheckForOrder();
         OnStackChange?.Invoke(stack);
 
         return true;
-        
-    }
-
-    private void Update()
-    {
-        //Debug.Log(stacks.Count);
-    }
-
-    /*private void OnTriggerEnter(Collider other)
-    {
-        var package = FindChildWithTag(other.transform, "Object");
-
-        if (package != null)
-        {
-            package.SetParent(package);
-
-            if (!CheckStacks(package.gameObject)) return;
-            
-            other.GetComponent<PackageCollector>().DropInPallet();
-
-
-        }
-    }*/
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.TryGetComponent(out PackageCollector collector)) return;
-
-        if (!collector.HasPackageInHand) return;
-        
-        if(!CheckStack2(collector.PackageInHand)) return;
-        
-        collector.ClearHand();
     }
 
     public void Reset()
     {
-        var packages = GetComponentsInChildren<Package>();
-
-        for (int i = 0; i < packages.Length; i++)
+        foreach (var _stacks in _palletStacks.Values)
         {
-            Destroy(packages[i].gameObject);
-            stacks.Clear();
+            _stacks.ClearStack();
         }
 
         index = 0;
-        currentOrder = new Order();
+        CurrentOrder = new Order();
 
         Debug.Log("stacks reseteados");
-        Debug.Log(stacks.Count);
     }
 
-    Transform FindChildWithTag(Transform parent, string tag)
+    private Transform FindChildWithTag(Transform parent, string tag)
     {
         Transform tempParent = parent;
         foreach (Transform tr in tempParent)
@@ -132,7 +63,8 @@ public class Pallet : MonoBehaviour
 
     private void OnStackChangeHandler(PalletStack stack)
     {
-        currentOrder.UpdateAmounts(stack.Color, stack.StackAmount);
+        CurrentOrder.UpdateAmounts(stack.Color, stack.StackAmount);
+        GameManager.Instance.OrderController.CheckForOrder();
     }
 
     private void InitPalletStack()
@@ -141,13 +73,28 @@ public class Pallet : MonoBehaviour
         {
             
             var stack = transform.GetChild(i).GetComponent<PalletStack>();
-            var color = (PackageId)Enum.GetValues(stacksColor.GetType()).GetValue(i);
+            var color = (PackageId)Enum.GetValues(_stacksColor.GetType()).GetValue(i);
 
-            palletStacks.Add(color, stack);
+            _palletStacks.Add(color, stack);
             stack.SetValues(color);
         }
         
         OnStackChange += OnStackChangeHandler;
+    }
+    
+    private void GetClosestStack(Transform employee, out PalletStack closeStack)
+    {
+        var minDistance = Mathf.Infinity;
+        closeStack = null;
+
+        foreach (var currentStack in _palletStacks.Values)
+        {
+            var distance = Vector3.Distance(currentStack.transform.position, employee.position);
+            if(distance > minDistance) continue;
+
+            minDistance = distance;
+            closeStack = currentStack;
+        }
     }
 
     private void Suscribe()
@@ -159,5 +106,22 @@ public class Pallet : MonoBehaviour
     private void Unsucribe()
     {
         GameManager.OnTruckArrives -= Reset;
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.TryGetComponent(out PackageCollector collector)) return;
+
+        if (collector.HasPackageInHand)
+        {
+            if(!CheckStack(collector.PackageInHand)) return;
+            collector.ClearHand();
+        }
+        else
+        {
+            GetClosestStack(collector.transform, out var stack);
+            if (stack == null) return;
+            stack.RemovePackage(collector);
+        }
     }
 }

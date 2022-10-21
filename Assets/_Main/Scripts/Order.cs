@@ -16,25 +16,7 @@ public class Order
         blueAmount = blueBoxes;
         yellowAmount = yellowBoxes;
     }
-
-    public void Add(string colorName)
-    {
-        switch (colorName)
-        {
-            case "red": redAmount++;
-                break;
-            case "blue": blueAmount++;
-                break;
-            case "green": greenAmount++;
-                break;
-            case "yellow": yellowAmount++;
-                break;
-            default: Debug.LogError("The name of the color is null or is nor from RGBY");
-                break;
-        }
-
-        Debug.Log($"Color counter is: R:{redAmount} / G: {greenAmount} / B:{blueAmount} / Y:{yellowAmount}");
-    }
+    
 
     public void UpdateAmounts(string colorName, int amount)
     {

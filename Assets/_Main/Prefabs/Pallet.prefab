@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2612997395359133785}
   - component: {fileID: 3998663673602810207}
-  - component: {fileID: 1446844056}
   m_Layer: 0
   m_Name: StackC
   m_TagString: Untagged
@@ -83,19 +82,6 @@ MonoBehaviour:
   color: 
   positions: []
   IsShowingNames: 0
---- !u!135 &1446844056
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 437168316479103813}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &605533673735007858
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,11 +340,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6777462005218905434}
   - component: {fileID: 2216590646834924899}
-  - component: {fileID: 1200424902}
   m_Layer: 0
   m_Name: StackB
   m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -396,19 +381,6 @@ MonoBehaviour:
   color: 
   positions: []
   IsShowingNames: 0
---- !u!135 &1200424902
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2978110696822956125}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3205323839839960341
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,11 +391,10 @@ GameObject:
   m_Component:
   - component: {fileID: 852788074083780019}
   - component: {fileID: 1654524760500153123}
-  - component: {fileID: 1244466612}
   m_Layer: 0
   m_Name: StackA
   m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -461,19 +432,6 @@ MonoBehaviour:
   color: 
   positions: []
   IsShowingNames: 1
---- !u!135 &1244466612
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3205323839839960341}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3387372603611127709
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d927a8302df399e4585518d457503001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stacksColor: 0
 --- !u!1 &4135522250865962790
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,7 +695,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3448406091534685855}
   - component: {fileID: 5425503719526737080}
-  - component: {fileID: 685081701}
   m_Layer: 0
   m_Name: StackD
   m_TagString: Untagged
@@ -778,19 +736,6 @@ MonoBehaviour:
   color: 
   positions: []
   IsShowingNames: 0
---- !u!135 &685081701
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7010311429250172957}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7127787206935051104
 GameObject:
   m_ObjectHideFlags: 0
