@@ -15,8 +15,7 @@ public class OrderController : MonoBehaviour
     Order palletOrder;
     Order currentOrder;
     Dictionary<Order, GameObject> ordersUI = new Dictionary<Order, GameObject>();
-
-    Order cleanOder = new Order(0,0,0,0);
+    
     Order tempOrder = new Order();
 
     [SerializeField]
@@ -35,10 +34,7 @@ public class OrderController : MonoBehaviour
     {
         if (isTimeOver)
         {
-            if (currentOrder.redAmount == palletOrder.redAmount
-            && currentOrder.greenAmount == palletOrder.greenAmount
-            && currentOrder.blueAmount == palletOrder.blueAmount
-            && currentOrder.yellowAmount == palletOrder.yellowAmount)
+            if (IsOrderComplete())
             {
                 GameManager.Instance.OrderCompleted();
                 GameManager.Instance.TruckLeaves();
@@ -53,15 +49,20 @@ public class OrderController : MonoBehaviour
             if (currentOrder == null) Debug.Log("Se rompio order");
             if (palletOrder == null) Debug.Log("Se rompio pallet");
 
-            if (currentOrder.redAmount == palletOrder.redAmount
-            && currentOrder.greenAmount == palletOrder.greenAmount
-            && currentOrder.blueAmount == palletOrder.blueAmount
-            && currentOrder.yellowAmount == palletOrder.yellowAmount)
+            if (IsOrderComplete())
             {
                 Debug.Log("Se termina");
                 GameManager.Instance.OrderCompleted();
             }
         }
+    }
+
+    private bool IsOrderComplete()
+    {
+        return currentOrder.redAmount == palletOrder.redAmount
+               && currentOrder.greenAmount == palletOrder.greenAmount
+               && currentOrder.blueAmount == palletOrder.blueAmount
+               && currentOrder.yellowAmount == palletOrder.yellowAmount;
     }
 
     void TurnPalletOff()
@@ -107,9 +108,9 @@ public class OrderController : MonoBehaviour
         /*tempOrder = cleanOder;
         palletObject.GetComponent<Pallet>().currentOrder = cleanOder;
         palletOrder = palletObject.gameObject.GetComponent<Pallet>().currentOrder;*/
-        palletObject.GetComponent<Pallet>().currentOrder = cleanOder;
-        palletOrder = palletObject.gameObject.GetComponent<Pallet>().currentOrder;
-        palletObject.gameObject.GetComponent<Pallet>().currentOrder.Reset();
+        palletObject.GetComponent<Pallet>().CurrentOrder.Reset();
+        palletOrder = palletObject.gameObject.GetComponent<Pallet>().CurrentOrder;
+        palletObject.gameObject.GetComponent<Pallet>().CurrentOrder.Reset();
     }
 
 

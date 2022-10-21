@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6651960871909934484}
   - component: {fileID: 165849656}
   - component: {fileID: 1799601615565223448}
-  - component: {fileID: 7541802568014719247}
+  - component: {fileID: 5072470161714356908}
   - component: {fileID: 5156643967265245608}
   - component: {fileID: 695680952}
   m_Layer: 7
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448b1705db724f0418c38686a701dfef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7541802568014719247
+--- !u!114 &5072470161714356908
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4885463315404986534}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 784dbb2f01fc3a54f9e495706918de1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 18584df622997324399724b364073347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 4885463316092659724}
