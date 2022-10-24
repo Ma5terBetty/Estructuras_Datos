@@ -7,9 +7,9 @@ using System.Linq;
 public class PalletStack : MonoBehaviour
 {
     private Pallet _pallet;
+    public CustomStack<Package> PackageStack { get; private set; } 
     public PackageId StackColor { get; private set; }
     public Transform[] Positions { get; private set; }
-    public CustomStack<GameObject> stack = new CustomStack<GameObject>();
     public int StackAmount { get; private set; }
     public string Color => StackColor.ToString();
     
@@ -24,33 +24,38 @@ public class PalletStack : MonoBehaviour
     {
         GetChildTransforms();
 
-        if (stack == null) stack = new CustomStack<GameObject>();
-        stack.Initialize(transform.childCount);
+        if (PackageStack == null) PackageStack = new CustomStack<Package>();
+        PackageStack.Initialize(transform.childCount);
         Suscribe();
     }
-
+    
     public void SetValues(PackageId newColor)
     {
         StackColor = newColor;
     }
 
-    public void RecieveItem(Package input)
+    public void ReceiveItem(Package input)
     {
-        input.DropInPallet(Positions[stack.Index()]);
-        stack.Push(input.gameObject);
-        StackAmount++;
+        input.DropInPallet(Positions[PackageStack.Index()]);
+        AddItem(input);
         Debug.Log("Package Left In Pallet");
     }
 
-    private GameObject RemoveItem()
+    private void AddItem(Package input)
+    {
+        PackageStack.Push(input);
+        StackAmount++;
+    }
+
+    private Package RemoveItem()
     {
         StackAmount--;
-        return stack.Pop();
+        return PackageStack.Pop();
     }
 
     public void RemovePackage(PackageCollector collector)
     {
-        if (stack.IsStackEmpty()) return;
+        if (PackageStack.IsStackEmpty()) return;
 
         var package = RemoveItem().GetComponent<Package>();
         
@@ -60,7 +65,7 @@ public class PalletStack : MonoBehaviour
         Debug.Log("Package Taken From Pallet");
     }
 
-    void GetChildTransforms()
+    private void GetChildTransforms()
     {
         Positions = new Transform[transform.childCount];
         for (int i = 0; i < Positions.Length; i++)
@@ -71,7 +76,7 @@ public class PalletStack : MonoBehaviour
 
     public void RestartStacks()
     {
-        stack.Initialize(transform.childCount);
+        PackageStack.Initialize(transform.childCount);
         StackAmount = 0;
     }
 
@@ -86,13 +91,13 @@ public class PalletStack : MonoBehaviour
             Destroy(packages[i].gameObject);
         }
         
-        stack.Initialize(transform.childCount);
+        PackageStack.Initialize(transform.childCount);
         StackAmount = 0;
     }
 
     private void Suscribe()
     {
-        if (stack != null) //Debug.Log("NO ES NULO");
+        if (PackageStack != null) //Debug.Log("NO ES NULO");
        GameManager.OnTruckArrives += RestartStacks; 
         GameManager.OnChangedScene += Unsuscribe;
     }

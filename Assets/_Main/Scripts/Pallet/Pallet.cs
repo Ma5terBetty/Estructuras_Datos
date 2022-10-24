@@ -10,6 +10,7 @@ public class Pallet : MonoBehaviour
     private Dictionary<PackageId, PalletStack> _palletStacks = new Dictionary<PackageId, PalletStack>();
     private int index = 0;
     private GameObject[] _stacksTest;
+    private Package _lastPackageAdded;
 
     public Order CurrentOrder { get; private set; }
 
@@ -29,7 +30,8 @@ public class Pallet : MonoBehaviour
 
         if (stack.StackAmount == 4) return false;
         
-        stack.RecieveItem(input);
+        stack.ReceiveItem(input);
+        _lastPackageAdded = input;
         OnStackChange?.Invoke(stack);
 
         return true;
@@ -97,6 +99,17 @@ public class Pallet : MonoBehaviour
         }
     }
 
+    private void GetLastPackage(PackageCollector collector)
+    {
+        foreach (var _stacks in _palletStacks)
+        {
+            if(_stacks.Key != _lastPackageAdded.Data.Id) continue;
+            
+            Debug.Log($"Last Package ID: {_stacks.Key}");
+            _stacks.Value.RemovePackage(collector);
+        }
+    }
+
     private void Suscribe()
     {
         GameManager.OnTruckArrives += Reset;
@@ -119,9 +132,11 @@ public class Pallet : MonoBehaviour
         }
         else
         {
-            GetClosestStack(collector.transform, out var stack);
+            if (_lastPackageAdded == null) return;
+            GetLastPackage(collector);
+            /*GetClosestStack(collector.transform, out var stack);
             if (stack == null) return;
-            stack.RemovePackage(collector);
+            stack.RemovePackage(collector);*/
         }
     }
 }
