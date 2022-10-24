@@ -104,6 +104,11 @@ public class GameManager : MonoBehaviour
 
     private void InitGameOverScreen(bool hasWon)
     {
+        if(!gameOverScreen) return;
+        if(!_canvas) return;
+#if UNITY_EDITOR
+        Debug.Log("Game Over");
+#endif
         gameOverScreen.SetData(hasWon? gameWonData : gameLostData);
         Instantiate(gameOverScreen, _canvas.transform);
     }
