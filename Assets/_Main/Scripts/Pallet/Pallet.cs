@@ -8,10 +8,9 @@ public class Pallet : MonoBehaviour
 {
     private readonly PackageId _stacksColor;
     private Dictionary<PackageId, PalletStack> _palletStacks = new Dictionary<PackageId, PalletStack>();
-    private int index = 0;
+    private int _index = 0;
     private GameObject[] _stacksTest;
-    private Package _lastPackageAdded;
-
+    private readonly CustomStack<PackageId> _lastIDStack = new CustomStack<PackageId>();
     public Order CurrentOrder { get; private set; }
 
     public UnityAction<PalletStack> OnStackChange;
@@ -31,7 +30,7 @@ public class Pallet : MonoBehaviour
         if (stack.StackAmount == 4) return false;
         
         stack.ReceiveItem(input);
-        _lastPackageAdded = input;
+        _lastIDStack.Push(input.Data.Id);
         OnStackChange?.Invoke(stack);
 
         return true;
@@ -39,12 +38,13 @@ public class Pallet : MonoBehaviour
 
     public void Reset()
     {
-        foreach (var _stacks in _palletStacks.Values)
+        foreach (var stacks in _palletStacks.Values)
         {
-            _stacks.ClearStack();
+            stacks.ClearStack();
         }
-
-        index = 0;
+        
+        _lastIDStack.Initialize();
+        _index = 0;
         CurrentOrder = new Order();
 
         Debug.Log("stacks reseteados");
@@ -101,9 +101,11 @@ public class Pallet : MonoBehaviour
 
     private void GetLastPackage(PackageCollector collector)
     {
+        var id = _lastIDStack.Pop();
+        
         foreach (var _stacks in _palletStacks)
         {
-            if(_stacks.Key != _lastPackageAdded.Data.Id) continue;
+            if(_stacks.Key != id) continue;
             
             Debug.Log($"Last Package ID: {_stacks.Key}");
             _stacks.Value.RemovePackage(collector);
@@ -132,7 +134,7 @@ public class Pallet : MonoBehaviour
         }
         else
         {
-            if (_lastPackageAdded == null) return;
+            if (_lastIDStack.IsStackEmpty()) return;
             GetLastPackage(collector);
             /*GetClosestStack(collector.transform, out var stack);
             if (stack == null) return;
