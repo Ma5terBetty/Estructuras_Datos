@@ -16,18 +16,23 @@ public class Order
         blueAmount = blueBoxes;
         yellowAmount = yellowBoxes;
     }
+    
 
-    public void Add(string colorName)
+    public void UpdateAmounts(string colorName, int amount)
     {
         switch (colorName)
         {
-            case "red": redAmount++;
+            case "red":
+                redAmount = amount;
                 break;
-            case "blue": blueAmount++;
+            case "blue":
+                blueAmount = amount;
                 break;
-            case "green": greenAmount++;
+            case "green":
+                greenAmount = amount;
                 break;
-            case "yellow": yellowAmount++;
+            case "yellow":
+                yellowAmount = amount;
                 break;
             default: Debug.LogError("The name of the color is null or is nor from RGBY");
                 break;

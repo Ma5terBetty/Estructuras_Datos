@@ -343,7 +343,7 @@ GameObject:
   m_Layer: 0
   m_Name: StackB
   m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -394,7 +394,7 @@ GameObject:
   m_Layer: 0
   m_Name: StackA
   m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -560,6 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d927a8302df399e4585518d457503001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stacksColor: 0
 --- !u!1 &4135522250865962790
 GameObject:
   m_ObjectHideFlags: 0

@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetData(hasWon? gameWonData : gameLostData);
         Instantiate(gameOverScreen, _canvas.transform);
     }
-    public void SetUIManager() => _canvas = UIManager.Instance.gameObject;
+    public void SetUIManager(UIManager uiManager) => _uiManager = uiManager;
     public void SetOrderController(OrderController orderController) => OrderController = orderController;
 
     private void ResetValue()
@@ -122,7 +122,13 @@ public class GameManager : MonoBehaviour
         OnChangedScene?.Invoke();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    
+
+    public void ResetLevel()
+    {
+        OnChangedScene?.Invoke();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+    }
+
     public IEnumerator LoadNextLevelAfter(float time)
     {
         yield return new WaitForSeconds(time);
