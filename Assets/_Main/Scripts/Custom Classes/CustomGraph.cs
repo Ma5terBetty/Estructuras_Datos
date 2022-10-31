@@ -8,12 +8,14 @@ public class CustomGraph : IGraph
     public int[,] adMatrix;
     public int[] tags;
     public int nodesQuantity;
+    public int edgesQuantity;
 
     public void AddEdge(int inputA, int inputB, int weight)
     {
         int o = Vert2Index(inputA);
         int d = Vert2Index(inputB);
         adMatrix[o, d] = weight;
+        edgesQuantity++;
     }
 
     public void AddVertex(int input)
@@ -32,6 +34,7 @@ public class CustomGraph : IGraph
         int o = Vert2Index(inputA);
         int d = Vert2Index(inputB);
         adMatrix[o, d] = 0;
+        edgesQuantity--;
     }
 
     public void DeleteVertex(int input)
@@ -69,6 +72,9 @@ public class CustomGraph : IGraph
         adMatrix = new int[N,N];
         tags = new int[N];
         nodesQuantity = 0;
+        edgesQuantity = 0;
+
+        Debug.Log("Se inicio el grafo");
     }
 
     public ISet Vertices()
@@ -82,7 +88,7 @@ public class CustomGraph : IGraph
         return vert;
     }
 
-    private int Vert2Index(int input)
+    public int Vert2Index(int input)
     {
         int i = nodesQuantity - 1;
         while (i >= 0 && tags[i] != input)
