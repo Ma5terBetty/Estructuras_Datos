@@ -7,8 +7,7 @@ public class GameManager : MonoBehaviour
     private int _ordersToComplete = 3;
     
     [Header("GameOver screen")]
-    [SerializeField]
-    private GameObject _canvas;
+    [SerializeField] private GameObject _canvas;
     [SerializeField] private GameOverScreen gameOverScreen;
     [SerializeField] private GameOverSO gameLostData;
     [SerializeField] private GameOverSO gameWonData;
@@ -48,6 +47,7 @@ public class GameManager : MonoBehaviour
     {
         OnGameOver += InitGameOverScreen;
         OnChangedScene += ResetValue;
+        _ordersToComplete = LevelManager.Instance.LevelData.AmountOfOrders;
     }
 
     private void MakeSingleton()
@@ -104,6 +104,11 @@ public class GameManager : MonoBehaviour
 
     private void InitGameOverScreen(bool hasWon)
     {
+        if(!gameOverScreen) return;
+        if(!_canvas) return;
+#if UNITY_EDITOR
+        Debug.Log("Game Over");
+#endif
         gameOverScreen.SetData(hasWon? gameWonData : gameLostData);
         Instantiate(gameOverScreen, _canvas.transform);
     }
