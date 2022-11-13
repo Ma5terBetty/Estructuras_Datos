@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 
 public class OrderController : MonoBehaviour
@@ -18,6 +20,7 @@ public class OrderController : MonoBehaviour
         }
     }
 
+    private LevelSO _data;
     private MyTree<NewOrder> _orders = new MyTree<NewOrder>();
     private int _orderIndex = 0;
     private Order _palletOrder;
@@ -29,14 +32,20 @@ public class OrderController : MonoBehaviour
     [SerializeField] private GameObject orderUIPrefab;
     [SerializeField] private float individualOrderTime = 12f;
 
+    private void Awake()
+    {
+        if (LevelManager.Instance) _data = LevelManager.Instance.LevelData;
+    }
+
     private void Start()
     {
         Suscribe();
 
         GameManager.Instance.SetOrderController(this);
-        AddOrder();
-        AddOrder();
-        AddOrder();
+        for (int i = 0; i < _data.AmountOfOrders; i++)
+        {
+            AddOrder();
+        }
         //_currentOrder = new Order();
         TurnPalletOff();    
     }

@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     {
         OnGameOver += InitGameOverScreen;
         OnChangedScene += ResetValue;
+        _ordersToComplete = LevelManager.Instance.LevelData.AmountOfOrders;
     }
 
     private void MakeSingleton()
