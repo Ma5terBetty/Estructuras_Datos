@@ -19,10 +19,11 @@ public class OrderController : MonoBehaviour
     }
 
     private MyTree<NewOrder> _orders = new MyTree<NewOrder>();
-    private int _orderIndex;
+    private int _orderIndex = 0;
     private Order _palletOrder;
     private Order _tempOrder = new Order();
     private float _totalOrderTime;
+    
     [SerializeField] private GameObject palletObject;
     [SerializeField] private GameObject rightUIPanel;
     [SerializeField] private GameObject orderUIPrefab;
@@ -33,7 +34,9 @@ public class OrderController : MonoBehaviour
         Suscribe();
 
         GameManager.Instance.SetOrderController(this);
-        _orders.Add(new NewOrder());
+        AddOrder();
+        AddOrder();
+        AddOrder();
         //_currentOrder = new Order();
         TurnPalletOff();    
     }
@@ -84,26 +87,29 @@ public class OrderController : MonoBehaviour
             palletObject.SetActive(true);
     }
 
-
-    public void GenerateOrder()
+    private void AddOrder()
     {
-        palletObject.SetActive(true);
-        _totalOrderTime = 0;
-
-        int[] temp = new int[4];
-        for (int i = 0; i < temp.Length; i++)
+        var temp = new int[4];
+        for (var i = 0; i < temp.Length; i++)
         { 
             temp[i] = Mathf.RoundToInt(Random.Range(0, 4));
             individualOrderTime += temp[i];
         }
         var orderData = new Order(temp[0], temp[1], temp[2], temp[3]);
         var order = Instantiate(orderUIPrefab, rightUIPanel.transform);
-        
-        
+        order.SetActive(false);
         _orders.Add(new NewOrder(orderData, order));
-        _orderIndex++;
-        //_currentOrder = orderData;
+        Debug.Log("Added");
+    }
 
+    public void GenerateOrder()
+    {
+        palletObject.SetActive(true);
+        _totalOrderTime = 0;
+       
+        //_orderIndex++;
+        var order = _orders[_orderIndex].GameObject;
+        order.SetActive(true);
         order.GetComponent<OrderUI>().data = _orders[_orderIndex].Order;
         order.GetComponent<OrderUI>().SetInfo();
         order.transform.localScale = Vector3.one;
@@ -111,6 +117,7 @@ public class OrderController : MonoBehaviour
         _totalOrderTime = individualOrderTime * 3f;
         UIManager.Instance.SetTimer(_totalOrderTime);
         //UIManager.Instance.SetTimer(5);
+        
 
         /*tempOrder = cleanOder;
         palletObject.GetComponent<Pallet>().currentOrder = cleanOder;
@@ -119,6 +126,8 @@ public class OrderController : MonoBehaviour
         _palletOrder = palletObject.gameObject.GetComponent<Pallet>().CurrentOrder;
         palletObject.gameObject.GetComponent<Pallet>().CurrentOrder.Reset();
     }
+
+    private void ChangeOrder() => _orderIndex = _orderIndex++ > _orders.Count ? _orderIndex : _orderIndex++; 
 
 
     // TESTING
@@ -155,6 +164,7 @@ public class OrderController : MonoBehaviour
     {
         GameManager.OnTruckArrives += TurnPalletOn;
         GameManager.OnTruckLeaves += TurnPalletOff;
+        GameManager.OnTruckLeaves += ChangeOrder;
         GameManager.OnChangedScene += Unsuscribe;
     }
 
@@ -162,6 +172,7 @@ public class OrderController : MonoBehaviour
     {
         GameManager.OnTruckArrives -= TurnPalletOn;
         GameManager.OnTruckLeaves -= TurnPalletOff;
+        GameManager.OnTruckLeaves -= ChangeOrder;
     }
 
 
