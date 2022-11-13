@@ -7,8 +7,7 @@ public class GameManager : MonoBehaviour
     private int _ordersToComplete = 3;
     
     [Header("GameOver screen")]
-    [SerializeField]
-    private GameObject _canvas;
+    [SerializeField] private GameObject _canvas;
     [SerializeField] private GameOverScreen gameOverScreen;
     [SerializeField] private GameOverSO gameLostData;
     [SerializeField] private GameOverSO gameWonData;
