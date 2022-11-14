@@ -11,18 +11,22 @@ public class TestDijkstra : MonoBehaviour
 
     string textNodes;
     public string[] travelNodes = new string[100];
-
-    [SerializeField]
-    GraphGenerator generator;
-    CustomGraph graph;
+    
+    CustomGraph graph = new CustomGraph();
 
     void Start()
     {
-        graph = generator.staticGraph;
+        graph = GraphGenerator.LoadGraph("grafos", "nivel1");
+        graph.ComposeAdMatrix();
 
         if (graph == null)
         {
             Debug.Log("NULL");
+        }
+        else
+        {
+            Debug.Log("Grafo cargado correctamente");
+            //graph.ComposeAdMatrix();
         }
         
     }
@@ -37,20 +41,20 @@ public class TestDijkstra : MonoBehaviour
 
     public void CalculateDestination()
     {
-        generator.GenerateGraph();
+        //generator.GenerateGraph();
 
-        graph = generator.staticGraph;
+        //graph = generator.staticGraph;
 
         var ori = origen;
         var dest = destino;
 
-        Dijkstra.Calculate(generator.staticGraph, ori);
+        Dijkstra.Calculate(graph, ori);
 
         // obtener el camino
         var distancia = string.Empty;
         var nodos = string.Empty;
 
-        for (int i = 0; i < generator.staticGraph.nodesQuantity; ++i)
+        for (int i = 0; i < graph.nodesQuantity; ++i)
         {
             if (Dijkstra.distance[i] == int.MaxValue)
             {
@@ -61,10 +65,10 @@ public class TestDijkstra : MonoBehaviour
                 distancia = Dijkstra.distance[i].ToString();
             }
 
-            if (generator.staticGraph.tags[i] == dest)
+            if (graph.tags[i] == dest)
             {
                 nodos = Dijkstra.nodes[i];
-                var mensaje = string.Format("Vertice: {0} --x-- Distancia: {1} --x-- Camino: {2}", generator.staticGraph.tags[i], distancia, Dijkstra.nodes[i]);
+                var mensaje = string.Format("Vertice: {0} --x-- Distancia: {1} --x-- Camino: {2}", graph.tags[i], distancia, Dijkstra.nodes[i]);
                 Debug.Log(mensaje);
                 textNodes = Dijkstra.nodes[i];
 

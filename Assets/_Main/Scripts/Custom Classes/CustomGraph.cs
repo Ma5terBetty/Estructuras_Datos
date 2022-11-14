@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class CustomGraph : IGraph
 {
     static int N = 100;
     public int[,] adMatrix;
+    public int[] plainAdMatrix;
     public int[] tags;
     public int nodesQuantity;
     public int edgesQuantity;
+    public string graphName = "Default";
 
     public void AddEdge(int inputA, int inputB, int weight)
     {
@@ -70,11 +73,12 @@ public class CustomGraph : IGraph
     public void Initialize()
     {
         adMatrix = new int[N,N];
+        plainAdMatrix = new int[N*N];
         tags = new int[N];
         nodesQuantity = 0;
         edgesQuantity = 0;
 
-        Debug.Log("Se inicio el grafo");
+        //Debug.Log(adMatrix.Length);
     }
 
     public ISet Vertices()
@@ -96,5 +100,28 @@ public class CustomGraph : IGraph
             i--;
         }
         return i;
+    }
+
+    public void PlainAdMatrix()
+    {
+        for (int xAxis = 0; xAxis < N; xAxis++)
+        {
+            for (int yAxis = 0; yAxis < N; yAxis++)
+            {
+                plainAdMatrix[yAxis*N + xAxis] = adMatrix[xAxis, yAxis];
+            }
+        }
+    }
+    public void ComposeAdMatrix()
+    {
+        adMatrix = new int[N, N];
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                adMatrix[i,j] = plainAdMatrix[i*N+j];
+                //if (adMatrix[i,j] != 0) Debug.Log($"Para la posición {i} , {j} se tomó el dato de {i*N+j} que es {adMatrix[i,j]}");
+            }
+        }
     }
    }

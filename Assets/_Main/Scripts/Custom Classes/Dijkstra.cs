@@ -55,6 +55,12 @@ public static class Dijkstra
         distance[origin] = 0;
         nodesA[origin] = nodesB[origin] = graph.tags[origin];
 
+        Debug.Log(auxGraph[0, 0]);
+        Debug.Log(distance[0]);
+
+        if (auxGraph != null) Debug.Log("No es el auxiliar");
+        if (distance != null) Debug.Log("No es la distancia");
+
         for (int count = 0; count < verticesCount - 1; ++count)
         {
             int u = MinimumDistance(distance, shortestPathTreeSet, verticesCount);

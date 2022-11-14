@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 
 public class GraphGenerator : MonoBehaviour
 {
@@ -37,6 +37,33 @@ public class GraphGenerator : MonoBehaviour
             Debug.Log("Aca?");
         }
     }
+    public static CustomGraph LoadGraph(string path, string filename)
+    { 
+        string fullpath = Application.persistentDataPath + "/" + path + "/" + filename + ".json";
+        if (File.Exists(fullpath))
+        {
+            string textJson = File.ReadAllText(fullpath);
+            var obj = JsonUtility.FromJson<CustomGraph>(textJson);
+            return obj;
+        }
+        else
+        {
+            Debug.Log("File, or data not found");
+            return default;
+        }
+    }
+    public static void SaveGraph(CustomGraph graph, string path, string filename)
+    {
+        string fullPath = Application.persistentDataPath + "/" + path + "/";
+        bool checkFolderExit = Directory.Exists(fullPath);
+        if (!checkFolderExit)
+        { 
+            Directory.CreateDirectory(fullPath);
+        }
+        string json = JsonUtility.ToJson(graph);
+        File.WriteAllText(fullPath + filename + ".json", json);
+        //Debug.Log("Graph Saved");
+    }
     void GetVerteces()
     {
         verteces = GameObject.FindGameObjectsWithTag("Waypoint");
@@ -64,6 +91,9 @@ public class GraphGenerator : MonoBehaviour
             staticGraph.AddEdge(edges[i].Origin, edges[i].Destination, edges[i].Weight);
         }
 
+        staticGraph.PlainAdMatrix();
+        SaveGraph(staticGraph, "grafos", "nivel1");
+
         //Debug.Log($"Se han cargado {staticGraph.edgesQuantity} de {edges.Count}");
         //Debug.Log($"Hay {staticGraph.nodesQuantity}");
     }
@@ -86,13 +116,13 @@ public class GraphGenerator : MonoBehaviour
                         {
                             edges.Add(new Edge(invGraphDic[origin], invGraphDic[destination], (int)hit.distance));
 
-                            Debug.Log("Se agregó una Arista!");
+                            //Debug.Log("Se agregó una Arista!");
                         }
                     };
                 }
                 else
                 {
-                    Debug.Log("Mismo Objeto");
+                    //Debug.Log("Mismo Objeto");
                 }
             }
         }
