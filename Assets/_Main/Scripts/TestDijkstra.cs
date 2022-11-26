@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TestDijkstra : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class TestDijkstra : MonoBehaviour
     int origen;
     [SerializeField]
     int destino;
+    [SerializeField]
+    string levelName;
 
     string textNodes;
     public string[] travelNodes = new string[100];
@@ -16,12 +19,12 @@ public class TestDijkstra : MonoBehaviour
 
     void Start()
     {
-        graph = GraphGenerator.LoadGraph("grafos", "nivel1");
+        graph = GraphGenerator.LoadGraph("grafos", SceneManager.GetActiveScene().name);
         graph.ComposeAdMatrix();
 
         if (graph == null)
         {
-            Debug.Log("NULL");
+            Debug.LogError("El grafo es Nulo");
         }
         else
         {

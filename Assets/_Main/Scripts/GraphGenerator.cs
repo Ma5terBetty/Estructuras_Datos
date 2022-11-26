@@ -11,6 +11,9 @@ public class GraphGenerator : MonoBehaviour
     [SerializeField]
     GameObject[] verteces;
 
+    [SerializeField]
+    string levelName;
+
     Dictionary<int, GameObject> graphDic = new Dictionary<int, GameObject>();
     Dictionary<GameObject, int> invGraphDic = new Dictionary<GameObject, int>();
 
@@ -62,7 +65,7 @@ public class GraphGenerator : MonoBehaviour
         }
         string json = JsonUtility.ToJson(graph);
         File.WriteAllText(fullPath + filename + ".json", json);
-        //Debug.Log("Graph Saved");
+        Debug.Log("Graph Saved");
     }
     void GetVerteces()
     {
@@ -92,7 +95,7 @@ public class GraphGenerator : MonoBehaviour
         }
 
         staticGraph.PlainAdMatrix();
-        SaveGraph(staticGraph, "grafos", "nivel1");
+        SaveGraph(staticGraph, "grafos", levelName);
 
         //Debug.Log($"Se han cargado {staticGraph.edgesQuantity} de {edges.Count}");
         //Debug.Log($"Hay {staticGraph.nodesQuantity}");
