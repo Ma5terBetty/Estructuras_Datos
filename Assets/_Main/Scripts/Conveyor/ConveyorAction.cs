@@ -9,14 +9,14 @@ public class ConveyorAction : MonoBehaviour
 
     [SerializeField] private MeshRenderer belt;
     Rigidbody rb;
-    private static readonly int ScrollYSpeed = Shader.PropertyToID("_ScrollYSpeed");
+    private static readonly int ScrollSpeed = Shader.PropertyToID("_Speed");
 
     public bool isLeftWallEnabled = true;
     public bool isRightWallEnabled = true;
 
     private void Awake()
     {
-        belt.material.SetFloat(ScrollYSpeed, speed);
+        belt.material.SetFloat(ScrollSpeed, speed);
     }
 
     void Start()
