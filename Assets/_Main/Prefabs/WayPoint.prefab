@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8763904560461922668}
   - component: {fileID: 8763904560461922670}
   - component: {fileID: 742326304}
-  - component: {fileID: 2481353086206489441}
+  - component: {fileID: 4562213652385614945}
   m_Layer: 10
   m_Name: WayPoint
   m_TagString: Waypoint
@@ -63,8 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectAttached: {fileID: 0}
---- !u!135 &2481353086206489441
-SphereCollider:
+--- !u!65 &4562213652385614945
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -74,5 +74,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

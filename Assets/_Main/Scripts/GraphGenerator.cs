@@ -107,7 +107,7 @@ public class GraphGenerator : MonoBehaviour
                     Vector3 dir = origin.transform.position - destination.transform.position;
                     Ray ray = new Ray(origin.transform.position, -dir);
                     RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, 15f) && hit.transform.CompareTag("Waypoint"))
+                    if (Physics.Raycast(ray, out hit) && hit.transform.CompareTag("Waypoint"))
                     {
                         //Debug.Log($" Origen {origin.name} / Destino {destination.name} / Hit {hit.transform.name}");
 
