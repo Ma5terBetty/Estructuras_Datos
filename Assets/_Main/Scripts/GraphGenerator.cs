@@ -35,10 +35,6 @@ public class GraphGenerator : MonoBehaviour
         GenerateEdgesList();
         InitializeGraph();
 
-        if (staticGraph == null)
-        {
-            Debug.Log("Aca?");
-        }
     }
     public static CustomGraph LoadGraph(string path, string filename)
     { 
@@ -113,13 +109,18 @@ public class GraphGenerator : MonoBehaviour
                     RaycastHit hit;
                     if (Physics.Raycast(ray, out hit))
                     {
-                        Debug.Log($" Origen {origin.name} / Destino {destination.name} / Hit {hit.transform.name}");
+                        //Debug.Log($" Origen {origin.name} / Destino {destination.name} / Hit {hit.transform.name}");
 
                         if (hit.transform.tag == "Waypoint")
                         {
+                            Debug.Log("Encontré una arista!");
                             edges.Add(new Edge(invGraphDic[origin], invGraphDic[destination], (int)hit.distance));
 
                             //Debug.Log("Se agregó una Arista!");
+                        }
+                        else
+                        {
+                            Debug.Log("Encontré una caja!");
                         }
                     };
                 }

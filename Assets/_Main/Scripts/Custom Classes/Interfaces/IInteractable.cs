@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IInreractable
+public interface IInteractable
 {
     void Interact(Collider other);
 }

@@ -71,8 +71,6 @@ public class EmployeeManager : MonoBehaviour
 #endif
             _currentEmployee.AddTask(newTask);
         }
-
-
     }
 
     public void OverrideTask()

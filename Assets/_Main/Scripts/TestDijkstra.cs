@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class TestDijkstra : MonoBehaviour
 {
     [SerializeField]
-    int origen;
+    public int origen;
     [SerializeField]
-    int destino;
+    public int destino;
     [SerializeField]
     string levelName;
 
-    string textNodes;
+    string textNodes = string.Empty;
     public string[] travelNodes = new string[100];
 
     public GameObject[] waypoints;
@@ -27,16 +27,22 @@ public class TestDijkstra : MonoBehaviour
 
         if (graph == null)
         {
-            Debug.LogError("El grafo es Nulo");
+            //Debug.LogError("El grafo es Nulo");
         }
         else
         {
-            Debug.Log("Grafo cargado correctamente");
+            //Debug.Log("Grafo cargado correctamente");
         }
 
         for (int i = 0; i < waypoints.Length; i++)
         { 
             waypointsDic.Add(waypoints[i].name, waypoints[i]);
+            //Debug.Log($"{waypoints[i]}");
+        }
+
+        if (waypointsDic.ContainsKey("0"))
+        {
+            Debug.Log("Algo hay");
         }
     }
 
@@ -46,8 +52,6 @@ public class TestDijkstra : MonoBehaviour
         {
             CalculateDestination();
         }
-
-        
     }
 
     public void CalculateDestination()
@@ -77,10 +81,10 @@ public class TestDijkstra : MonoBehaviour
             {
                 nodos = Dijkstra.nodes[i];
                 var mensaje = string.Format("Vertice: {0} --x-- Distancia: {1} --x-- Camino: {2}", graph.tags[i], distancia, Dijkstra.nodes[i]);
-                //Debug.Log(mensaje);
+                Debug.Log(mensaje);
                 textNodes = Dijkstra.nodes[i];
 
-                //Debug.Log(textNodes);
+                Debug.Log(textNodes);
 
                 char delimiter = ',';
                 travelNodes = textNodes.Split(delimiter);
@@ -90,5 +94,8 @@ public class TestDijkstra : MonoBehaviour
                 }
             }
         }
+
+        origen = destino;
+        destino = 0;
     }
 }

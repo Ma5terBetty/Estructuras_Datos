@@ -8,17 +8,15 @@ public class GizmoTEst : MonoBehaviour
     [SerializeField]
     GameObject a;
     [SerializeField]
-    GameObject b;
-    [SerializeField]
-    GameObject c;
+    Transform[] transforms = new Transform[10];
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Vector3 rayDir = a.transform.position - b.transform.position;
-        Gizmos.DrawRay(a.transform.localPosition, -rayDir);
-        rayDir = a.transform.position - c.transform.position;
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(a.transform.localPosition, -rayDir);
+        for (int i = 0; i < transforms.Length; i++)
+        {
+            Gizmos.color = Color.red;
+            Vector3 rayDir = a.transform.position - transforms[i].transform.position;
+            Gizmos.DrawRay(a.transform.localPosition, -rayDir);
+        }
     }
 }

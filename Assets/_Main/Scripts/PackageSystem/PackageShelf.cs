@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PackageShelf : MonoBehaviour, IInreractable
+public class PackageShelf : MonoBehaviour, IInteractable
 {
     [SerializeField] private Package package;
     [SerializeField] private PackageTypeSO type;
