@@ -107,22 +107,19 @@ public class GraphGenerator : MonoBehaviour
                     Vector3 dir = origin.transform.position - destination.transform.position;
                     Ray ray = new Ray(origin.transform.position, -dir);
                     RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit))
+                    if (Physics.Raycast(ray, out hit, 15f) && hit.transform.CompareTag("Waypoint"))
                     {
                         //Debug.Log($" Origen {origin.name} / Destino {destination.name} / Hit {hit.transform.name}");
 
-                        if (hit.transform.tag == "Waypoint")
-                        {
-                            Debug.Log("Encontré una arista!");
-                            edges.Add(new Edge(invGraphDic[origin], invGraphDic[destination], (int)hit.distance));
+                        //Debug.Log("Encontré una arista!");
+                        edges.Add(new Edge(invGraphDic[origin], invGraphDic[destination], Mathf.RoundToInt(Vector3.Distance(origin.transform.position, destination.transform.position))));
 
-                            //Debug.Log("Se agregó una Arista!");
-                        }
-                        else
-                        {
-                            Debug.Log("Encontré una caja!");
-                        }
-                    };
+                        //Debug.Log("Se agregó una Arista!");
+                    }
+                    else
+                    {
+                        Debug.Log("Encontré una caja!");
+                    }
                 }
                 else
                 {
@@ -130,5 +127,35 @@ public class GraphGenerator : MonoBehaviour
                 }
             }
         }
+        /*
+        foreach (var destination in graphDic.Values)
+        {
+            foreach (var origin in graphDic.Values)
+            {
+                if (destination.transform.position != origin.transform.position)
+                {
+                    Vector3 dir = destination.transform.position - origin.transform.position;
+                    Ray ray = new Ray(destination.transform.position, -dir);
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit, 12f) && hit.transform.tag == "Waypoint")
+                    {
+                        //Debug.Log($" Origen {origin.name} / Destino {destination.name} / Hit {hit.transform.name}");
+
+                        //Debug.Log("Encontré una arista!");
+                        edges.Add(new Edge(invGraphDic[destination], invGraphDic[origin], Mathf.RoundToInt(Vector3.Distance(destination.transform.position, origin.transform.position))));
+
+                        //Debug.Log("Se agregó una Arista!");
+                    }
+                    else
+                    {
+                        Debug.Log("Encontré una caja!");
+                    }
+                }
+                else
+                {
+                    //Debug.Log("Mismo Objeto");
+                }
+            }
+        }*/
     }
 }

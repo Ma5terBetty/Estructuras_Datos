@@ -84,7 +84,7 @@ public class TestDijkstra : MonoBehaviour
                 Debug.Log(mensaje);
                 textNodes = Dijkstra.nodes[i];
 
-                Debug.Log(textNodes);
+                //Debug.Log(textNodes);
 
                 char delimiter = ',';
                 travelNodes = textNodes.Split(delimiter);
@@ -97,5 +97,10 @@ public class TestDijkstra : MonoBehaviour
 
         origen = destino;
         destino = 0;
+
+        for (int i = 0; i < Dijkstra.nodesArray.Length; i++)
+        {
+            Debug.Log($"{Dijkstra.nodesArray[i]}");
+        }
     }
 }

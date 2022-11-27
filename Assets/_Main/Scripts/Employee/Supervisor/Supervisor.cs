@@ -57,7 +57,7 @@ public class Supervisor : MonoBehaviour
         for (int i = 0; i < dijkstraTest.travelNodes.Length; i++)
         {
             _assignTask.SetTask(dijkstraTest.waypointsDic[dijkstraTest.travelNodes[i]].transform.position);
-            Debug.Log(dijkstraTest.travelNodes[i]);
+            //Debug.Log(dijkstraTest.travelNodes[i]);
         }
     }
 
