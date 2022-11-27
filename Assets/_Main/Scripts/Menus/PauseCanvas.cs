@@ -23,6 +23,6 @@ public class PauseCanvas : MonoBehaviour
 
     private void MainMenuButtonOnClickHandler()
     {
-        GameManager.Instance.LoadMainMenu();
+        GameManager.Instance.LoadLevel("MainMenu");
     }
 }

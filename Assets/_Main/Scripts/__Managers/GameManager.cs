@@ -10,12 +10,9 @@ public class GameManager : MonoBehaviour
     [Header("GameOver screen")]
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameOverScreen gameOverScreen;
-    [SerializeField] private GameOverSO gameLostData;
-    [SerializeField] private GameOverSO gameWonData;
 
     [Header("Pause Screen")] 
     [SerializeField] private GameObject pauseScreen;
-
     public static GameManager Instance { get; private set; }
     public bool IsGamePaused { get; private set; }
     public bool IsGameOver;
@@ -125,8 +122,8 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log("Game Over");
 #endif
-        gameOverScreen.SetData(hasWon? gameWonData : gameLostData);
-        Instantiate(gameOverScreen, _canvas.transform);
+        var gameOver = Instantiate(gameOverScreen, _canvas.transform);
+        gameOver.InitStats(hasWon);
     }
     public void SetUIManager(UIManager uiManager) => _uiManager = uiManager;
     public void SetOrderController(OrderController orderController) => OrderController = orderController;
@@ -150,18 +147,17 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
-    public IEnumerator LoadNextLevelAfter(float time)
+    public void LoadLevel(string level)
     {
-        yield return new WaitForSeconds(time);
+        OnChangedScene?.Invoke();
+        SceneManager.LoadScene(level, LoadSceneMode.Single);
+    }
+    
+    public void NextLevel()
+    {
         var currentScene = SceneManager.GetActiveScene().buildIndex;
         OnChangedScene?.Invoke();
         SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount + 1 ? currentScene : currentScene + 1, LoadSceneMode.Single);
-    }
-
-    public void LoadMainMenu()
-    {
-        OnChangedScene?.Invoke();
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     #endregion

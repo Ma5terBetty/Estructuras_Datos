@@ -6,52 +6,62 @@ using UnityEngine.UI;
 
 public class GameOverScreen : MonoBehaviour
 {
-    private Image _background;
-    [SerializeField] private GameOverSO screenData;
-    [SerializeField] private TMP_Text[] texts;
-    //[SerializeField] public Button[] buttons;
+    private bool _levelWon;
+    private TMP_Text _continueText;
+    private TMP_Text _mainMenuText;
+    
+    [SerializeField] private TMP_Text titleText;
+    [SerializeField] private Image background;
+    [SerializeField] private Button continueButton;
+    [SerializeField] private Button mainMenuButton;
 
     private void Awake()
     {
-        _background = GetComponentInChildren<Image>();
+        _continueText = continueButton.GetComponentInChildren<TMP_Text>();
+        _mainMenuText = mainMenuButton.GetComponentInChildren<TMP_Text>();
     }
 
     private void Start()
     {
-        SetBackgroundData(ref _background, screenData.Background);
-        SetTextData(ref texts[0], screenData.Tittle);
-        SetTextData(ref texts[1], screenData.Message);
-        
-        StartCoroutine(screenData.IsGameOver == true? GameManager.Instance.ResetLevelAfter(5f) : GameManager.Instance.LoadNextLevelAfter(5f));
+        continueButton.onClick.AddListener(Continue);
+        mainMenuButton.onClick.AddListener(MainMenu);
     }
 
-    private void SetTextData(ref TMP_Text text, in MyText textData)
+    private void OnDisable()
     {
-        text.text = textData.Text;
-        text.font = textData.Font;
-        text.color = textData.Color;
+        continueButton.onClick.RemoveListener(Continue);
+        mainMenuButton.onClick.RemoveListener(MainMenu);
     }
 
-    private void SetBackgroundData(ref Image background, in MyBackground textData)
+    public void InitStats(bool levelWon)
     {
-        background.sprite = textData.Image;
-        background.color = textData.Color;
-        background.material = textData.Material;
+        _levelWon = levelWon;
+        SetText(ref titleText, "Shift completed", "You are fired!!!", _levelWon);
+        SetText(ref _continueText, _levelWon);
+        SetText(ref _mainMenuText, _levelWon);
+        background.color = levelWon ? new Color(0.3f, 0.3f, 0.3f, 0.5f) : new Color(0, 0, 0, 0.8f);
     }
 
-    public void SetData(GameOverSO data) => screenData = data;
+    public void Continue()
+    {
+        if (_levelWon) GameManager.Instance.NextLevel();
+        else GameManager.Instance.ResetLevel();
+    }
 
-    // private IEnumerator ResetLevelAfter(float time)
-    // {
-    //     yield return new WaitForSeconds(time);
-    //     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    // }
-    //
-    // private IEnumerator LoadNextLevelAfter(float time)
-    // {
-    //     yield return new WaitForSeconds(time);
-    //     var currentScene = SceneManager.GetActiveScene().buildIndex;
-    //     SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount + 1 ? currentScene : currentScene + 1);
-    // }
+    public void MainMenu()
+    {
+        GameManager.Instance.LoadLevel("MainMenu");
+    }
+
+    private void SetText(ref TMP_Text text, in string completedMessage, in string failedMessage, in bool levelWon)
+    {
+        text.text = levelWon ? completedMessage : failedMessage;
+        text.color = levelWon ? Color.green : Color.red;
+    }
+
+    private void SetText(ref TMP_Text text, in bool levelWon)
+    {
+        text.color = levelWon ? Color.green : Color.red;
+    }
 
 }
