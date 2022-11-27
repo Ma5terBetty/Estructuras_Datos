@@ -3,14 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Package : MonoBehaviour
+public class Package : MonoBehaviour, ISortable
 {
     [SerializeField] private bool canUse = true;
     
     private Rigidbody _rigidbody;
     private Collider _collider;
 
+    public float SortValue { get; private set; }
     public PackageTypeSO Data { get; private set; }
+    public GameObject GameObject => gameObject;
     public bool CanUse => canUse;
 
     private void Awake()
@@ -96,5 +98,9 @@ public class Package : MonoBehaviour
     private void OnMouseExit()
     {
         UIManager.Instance.TurnOffName();
+    }
+    public void SetSortValue(float value)
+    {
+        SortValue = value;
     }
 }

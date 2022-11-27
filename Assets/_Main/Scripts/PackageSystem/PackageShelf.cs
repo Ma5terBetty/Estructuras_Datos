@@ -10,8 +10,7 @@ public class PackageShelf : MonoBehaviour
     [Range(1, 20)] [SerializeField] private int amount;
     [SerializeField] private Transform placesBox;
 
-
-    private CustomQueue<Package> _packageQueue = new CustomQueue<Package>();
+    private List<ISortable> _packagesList;
 
     private void Start()
     {
@@ -27,6 +26,8 @@ public class PackageShelf : MonoBehaviour
 
     private void FillShelf()
     {
+        _packagesList = new List<ISortable>(amount);
+        
         for (int i = 0; i < amount; i++)
         {
             var currentPlace = placesBox.GetChild(i);
@@ -34,7 +35,7 @@ public class PackageShelf : MonoBehaviour
             var newPackage = Instantiate(package, currentPlace);
             newPackage.SetData(type);
             newPackage.SetInShelf(currentPlace);
-            _packageQueue.Enqueue(newPackage);
+            _packagesList.Add(newPackage);
         }
     }
 
@@ -51,10 +52,22 @@ public class PackageShelf : MonoBehaviour
 
     public void GivePackage(Transform input)
     {
-        if(_packageQueue.IsQueueEmpty()) return;
+        if(_packagesList.Count == 0) return;
 
-        var packageToGive = _packageQueue.Dequeue();
+        var employeePos = input.position;
+
+        foreach (var package in _packagesList)
+        {
+            var currPackPos = package.GameObject.transform.position;
+            var distance = Vector3.Distance(employeePos, currPackPos);
+            package.SetSortValue(distance);
+        }
         
+        _packagesList = CustomQuickSort.Sort(_packagesList,0, _packagesList.Count-1);
+
+        var packageToGive = (Package)_packagesList[0];
+        _packagesList.RemoveAt(0);
+
         packageToGive.transform.position = input.position;
         packageToGive.TakeOutFromShelf();
     }
@@ -79,7 +92,7 @@ public class PackageShelf : MonoBehaviour
             if(currentPlace.childCount > 0) continue;
             
             package.SetInShelf(currentPlace);
-            _packageQueue.Enqueue(package);
+            _packagesList.Add((ISortable)package);
         }
     }
 
