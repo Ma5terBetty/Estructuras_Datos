@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PackageShelf : MonoBehaviour
+public class PackageShelf : MonoBehaviour, IInreractable
 {
     [SerializeField] private Package package;
     [SerializeField] private PackageTypeSO type;
@@ -96,7 +96,20 @@ public class PackageShelf : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void Interact(Collider other)
+    {
+        if (!other.TryGetComponent(out PackageCollector collector)) return;
+
+        if (!collector.HasPackageInHand)
+        {
+            GivePackage(collector.transform);
+            return;
+        }
+
+        ReturnPackage(collector);
+    }
+
+    /*private void OnTriggerEnter(Collider other)
     {
         
         if(!other.TryGetComponent(out PackageCollector collector)) return;
@@ -108,5 +121,15 @@ public class PackageShelf : MonoBehaviour
         }
         
         ReturnPackage(collector);
+    }
+    */
+    private void OnMouseOver()
+    {
+        UIManager.Instance.ShowName(type.name);
+    }
+
+    private void OnMouseExit()
+    {
+        UIManager.Instance.TurnOffName();
     }
 }

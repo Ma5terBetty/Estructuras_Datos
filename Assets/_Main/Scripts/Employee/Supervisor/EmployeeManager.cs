@@ -62,12 +62,12 @@ public class EmployeeManager : MonoBehaviour
     public void SetTask(Task newTask)
     {
 #if UNITY_EDITOR
-        Debug.Log(">>>>>>>>>>>>>>Set task");
+        //Debug.Log(">>>>>>>>>>>>>>Set task");
 #endif
         if (_currentEmployee)
         {
 #if UNITY_EDITOR
-            Debug.Log("<<<<<<<<<<<<<<<Set task");
+            //Debug.Log("<<<<<<<<<<<<<<<Set task");
 #endif
             _currentEmployee.AddTask(newTask);
         }

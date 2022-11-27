@@ -6,6 +6,7 @@ using UnityEngine;
 public class AssignTask : MonoBehaviour
 {
     [SerializeField] private LayerMask target;
+    [SerializeField] private TestDijkstra Dijkstra;
     private EmployeeManager _employeeManager;
 
     private void Awake()

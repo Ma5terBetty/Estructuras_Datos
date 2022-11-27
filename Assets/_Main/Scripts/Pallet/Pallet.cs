@@ -47,7 +47,7 @@ public class Pallet : MonoBehaviour
         _index = 0;
         CurrentOrder = new Order();
 
-        Debug.Log("stacks reseteados");
+        //Debug.Log("stacks reseteados");
     }
 
     private Transform FindChildWithTag(Transform parent, string tag)

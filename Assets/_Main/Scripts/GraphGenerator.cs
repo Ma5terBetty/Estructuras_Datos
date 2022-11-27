@@ -14,7 +14,7 @@ public class GraphGenerator : MonoBehaviour
     [SerializeField]
     string levelName;
 
-    Dictionary<int, GameObject> graphDic = new Dictionary<int, GameObject>();
+    public Dictionary<int, GameObject> graphDic = new Dictionary<int, GameObject>();
     Dictionary<GameObject, int> invGraphDic = new Dictionary<GameObject, int>();
 
     [SerializeField]
@@ -113,7 +113,7 @@ public class GraphGenerator : MonoBehaviour
                     RaycastHit hit;
                     if (Physics.Raycast(ray, out hit))
                     {
-                        //Debug.Log($" Origen {origin.name} / Destino {destination.name} / Hit {hit.transform.name}");
+                        Debug.Log($" Origen {origin.name} / Destino {destination.name} / Hit {hit.transform.name}");
 
                         if (hit.transform.tag == "Waypoint")
                         {

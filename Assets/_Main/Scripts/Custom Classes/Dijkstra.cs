@@ -11,6 +11,7 @@ public static class Dijkstra
     public static int[] distance;
     public static string[] nodes;
     public static string[] nodesArray = new string[100];
+    public static string destiny;
 
     private static int MinimumDistance(int[] distance, bool[] shortestPathTreeSet, int verticesCount)
     {
@@ -55,11 +56,11 @@ public static class Dijkstra
         distance[origin] = 0;
         nodesA[origin] = nodesB[origin] = graph.tags[origin];
 
-        Debug.Log(auxGraph[0, 0]);
-        Debug.Log(distance[0]);
+        //Debug.Log(auxGraph[0, 0]);
+        //Debug.Log(distance[0]);
 
-        if (auxGraph != null) Debug.Log("No es el auxiliar");
-        if (distance != null) Debug.Log("No es la distancia");
+        //if (auxGraph != null) Debug.Log("No es el auxiliar");
+        //if (distance != null) Debug.Log("No es la distancia");
 
         for (int count = 0; count < verticesCount - 1; ++count)
         {

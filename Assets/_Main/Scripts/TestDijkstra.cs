@@ -14,6 +14,9 @@ public class TestDijkstra : MonoBehaviour
 
     string textNodes;
     public string[] travelNodes = new string[100];
+
+    public GameObject[] waypoints;
+    public Dictionary<string, GameObject> waypointsDic = new Dictionary<string, GameObject>();
     
     CustomGraph graph = new CustomGraph();
 
@@ -29,9 +32,12 @@ public class TestDijkstra : MonoBehaviour
         else
         {
             Debug.Log("Grafo cargado correctamente");
-            //graph.ComposeAdMatrix();
         }
-        
+
+        for (int i = 0; i < waypoints.Length; i++)
+        { 
+            waypointsDic.Add(waypoints[i].name, waypoints[i]);
+        }
     }
 
     void Update()
@@ -40,17 +46,16 @@ public class TestDijkstra : MonoBehaviour
         {
             CalculateDestination();
         }
+
+        
     }
 
     public void CalculateDestination()
     {
-        //generator.GenerateGraph();
-
-        //graph = generator.staticGraph;
-
         var ori = origen;
         var dest = destino;
 
+        Dijkstra.destiny = destino.ToString();
         Dijkstra.Calculate(graph, ori);
 
         // obtener el camino
@@ -72,10 +77,10 @@ public class TestDijkstra : MonoBehaviour
             {
                 nodos = Dijkstra.nodes[i];
                 var mensaje = string.Format("Vertice: {0} --x-- Distancia: {1} --x-- Camino: {2}", graph.tags[i], distancia, Dijkstra.nodes[i]);
-                Debug.Log(mensaje);
+                //Debug.Log(mensaje);
                 textNodes = Dijkstra.nodes[i];
 
-                Debug.Log(textNodes);
+                //Debug.Log(textNodes);
 
                 char delimiter = ',';
                 travelNodes = textNodes.Split(delimiter);
