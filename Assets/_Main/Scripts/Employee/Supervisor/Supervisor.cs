@@ -35,16 +35,22 @@ public class Supervisor : MonoBehaviour
 
     private void SelectEmployee()
     {
+        if(GameManager.Instance.IsGamePaused) return;
+
         _selectEmployee.GetEmployee(_input.MousePosition);
     }
 
     private void AssignTask()
     {
+        if(GameManager.Instance.IsGamePaused) return;
+        
         _assignTask.SetTask(_input.MousePosition);
     }
 
     private void OverrideTask()
     {
+        if(GameManager.Instance.IsGamePaused) return;
+        
         _assignTask.OverrideTask();
     }
 }

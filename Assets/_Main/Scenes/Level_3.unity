@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5833,6 +5833,10 @@ PrefabInstance:
       propertyPath: _canvas
       value: 
       objectReference: {fileID: 1939165098450819011}
+    - target: {fileID: 305427258100244292, guid: c64d8d274f0de084a8ab66ea6b83b8b9, type: 3}
+      propertyPath: pauseScreen
+      value: 
+      objectReference: {fileID: 1235368484}
     - target: {fileID: 305427258100244293, guid: c64d8d274f0de084a8ab66ea6b83b8b9, type: 3}
       propertyPath: m_Name
       value: GameManager (1)
@@ -6190,6 +6194,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cc170356de9b44488d900d2ac32404d, type: 3}
+--- !u!1 &1235368484 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5651679808037250950, guid: d84ce8ed964b4804baf7da11faf7436c, type: 3}
+  m_PrefabInstance: {fileID: 1939165098450819009}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1238023523
 PrefabInstance:
   m_ObjectHideFlags: 0
