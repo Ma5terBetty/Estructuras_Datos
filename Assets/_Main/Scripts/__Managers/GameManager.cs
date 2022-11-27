@@ -10,16 +10,9 @@ public class GameManager : MonoBehaviour
     [Header("GameOver screen")]
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameOverScreen gameOverScreen;
-<<<<<<< HEAD
-    
-=======
-    [SerializeField] private GameOverSO gameLostData;
-    [SerializeField] private GameOverSO gameWonData;
 
     [Header("Pause Screen")] 
     [SerializeField] private GameObject pauseScreen;
-
->>>>>>> develop
     public static GameManager Instance { get; private set; }
     public bool IsGamePaused { get; private set; }
     public bool IsGameOver;
@@ -167,20 +160,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount + 1 ? currentScene : currentScene + 1, LoadSceneMode.Single);
     }
 
-<<<<<<< HEAD
-    public IEnumerator LoadNextLevelAfter(float time)
-    {
-        yield return new WaitForSeconds(time);
-        NextLevel();
-    }
-=======
-    public void LoadMainMenu()
-    {
-        OnChangedScene?.Invoke();
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-    }
-
->>>>>>> develop
     #endregion
     
     
