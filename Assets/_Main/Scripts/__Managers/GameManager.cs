@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -9,7 +10,16 @@ public class GameManager : MonoBehaviour
     [Header("GameOver screen")]
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameOverScreen gameOverScreen;
+<<<<<<< HEAD
     
+=======
+    [SerializeField] private GameOverSO gameLostData;
+    [SerializeField] private GameOverSO gameWonData;
+
+    [Header("Pause Screen")] 
+    [SerializeField] private GameObject pauseScreen;
+
+>>>>>>> develop
     public static GameManager Instance { get; private set; }
     public bool IsGamePaused { get; private set; }
     public bool IsGameOver;
@@ -26,11 +36,13 @@ public class GameManager : MonoBehaviour
     public static event TruckLeavesHandler OnTruckLeaves;
     public delegate void ChangeSceneHandler();
     public static event ChangeSceneHandler OnChangedScene;
-    
+
     private void Awake()
     {
         MakeSingleton();
         IsGameOver = false;
+        IsGamePaused = false;
+        pauseScreen.SetActive(false);
     }
 
     private void Update()
@@ -39,6 +51,9 @@ public class GameManager : MonoBehaviour
         {
             InitGameOverScreen(true);
         }
+        
+        if(Input.GetKeyDown(KeyCode.P))
+            TogglePause();
     }
 
     private void Start()
@@ -60,7 +75,14 @@ public class GameManager : MonoBehaviour
         //DontDestroyOnLoad(gameObject);
     }
 
-    public void SetPause(bool isPause)
+    public void TogglePause()
+    {
+        SetPause(!IsGamePaused);
+        
+        pauseScreen.SetActive(IsGamePaused);
+    }
+
+    private void SetPause(bool isPause)
     {
         IsGamePaused = isPause;
         Time.timeScale = IsGamePaused ? 0 : 1;
@@ -145,11 +167,20 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount + 1 ? currentScene : currentScene + 1, LoadSceneMode.Single);
     }
 
+<<<<<<< HEAD
     public IEnumerator LoadNextLevelAfter(float time)
     {
         yield return new WaitForSeconds(time);
         NextLevel();
     }
+=======
+    public void LoadMainMenu()
+    {
+        OnChangedScene?.Invoke();
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
+
+>>>>>>> develop
     #endregion
     
     

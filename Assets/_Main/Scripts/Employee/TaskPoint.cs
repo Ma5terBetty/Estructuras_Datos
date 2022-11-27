@@ -16,6 +16,7 @@ public class TaskPoint : MonoBehaviour
 
     private void OnMouseDown()
     {
+
         if(_isClicked)
             return;
         _isClicked = true;
