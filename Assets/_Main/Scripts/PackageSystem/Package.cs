@@ -48,7 +48,7 @@ public class Package : MonoBehaviour, ISortable
     {
         canUse = true;
         _rigidbody.isKinematic = false;
-        transform.SetParent(transform);
+        transform.SetParent(null);
     }
 
     public void DropInPallet()
