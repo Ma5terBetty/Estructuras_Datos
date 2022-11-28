@@ -55,6 +55,26 @@ public class PackageShelf : MonoBehaviour, IInteractable
     {
         if(_packagesList.Count == 0) return;
 
+        var employeePos = input.position;
+        
+        for (int i = 0; i < _packagesList.Count; i++)
+        {
+            var currentPackage = _packagesList[i];
+            
+            if (currentPackage == null)
+            {
+                Debug.Log("Package Null");
+                _packagesList.RemoveAt(i);
+                continue;
+            }
+
+            var packagePos = currentPackage.GameObject.transform.position;
+            var distance = Vector3.Distance(employeePos, packagePos);
+            currentPackage.SetSortValue(distance);
+        }
+
+        _packagesList = CustomQuickSort.Sort(_packagesList, 0, _packagesList.Count - 1);
+
         var packageToGive = (Package)_packagesList[0];
         _packagesList.RemoveAt(0);
 
@@ -73,7 +93,8 @@ public class PackageShelf : MonoBehaviour, IInteractable
             if(currentPlace.childCount > 0) continue;
             
             package.SetInShelf(currentPlace);
-            _packagesList.Add((ISortable)package);
+            _packagesList.Add(package);
+            break;
         }
     }
 
