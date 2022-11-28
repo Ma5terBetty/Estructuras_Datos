@@ -11,6 +11,8 @@ public class TestDijkstra : MonoBehaviour
     public int destino;
     [SerializeField]
     string levelName;
+    [SerializeField]
+    GraphGenerator generator;
 
     string textNodes = string.Empty;
     public string[] travelNodes = new string[100];
@@ -22,16 +24,17 @@ public class TestDijkstra : MonoBehaviour
 
     void Start()
     {
+        waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
         graph = GraphGenerator.LoadGraph("grafos", SceneManager.GetActiveScene().name);
         graph.ComposeAdMatrix();
 
         if (graph == null)
         {
-            //Debug.LogError("El grafo es Nulo");
+            Debug.LogError("El grafo es Nulo");
         }
         else
         {
-            //Debug.Log("Grafo cargado correctamente");
+            Debug.Log("Grafo cargado correctamente");
         }
 
         for (int i = 0; i < waypoints.Length; i++)

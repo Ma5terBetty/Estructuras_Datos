@@ -39,7 +39,6 @@ public class GraphGenerator : MonoBehaviour
         GetVerteces();
         GenerateEdgesList();
         InitializeGraph();
-
     }
     public static CustomGraph LoadGraph(string path, string filename)
     { 
