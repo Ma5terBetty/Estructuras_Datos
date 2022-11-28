@@ -55,17 +55,6 @@ public class PackageShelf : MonoBehaviour, IInteractable
     {
         if(_packagesList.Count == 0) return;
 
-        var employeePos = input.position;
-
-        foreach (var package in _packagesList)
-        {
-            var currPackPos = package.GameObject.transform.position;
-            var distance = Vector3.Distance(employeePos, currPackPos);
-            package.SetSortValue(distance);
-        }
-        
-        _packagesList = CustomQuickSort.Sort(_packagesList,0, _packagesList.Count-1);
-
         var packageToGive = (Package)_packagesList[0];
         _packagesList.RemoveAt(0);
 
