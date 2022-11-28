@@ -183,6 +183,4 @@ public class OrderController : MonoBehaviour
         GameManager.OnTruckLeaves -= TurnPalletOff;
         GameManager.OnTruckLeaves -= ChangeOrder;
     }
-
-
 }

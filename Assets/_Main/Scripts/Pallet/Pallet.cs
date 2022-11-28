@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Pallet : MonoBehaviour
+public class Pallet : MonoBehaviour, IInteractable
 {
     private readonly PackageId _stacksColor;
     private Dictionary<PackageId, PalletStack> _palletStacks = new Dictionary<PackageId, PalletStack>();
@@ -47,7 +47,7 @@ public class Pallet : MonoBehaviour
         _index = 0;
         CurrentOrder = new Order();
 
-        Debug.Log("stacks reseteados");
+        //Debug.Log("stacks reseteados");
     }
 
     private Transform FindChildWithTag(Transform parent, string tag)
@@ -122,8 +122,26 @@ public class Pallet : MonoBehaviour
     {
         GameManager.OnTruckArrives -= Reset;
     }
-    
-    private void OnTriggerEnter(Collider other)
+
+    public void Interact(Collider other)
+    {
+        if (!other.TryGetComponent(out PackageCollector collector)) return;
+
+        if (collector.HasPackageInHand)
+        {
+            if (!CheckStack(collector.PackageInHand)) return;
+            collector.ClearHand();
+        }
+        else
+        {
+            if (_lastIDStack.IsStackEmpty()) return;
+            GetLastPackage(collector);
+            /*GetClosestStack(collector.transform, out var stack);
+            if (stack == null) return;
+            stack.RemovePackage(collector);*/
+        }
+    }
+    /*private void OnTriggerEnter(Collider other)
     {
         if (!other.TryGetComponent(out PackageCollector collector)) return;
 
@@ -139,6 +157,4 @@ public class Pallet : MonoBehaviour
             /*GetClosestStack(collector.transform, out var stack);
             if (stack == null) return;
             stack.RemovePackage(collector);*/
-        }
-    }
 }
