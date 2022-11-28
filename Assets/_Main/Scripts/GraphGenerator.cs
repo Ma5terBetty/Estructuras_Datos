@@ -25,6 +25,11 @@ public class GraphGenerator : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    private void Start()
+    {
+        //GenerateGraph();
+    }
+
     public void GenerateGraph()
     { 
         verteces.Initialize();
@@ -66,6 +71,8 @@ public class GraphGenerator : MonoBehaviour
     void GetVerteces()
     {
         verteces = GameObject.FindGameObjectsWithTag("Waypoint");
+        graphDic.Clear();
+        invGraphDic.Clear();
 
         for (int i = 0; i < verteces.Length; i++)
         {
@@ -107,9 +114,9 @@ public class GraphGenerator : MonoBehaviour
                     Vector3 dir = origin.transform.position - destination.transform.position;
                     Ray ray = new Ray(origin.transform.position, -dir);
                     RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit) && hit.transform.CompareTag("Waypoint"))
+                    if (Physics.Raycast(ray, out hit) && hit.transform.CompareTag("Waypoint") && hit.transform.name == destination.name)
                     {
-                        //Debug.Log($" Origen {origin.name} / Destino {destination.name} / Hit {hit.transform.name}");
+                        Debug.Log($" Origen {origin.name} / Destino {destination.name} / Hit {hit.transform.name}");
 
                         //Debug.Log("Encontré una arista!");
                         edges.Add(new Edge(invGraphDic[origin], invGraphDic[destination], Mathf.RoundToInt(Vector3.Distance(origin.transform.position, destination.transform.position))));

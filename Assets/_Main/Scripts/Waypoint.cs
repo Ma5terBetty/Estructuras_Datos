@@ -5,8 +5,12 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour
 {
     IInteractable attached;
-    [SerializeField] GameObject objectAttached;
-    [SerializeField] string textToShow;
+    [SerializeField]
+    GameObject objectAttached;
+    [SerializeField]
+    string textToShow;
+    [SerializeField]
+    bool isVisible;
     string nodeName;
     bool isInteractable = false;
 
@@ -19,6 +23,10 @@ public class Waypoint : MonoBehaviour
             attached = objectAttached.GetComponent<IInteractable>();
             isInteractable = true;
             //Debug.Log($"El nodo {nodeName} tiene atachado el objeto {objectAttached.name}");
+        }
+        else if (isVisible)
+        {
+            isInteractable = true;
         }
         else
         {

@@ -109,7 +109,6 @@ public static class Dijkstra
                     {
                         nodes[i] += "," + l1[j].ToString();
                     }
-
                     nodesArray[j] = l1[j].ToString();
                 }
             }
