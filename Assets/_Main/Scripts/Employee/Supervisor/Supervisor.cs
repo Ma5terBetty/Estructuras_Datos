@@ -8,28 +8,15 @@ using UnityEngine;
 /// </summary>
 public class Supervisor : MonoBehaviour
 {
-    public static Supervisor Instance;
-
     private InputHandler _input;
     private SelectEmployee _selectEmployee;
     private AssignTask _assignTask;
-    public TestDijkstra dijkstraTest;
 
     private void Awake()
     {
-        if (Instance == null)
-        { 
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
         _input = GetComponent<InputHandler>();
         _selectEmployee = GetComponent<SelectEmployee>();
         _assignTask = GetComponent<AssignTask>();
-        dijkstraTest = GetComponent<TestDijkstra>();
     }
 
     private void Start()
@@ -48,21 +35,22 @@ public class Supervisor : MonoBehaviour
 
     private void SelectEmployee()
     {
+        if(GameManager.Instance.IsGamePaused) return;
+
         _selectEmployee.GetEmployee(_input.MousePosition);
     }
 
-    public void AssignTask()
+    private void AssignTask()
     {
-        //_assignTask.SetTask(_input.MousePosition);
-        for (int i = 0; i < dijkstraTest.travelNodes.Length; i++)
-        {
-            _assignTask.SetTask(dijkstraTest.waypointsDic[dijkstraTest.travelNodes[i]].transform.position);
-            //Debug.Log(dijkstraTest.travelNodes[i]);
-        }
+        if(GameManager.Instance.IsGamePaused) return;
+        
+        _assignTask.SetTask(_input.MousePosition);
     }
 
     private void OverrideTask()
     {
+        if(GameManager.Instance.IsGamePaused) return;
+        
         _assignTask.OverrideTask();
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -9,9 +10,9 @@ public class GameManager : MonoBehaviour
     [Header("GameOver screen")]
     [SerializeField] private GameObject _canvas;
     [SerializeField] private GameOverScreen gameOverScreen;
-    [SerializeField] private GameOverSO gameLostData;
-    [SerializeField] private GameOverSO gameWonData;
-    
+
+    [Header("Pause Screen")] 
+    [SerializeField] private GameObject pauseScreen;
     public static GameManager Instance { get; private set; }
     public bool IsGamePaused { get; private set; }
     public bool IsGameOver;
@@ -28,11 +29,13 @@ public class GameManager : MonoBehaviour
     public static event TruckLeavesHandler OnTruckLeaves;
     public delegate void ChangeSceneHandler();
     public static event ChangeSceneHandler OnChangedScene;
-    
+
     private void Awake()
     {
         MakeSingleton();
         IsGameOver = false;
+        IsGamePaused = false;
+        pauseScreen.SetActive(false);
     }
 
     private void Update()
@@ -41,6 +44,9 @@ public class GameManager : MonoBehaviour
         {
             InitGameOverScreen(true);
         }
+        
+        if(Input.GetKeyDown(KeyCode.P))
+            TogglePause();
     }
 
     private void Start()
@@ -62,7 +68,14 @@ public class GameManager : MonoBehaviour
         //DontDestroyOnLoad(gameObject);
     }
 
-    public void SetPause(bool isPause)
+    public void TogglePause()
+    {
+        SetPause(!IsGamePaused);
+        
+        pauseScreen.SetActive(IsGamePaused);
+    }
+
+    private void SetPause(bool isPause)
     {
         IsGamePaused = isPause;
         Time.timeScale = IsGamePaused ? 0 : 1;
@@ -109,8 +122,8 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log("Game Over");
 #endif
-        gameOverScreen.SetData(hasWon? gameWonData : gameLostData);
-        Instantiate(gameOverScreen, _canvas.transform);
+        var gameOver = Instantiate(gameOverScreen, _canvas.transform);
+        gameOver.InitStats(hasWon);
     }
     public void SetUIManager(UIManager uiManager) => _uiManager = uiManager;
     public void SetOrderController(OrderController orderController) => OrderController = orderController;
@@ -134,13 +147,26 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
-    public IEnumerator LoadNextLevelAfter(float time)
+    public void LoadLevel(string level)
     {
-        yield return new WaitForSeconds(time);
-        var currentScene = SceneManager.GetActiveScene().buildIndex;
         OnChangedScene?.Invoke();
-        SceneManager.LoadScene(currentScene + 1 > SceneManager.sceneCount + 1 ? currentScene : currentScene + 1, LoadSceneMode.Single);
+        SceneManager.LoadScene(level, LoadSceneMode.Single);
     }
+    
+    public void NextLevel()
+    {
+        var nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        if (nextScene >= SceneManager.sceneCountInBuildSettings)
+        {
+            Debug.Log("No more scenes");
+            Instance.LoadLevel("MainMenu");
+            return;
+        }
+
+        OnChangedScene?.Invoke();
+        SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
+    }
+
     #endregion
     
     

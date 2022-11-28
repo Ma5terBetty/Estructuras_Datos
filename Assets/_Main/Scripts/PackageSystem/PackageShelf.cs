@@ -11,6 +11,7 @@ public class PackageShelf : MonoBehaviour, IInteractable
     [SerializeField] private Transform placesBox;
 
     private List<ISortable> _packagesList;
+    public PackageTypeSO ShelfType => type;
 
     private void Start()
     {
@@ -72,17 +73,8 @@ public class PackageShelf : MonoBehaviour, IInteractable
         packageToGive.TakeOutFromShelf();
     }
 
-    public void ReturnPackage(PackageCollector collector)
+    public void ReturnPackage(Package package)
     {
-
-        if (!CanReturnPackage(collector.PackageInHand))
-        {
-            Debug.Log("Could not return");
-            return;
-        }
-
-        var package = collector.ReturnToShelf();
-        
         if(package.Data != type) return;
         
         for (int i = 0; i < placesBox.childCount; i++)
@@ -120,7 +112,7 @@ public class PackageShelf : MonoBehaviour, IInteractable
             return;
         }
         
-        ReturnPackage(collector);
+        //ReturnPackage(collector);
     }
     */
     private void OnMouseOver()

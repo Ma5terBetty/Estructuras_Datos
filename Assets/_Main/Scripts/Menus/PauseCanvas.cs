@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,43 +7,22 @@ using UnityEngine.SceneManagement;
 
 public class PauseCanvas : MonoBehaviour
 {
-    //Temporal
-
-    [SerializeField] private GameObject pauseCanvas;
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button mainMenuButton;
-    private bool _isGamePaused;
 
-    private void Start()
+    private void Awake()
     {
-        resumeButton.onClick.AddListener(PauseGame);
-        mainMenuButton.onClick.AddListener(MainMenuButtonHandler);
+        resumeButton.onClick.AddListener(ResumeButtonOnClickHandler);
+        mainMenuButton.onClick.AddListener(MainMenuButtonOnClickHandler);
     }
 
-    private void Update()
+    private void ResumeButtonOnClickHandler()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-            PauseGame();
+        GameManager.Instance.TogglePause();
     }
 
-    private void PauseGame()
+    private void MainMenuButtonOnClickHandler()
     {
-        if (!GameManager.Instance.IsGamePaused)
-        {
-            GameManager.Instance.SetPause(true);
-            pauseCanvas.SetActive(true);
-        }
-        else
-        {
-            GameManager.Instance.SetPause(false);
-            pauseCanvas.SetActive(false);
-        }
-
-    }
-
-    private void MainMenuButtonHandler()
-    {
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
-        GameManager.Instance.SetPause(false);
+        GameManager.Instance.LoadLevel("MainMenu");
     }
 }
