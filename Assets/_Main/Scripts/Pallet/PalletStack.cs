@@ -88,7 +88,11 @@ public class PalletStack : MonoBehaviour
         
         for (int i = 0; i < packages.Length; i++)
         {
-            Destroy(packages[i].gameObject);
+            var currentPackage = packages[i].gameObject;
+            currentPackage.transform.SetParent(null);
+            currentPackage.transform.position = new Vector3(0, -100, 0);
+            
+            //Destroy(packages[i].gameObject);
         }
         
         PackageStack.Initialize(transform.childCount);
