@@ -98,7 +98,7 @@ public class PackageShelf : MonoBehaviour, IInteractable
             return;
         }
 
-        ReturnPackage(collector);
+        //ReturnPackage(collector);
     }
 
     /*private void OnTriggerEnter(Collider other)

@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PackageReturner : MonoBehaviour
+public class PackageReturner : MonoBehaviour, IInteractable
 {
     [SerializeField] private PackageShelf[] shelves;
     [SerializeField] private float timeToReturn = 3;
@@ -58,7 +58,17 @@ public class PackageReturner : MonoBehaviour
         StartCoroutine(ReturnToShelf());
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
+    {
+        if (!other.TryGetComponent(out PackageCollector collector)) return;
+
+        if (collector.HasPackageInHand)
+        {
+            GetPackage(collector);
+        }
+    }*/
+
+    public void Interact(Collider other)
     {
         if (!other.TryGetComponent(out PackageCollector collector)) return;
 

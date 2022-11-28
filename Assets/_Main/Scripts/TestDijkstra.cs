@@ -40,10 +40,10 @@ public class TestDijkstra : MonoBehaviour
             //Debug.Log($"{waypoints[i]}");
         }
 
-        if (waypointsDic.ContainsKey("0"))
+        /*if (waypointsDic.ContainsKey("0"))
         {
             Debug.Log("Algo hay");
-        }
+        }*/
     }
 
     void Update()
@@ -100,7 +100,7 @@ public class TestDijkstra : MonoBehaviour
 
         for (int i = 0; i < Dijkstra.nodesArray.Length; i++)
         {
-            Debug.Log($"{Dijkstra.nodesArray[i]}");
+            //Debug.Log($"{Dijkstra.nodesArray[i]}");
         }
     }
 }

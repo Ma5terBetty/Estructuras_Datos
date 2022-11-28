@@ -6,6 +6,7 @@ public class Waypoint : MonoBehaviour
 {
     IInteractable attached;
     [SerializeField] GameObject objectAttached;
+    [SerializeField] string textToShow;
     string nodeName;
     bool isInteractable = false;
 
@@ -41,7 +42,7 @@ public class Waypoint : MonoBehaviour
     {
         if (isInteractable)
         {
-            UIManager.Instance.ShowName("Hello There");
+            UIManager.Instance.ShowName(textToShow);
         }
 
         if (Input.GetMouseButtonDown(0))
