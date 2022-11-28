@@ -9,10 +9,14 @@ public class Package : MonoBehaviour, ISortable
     
     private Rigidbody _rigidbody;
     private Collider _collider;
+    private ISortable _sortableImplementation;
+    
+    private const float TimeDisable = 0.75f;
 
     public float SortValue { get; private set; }
-    public PackageTypeSO Data { get; private set; }
     public GameObject GameObject => gameObject;
+
+    public PackageTypeSO Data { get; private set; }
     public bool CanUse => canUse;
 
     private void Awake()
@@ -37,8 +41,8 @@ public class Package : MonoBehaviour, ISortable
     {
         if (!CanUse) return;
 
+        StartCoroutine(DisablePackage());
         _rigidbody.isKinematic = true;
-        canUse = false;
         transform.position = hand.position;
         transform.rotation = employee.rotation;
         transform.SetParent(employee);
@@ -46,7 +50,9 @@ public class Package : MonoBehaviour, ISortable
 
     public void Drop()
     {
-        canUse = true;
+        if (!CanUse) return;
+        
+        StartCoroutine(DisablePackage());
         _rigidbody.isKinematic = false;
         transform.SetParent(null);
     }
@@ -60,12 +66,15 @@ public class Package : MonoBehaviour, ISortable
 
     public void DropInPallet(Transform place)
     {
+        if (!CanUse) return;
+        
+        StartCoroutine(DisablePackage());
         transform.SetParent(place);
-        canUse = false;
         _collider.enabled = false;
         _rigidbody.isKinematic = true;
         transform.position = place.position;
         transform.rotation = place.rotation;
+
     }
 
     public void SetInShelf(Transform place)
@@ -75,7 +84,7 @@ public class Package : MonoBehaviour, ISortable
         transform.rotation = place.rotation;
         _collider.enabled = false;
         transform.SetParent(place);
-        canUse = false;
+        StartCoroutine(DisablePackage());
     }
 
     public void TakeOutFromShelf()
@@ -88,6 +97,11 @@ public class Package : MonoBehaviour, ISortable
     {
         canUse = input;
     }
+    
+    public void SetSortValue(float value)
+    {
+        SortValue = value;
+    }
 
     private void OnMouseOver()
     {
@@ -99,8 +113,12 @@ public class Package : MonoBehaviour, ISortable
     {
         UIManager.Instance.TurnOffName();
     }
-    public void SetSortValue(float value)
+
+    private IEnumerator DisablePackage()
     {
-        SortValue = value;
+        canUse = false;
+        yield return new WaitForSeconds(TimeDisable);
+        canUse = true;
+        yield return null;
     }
 }
