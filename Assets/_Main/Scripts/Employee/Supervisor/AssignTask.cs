@@ -13,7 +13,7 @@ public class AssignTask : MonoBehaviour
         _employeeManager = GetComponent<EmployeeManager>();
     }
 
-    public void SetTask(in Vector2 mousePos)
+    /*public void SetTask(in Vector2 mousePos)
     {
         if(!_employeeManager) return;
 
@@ -22,6 +22,17 @@ public class AssignTask : MonoBehaviour
         if (!Physics.Raycast(ray, out hit, 100f, target)) return;
         if (!_employeeManager.HasEmployee()) return;
         _employeeManager.SetTask(new Task(){Position = hit.point, TaskPoint = null});
+    }*/
+
+    public void SetTask(Vector3 position)
+    {
+        if(!_employeeManager) return;
+
+        //var ray = Camera.main.ScreenPointToRay(mousePos);
+        //RaycastHit hit;
+        //if (!Physics.Raycast(ray, out hit, 100f, target)) return;
+        //if (!_employeeManager.HasEmployee()) return;
+        _employeeManager.SetTask(new Task(){Position = position, TaskPoint = null});
     }
 
     public void OverrideTask()
