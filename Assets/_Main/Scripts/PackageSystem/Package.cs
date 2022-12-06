@@ -59,7 +59,7 @@ public class Package : MonoBehaviour, ISortable
 
     public void DropInPallet()
     {
-        canUse = false;
+        SetCanUse(false);
         _rigidbody.isKinematic = true;
         transform.SetParent(transform);
     }
@@ -90,7 +90,7 @@ public class Package : MonoBehaviour, ISortable
     public void TakeOutFromShelf()
     {
         _collider.enabled = true;
-        canUse = true;
+        SetCanUse(true);
     }
 
     public void SetCanUse(bool input)
@@ -116,9 +116,9 @@ public class Package : MonoBehaviour, ISortable
 
     private IEnumerator DisablePackage()
     {
-        canUse = false;
+        SetCanUse(false);
         yield return new WaitForSeconds(TimeDisable);
-        canUse = true;
+        SetCanUse(true);
         yield return null;
     }
 }
