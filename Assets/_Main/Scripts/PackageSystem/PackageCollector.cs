@@ -83,6 +83,8 @@ public class PackageCollector : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.TryGetComponent(out Package package)) return;
+
+        if (package.CurrentState == Package.PackageState.InHand) return;
         
         if(!HasPackageInHand)
             PickUpPackage(package);
