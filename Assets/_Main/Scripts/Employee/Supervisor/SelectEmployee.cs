@@ -30,9 +30,9 @@ public class SelectEmployee : MonoBehaviour
         {
             _employeeManager.GetEmployee(hit.collider.gameObject.GetComponent<Employee>());
         }
-        else
-        {
-            _employeeManager.RemoveEmployee();
-        }
+        // else
+        // {
+        //     _employeeManager.RemoveEmployee();
+        // }
     }
 }
