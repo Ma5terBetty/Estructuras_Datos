@@ -133,6 +133,7 @@ public class Pallet : MonoBehaviour, IInteractable
 
         if (collector.HasPackageInHand)
         {
+            if (collector.PackageInHand.CurrentState != Package.PackageState.InHand) return;
             if (!CheckStack(collector.PackageInHand)) return;
             collector.ClearHand();
         }

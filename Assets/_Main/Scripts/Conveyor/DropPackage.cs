@@ -10,7 +10,6 @@ public class DropPackage : MonoBehaviour
     private IEnumerator CanUseAfter(Package package, float time)
     {
         yield return new WaitForSeconds(time);
-        package.SetCanUse(true);
         //package.SetCanInteract(true);
     }
     private void OnTriggerEnter(Collider other)
@@ -23,6 +22,6 @@ public class DropPackage : MonoBehaviour
         packageCollector.DropPackage();
         //package.SetCanInteract(false);
         package.gameObject.transform.position = dropPosition.position;
-        StartCoroutine(CanUseAfter(package, 0.3f));
+        //StartCoroutine(CanUseAfter(package, 0.3f));
     }
 }

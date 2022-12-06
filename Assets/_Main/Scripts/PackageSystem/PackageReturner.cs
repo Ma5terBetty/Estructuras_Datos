@@ -58,16 +58,6 @@ public class PackageReturner : MonoBehaviour, IInteractable
         StartCoroutine(ReturnToShelf());
     }
 
-    /*private void OnTriggerEnter(Collider other)
-    {
-        if (!other.TryGetComponent(out PackageCollector collector)) return;
-
-        if (collector.HasPackageInHand)
-        {
-            GetPackage(collector);
-        }
-    }*/
-
     public void Interact(Collider other)
     {
         if (!other.TryGetComponent(out PackageCollector collector)) return;
