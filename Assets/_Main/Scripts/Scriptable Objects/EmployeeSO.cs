@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,4 +15,14 @@ public class EmployeeSO : ScriptableObject
     public float Speed => speed;
     public float MinTaskDistance => minTaskDistance;
     public float PickUpDistance => pickUpDistance;
+    [field: SerializeField]
+    public EmployeeRole Role { get; private set; }
+}
+
+public enum EmployeeRole
+{
+    ShelvePallet,
+    Shelve,
+    Pallet,
+    Fixer
 }

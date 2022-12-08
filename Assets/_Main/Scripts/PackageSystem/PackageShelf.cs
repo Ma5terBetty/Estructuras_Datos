@@ -54,7 +54,7 @@ public class PackageShelf : MonoBehaviour, IInteractable
     public void GivePackage(Transform input)
     {
         if(_packagesList.Count == 0) return;
-
+        
         var employeePos = input.position;
         
         for (int i = 0; i < _packagesList.Count; i++)
@@ -100,13 +100,20 @@ public class PackageShelf : MonoBehaviour, IInteractable
 
     public void Interact(Collider other)
     {
+        
+        
         if (!other.TryGetComponent(out PackageCollector collector)) return;
-
+        
+        var employee = collector.gameObject.GetComponent<Employee>();
+        if ((!employee || employee.GetData().Role != EmployeeRole.ShelvePallet) &&
+            employee.GetData().Role != EmployeeRole.Shelve) return;
+        
         if (!collector.HasPackageInHand)
         {
             GivePackage(collector.transform);
             return;
         }
+
 
         //ReturnPackage(collector);
     }

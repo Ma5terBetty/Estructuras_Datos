@@ -126,9 +126,14 @@ public class Pallet : MonoBehaviour, IInteractable
     public void Interact(Collider other)
     {
         if (!other.TryGetComponent(out PackageCollector collector)) return;
+        
+        var employee = collector.gameObject.GetComponent<Employee>();
+        if ((!employee || employee.GetData().Role != EmployeeRole.ShelvePallet) &&
+            employee.GetData().Role != EmployeeRole.Pallet) return;
 
         if (collector.HasPackageInHand)
         {
+            if (collector.PackageInHand.CurrentState != Package.PackageState.InHand) return;
             if (!CheckStack(collector.PackageInHand)) return;
             collector.ClearHand();
         }

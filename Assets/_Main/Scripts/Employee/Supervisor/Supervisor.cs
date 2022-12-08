@@ -35,16 +35,14 @@ public class Supervisor : MonoBehaviour
     {
         //_input.OnRightClick += AssignTask;
         _input.OnLeftClick += SelectEmployee;
-        _input.OnDoubleRightClick += OverrideTask;
-
-
+        //_input.OnDoubleRightClick += OverrideTask;
     }
 
     private void OnDisable()
     {
         //_input.OnRightClick -= AssignTask;
         _input.OnLeftClick -= SelectEmployee;
-        _input.OnDoubleRightClick -= OverrideTask;
+        //_input.OnDoubleRightClick -= OverrideTask;
     }
 
     private void SelectEmployee()

@@ -6,23 +6,35 @@ using UnityEngine;
 public class Package : MonoBehaviour, ISortable
 {
     [SerializeField] private bool canUse = true;
-    
+
     private Rigidbody _rigidbody;
     private Collider _collider;
     private ISortable _sortableImplementation;
-    
-    private const float TimeDisable = 0.75f;
+
+    private const float ChangeStateTime = 0.75f;
 
     public float SortValue { get; private set; }
     public GameObject GameObject => gameObject;
 
     public PackageTypeSO Data { get; private set; }
-    public bool CanUse => canUse;
+
+    //Test
+    public enum PackageState
+    {
+        InHand,
+        Placed,
+        Dropped
+    }
+
+    public PackageState CurrentState { get; private set; }
+
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
+
+        CurrentState = PackageState.Dropped;
     }
 
     public void SetData(PackageTypeSO newData)
@@ -39,68 +51,71 @@ public class Package : MonoBehaviour, ISortable
 
     public void PickUp(Transform employee, Transform hand)
     {
-        if (!CanUse) return;
-
-        StartCoroutine(DisablePackage());
+        if (CurrentState == PackageState.InHand) return;
+        
         _rigidbody.isKinematic = true;
         transform.position = hand.position;
         transform.rotation = employee.rotation;
         transform.SetParent(employee);
+        StartCoroutine(ChangeState(PackageState.InHand));
     }
 
     public void Drop()
     {
-        if (!CanUse) return;
+        if (CurrentState != PackageState.InHand) return;
         
-        StartCoroutine(DisablePackage());
         _rigidbody.isKinematic = false;
         transform.SetParent(null);
-    }
-
-    public void DropInPallet()
-    {
-        canUse = false;
-        _rigidbody.isKinematic = true;
-        transform.SetParent(transform);
+        StartCoroutine(ChangeState(PackageState.Dropped));
     }
 
     public void DropInPallet(Transform place)
     {
-        if (!CanUse) return;
+        if (CurrentState != PackageState.InHand) return;
         
-        StartCoroutine(DisablePackage());
         transform.SetParent(place);
         _collider.enabled = false;
         _rigidbody.isKinematic = true;
         transform.position = place.position;
         transform.rotation = place.rotation;
+        StartCoroutine(ChangeState(PackageState.Placed));
 
     }
 
     public void SetInShelf(Transform place)
     {
+        if (CurrentState == PackageState.Placed) return;
+        
         _rigidbody.isKinematic = true;
         transform.position = place.position;
         transform.rotation = place.rotation;
         _collider.enabled = false;
         transform.SetParent(place);
-        StartCoroutine(DisablePackage());
+        StartCoroutine(ChangeState(PackageState.Placed));
     }
+    
 
     public void TakeOutFromShelf()
     {
         _collider.enabled = true;
-        canUse = true;
     }
 
-    public void SetCanUse(bool input)
-    {
-        canUse = input;
-    }
-    
     public void SetSortValue(float value)
     {
         SortValue = value;
+    }
+    
+    private void SetState(PackageState newState)
+    {
+        CurrentState = newState;
+        Debug.Log($"Package State: {CurrentState}");
+    }
+    
+    private IEnumerator ChangeState(PackageState newState)
+    {
+        yield return new WaitForSeconds(ChangeStateTime);
+        SetState(newState);
+        yield return null;
     }
 
     private void OnMouseOver()
@@ -112,13 +127,5 @@ public class Package : MonoBehaviour, ISortable
     private void OnMouseExit()
     {
         UIManager.Instance.TurnOffName();
-    }
-
-    private IEnumerator DisablePackage()
-    {
-        canUse = false;
-        yield return new WaitForSeconds(TimeDisable);
-        canUse = true;
-        yield return null;
     }
 }
