@@ -108,7 +108,7 @@ public class Package : MonoBehaviour, ISortable
     private void SetState(PackageState newState)
     {
         CurrentState = newState;
-        Debug.Log($"Package State: {CurrentState}");
+        //Debug.Log($"Package State: {CurrentState}");
     }
     
     private IEnumerator ChangeState(PackageState newState)

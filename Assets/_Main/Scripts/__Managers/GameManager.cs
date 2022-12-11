@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
     
     public void NextLevel()
     {
-        var nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+       /* var nextScene = SceneManager.GetActiveScene().buildIndex + 1;
         if (nextScene >= SceneManager.sceneCountInBuildSettings)
         {
             Debug.Log("No more scenes");
@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
         }
 
         OnChangedScene?.Invoke();
-        SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
+        SceneManager.LoadScene(nextScene, LoadSceneMode.Single);*/
     }
 
     #endregion

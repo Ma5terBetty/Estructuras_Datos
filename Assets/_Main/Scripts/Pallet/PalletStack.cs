@@ -38,7 +38,7 @@ public class PalletStack : MonoBehaviour
     {
         input.DropInPallet(Positions[PackageStack.Index()]);
         AddItem(input);
-        Debug.Log("Package Left In Pallet");
+        //Debug.Log("Package Left In Pallet");
     }
 
     private void AddItem(Package input)

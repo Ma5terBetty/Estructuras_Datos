@@ -38,7 +38,7 @@ public class Order
                 break;
         }
 
-        Debug.Log($"Color counter is: R:{redAmount} / G: {greenAmount} / B:{blueAmount} / Y:{yellowAmount}");
+        //Debug.Log($"Color counter is: R:{redAmount} / G: {greenAmount} / B:{blueAmount} / Y:{yellowAmount}");
     }
 
     public void Reset()

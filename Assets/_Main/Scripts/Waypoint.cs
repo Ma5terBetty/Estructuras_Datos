@@ -5,10 +5,21 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour
 {
     IInteractable attached;
-    [SerializeField] GameObject objectAttached;
-    [SerializeField] string textToShow;
+    [SerializeField]
+    GameObject objectAttached;
+    [SerializeField]
+    string textToShow;
+    [SerializeField]
+    bool isVisible;
     string nodeName;
     bool isInteractable = false;
+
+    BoxCollider boxCollider;
+
+    private void Awake()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+    }
 
     private void Start()
     {
@@ -18,11 +29,18 @@ public class Waypoint : MonoBehaviour
         {
             attached = objectAttached.GetComponent<IInteractable>();
             isInteractable = true;
+            boxCollider.size = Vector3.one * 5;
             //Debug.Log($"El nodo {nodeName} tiene atachado el objeto {objectAttached.name}");
+        }
+        else if (isVisible)
+        {
+            isInteractable = true;
+            boxCollider.size = Vector3.one * 5;
         }
         else
         {
             isInteractable = false;
+            boxCollider.size = Vector3.one;
         }
     }
 
@@ -34,7 +52,7 @@ public class Waypoint : MonoBehaviour
         if (objectAttached != null && Dijkstra.destiny == nodeName && other.tag == "Employee")
         {
             attached.Interact(other);
-            Debug.Log("Dar Paquete");
+            //Debug.Log("Dar Paquete");
         }
     }
 
@@ -45,9 +63,9 @@ public class Waypoint : MonoBehaviour
             UIManager.Instance.ShowName(textToShow);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("Me han clickeado");
+           //Debug.Log("Me han clickeado");
             Supervisor.Instance.dijkstraTest.destino = int.Parse(gameObject.name);
             Supervisor.Instance.dijkstraTest.CalculateDestination();
             Supervisor.Instance.AssignTask();
