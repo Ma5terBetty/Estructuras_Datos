@@ -5029,7 +5029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  <LevelData>k__BackingField: {fileID: 11400000, guid: 5aa9fc94391d18e498c277f3b1aa2311, type: 2}
+  <LevelData>k__BackingField: {fileID: 11400000, guid: 19c551c53bb9cab4fbb31ee139919493, type: 2}
 --- !u!1 &721440350 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1681651414697798, guid: e082979a473bb914ab8af10a5d754993, type: 3}
@@ -10191,6 +10191,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 742326304, guid: 06421881425f55e489da1ad322efc464, type: 3}
+      propertyPath: objectAttached
+      value: 
+      objectReference: {fileID: 142355523}
     - target: {fileID: 4562213652385614945, guid: 06421881425f55e489da1ad322efc464, type: 3}
       propertyPath: m_Size.x
       value: 2
