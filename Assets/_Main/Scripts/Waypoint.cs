@@ -29,18 +29,18 @@ public class Waypoint : MonoBehaviour
         {
             attached = objectAttached.GetComponent<IInteractable>();
             isInteractable = true;
-            boxCollider.size = Vector3.one * 5;
+            //boxCollider.size = Vector3.one * 5;
             //Debug.Log($"El nodo {nodeName} tiene atachado el objeto {objectAttached.name}");
         }
         else if (isVisible)
         {
             isInteractable = true;
-            boxCollider.size = Vector3.one * 5;
+            //boxCollider.size = Vector3.one * 5;
         }
         else
         {
             isInteractable = false;
-            boxCollider.size = Vector3.one;
+            //boxCollider.size = Vector3.one;
         }
     }
 
