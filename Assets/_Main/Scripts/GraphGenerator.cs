@@ -20,9 +20,9 @@ public class GraphGenerator : MonoBehaviour
     [SerializeField]
     public CustomGraph staticGraph;
 
-    private void Awake()
+    private void Start()
     {
-        DontDestroyOnLoad(this);
+        GenerateGraph();
     }
 
     public void GenerateGraph()
@@ -34,7 +34,6 @@ public class GraphGenerator : MonoBehaviour
         GetVerteces();
         GenerateEdgesList();
         InitializeGraph();
-
     }
     public static CustomGraph LoadGraph(string path, string filename)
     { 
@@ -66,6 +65,8 @@ public class GraphGenerator : MonoBehaviour
     void GetVerteces()
     {
         verteces = GameObject.FindGameObjectsWithTag("Waypoint");
+        graphDic.Clear();
+        invGraphDic.Clear();
 
         for (int i = 0; i < verteces.Length; i++)
         {
@@ -91,7 +92,7 @@ public class GraphGenerator : MonoBehaviour
         }
 
         staticGraph.PlainAdMatrix();
-        SaveGraph(staticGraph, "grafos", levelName);
+        //SaveGraph(staticGraph, "grafos", levelName);
 
         //Debug.Log($"Se han cargado {staticGraph.edgesQuantity} de {edges.Count}");
         //Debug.Log($"Hay {staticGraph.nodesQuantity}");
@@ -107,7 +108,7 @@ public class GraphGenerator : MonoBehaviour
                     Vector3 dir = origin.transform.position - destination.transform.position;
                     Ray ray = new Ray(origin.transform.position, -dir);
                     RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit) && hit.transform.CompareTag("Waypoint"))
+                    if (Physics.Raycast(ray, out hit) && hit.transform.CompareTag("Waypoint") && hit.transform.name == destination.name)
                     {
                         //Debug.Log($" Origen {origin.name} / Destino {destination.name} / Hit {hit.transform.name}");
 

@@ -11,6 +11,8 @@ TagManager:
   - Canvas
   - Shelv
   - Waypoint
+  - Supervisor
+  - Trash
   layers:
   - Default
   - TransparentFX
