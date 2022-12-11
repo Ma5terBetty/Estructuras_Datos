@@ -110,7 +110,7 @@ public class GraphGenerator : MonoBehaviour
                     RaycastHit hit;
                     if (Physics.Raycast(ray, out hit) && hit.transform.CompareTag("Waypoint") && hit.transform.name == destination.name)
                     {
-                        Debug.Log($" Origen {origin.name} / Destino {destination.name} / Hit {hit.transform.name}");
+                        //Debug.Log($" Origen {origin.name} / Destino {destination.name} / Hit {hit.transform.name}");
 
                         //Debug.Log("Encontré una arista!");
                         edges.Add(new Edge(invGraphDic[origin], invGraphDic[destination], Mathf.RoundToInt(Vector3.Distance(origin.transform.position, destination.transform.position))));

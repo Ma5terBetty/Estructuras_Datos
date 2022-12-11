@@ -87,12 +87,12 @@ public class TestDijkstra : MonoBehaviour
             {
                 nodos = Dijkstra.nodes[i];
                 var mensaje = string.Format("Vertice: {0} --x-- Distancia: {1} --x-- Camino: {2}", generator.staticGraph.tags[i], distancia, Dijkstra.nodes[i]);
-                Debug.Log(mensaje);
+                //Debug.Log(mensaje);
                 textNodes = Dijkstra.nodes[i];
 
                 if (textNodes == null) Debug.Log("EHHHH2");
 
-                Debug.Log(textNodes);
+                //Debug.Log(textNodes);
 
                 char delimiter = ',';
 
