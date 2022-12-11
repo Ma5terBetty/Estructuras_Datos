@@ -14,6 +14,7 @@ public class Employee : MonoBehaviour
     private PackageCollector _packageCollector;
     
     private TaskHandler _taskHandler;
+    public EmployeeRole Role { get; private set; }
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class Employee : MonoBehaviour
     private void Start()
     {
         _packageCollector.OnPackageChange += OverrideTask;
+        Role = data.Role;
     }
 
     private void OnDisable()
