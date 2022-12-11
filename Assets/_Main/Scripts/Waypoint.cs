@@ -65,7 +65,7 @@ public class Waypoint : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log("Me han clickeado");
+           //Debug.Log("Me han clickeado");
             Supervisor.Instance.dijkstraTest.destino = int.Parse(gameObject.name);
             Supervisor.Instance.dijkstraTest.CalculateDestination();
             Supervisor.Instance.AssignTask();
