@@ -20,14 +20,9 @@ public class GraphGenerator : MonoBehaviour
     [SerializeField]
     public CustomGraph staticGraph;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(this);
-    }
-
     private void Start()
     {
-        //GenerateGraph();
+        GenerateGraph();
     }
 
     public void GenerateGraph()
@@ -97,7 +92,7 @@ public class GraphGenerator : MonoBehaviour
         }
 
         staticGraph.PlainAdMatrix();
-        SaveGraph(staticGraph, "grafos", levelName);
+        //SaveGraph(staticGraph, "grafos", levelName);
 
         //Debug.Log($"Se han cargado {staticGraph.edgesQuantity} de {edges.Count}");
         //Debug.Log($"Hay {staticGraph.nodesQuantity}");

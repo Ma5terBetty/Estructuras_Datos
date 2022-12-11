@@ -25,8 +25,10 @@ public class TestDijkstra : MonoBehaviour
     void Start()
     {
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
-        graph = GraphGenerator.LoadGraph("grafos", SceneManager.GetActiveScene().name);
-        graph.ComposeAdMatrix();
+        //graph = GraphGenerator.LoadGraph("grafos", SceneManager.GetActiveScene().name);
+        //graph.ComposeAdMatrix();
+
+        graph = generator.staticGraph;
 
         if (graph == null)
         {
@@ -51,10 +53,10 @@ public class TestDijkstra : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        /*if (Input.GetKeyDown(KeyCode.G))
         {
             CalculateDestination();
-        }
+        }*/
     }
 
     public void CalculateDestination()
@@ -63,13 +65,13 @@ public class TestDijkstra : MonoBehaviour
         var dest = destino;
 
         Dijkstra.destiny = destino.ToString();
-        Dijkstra.Calculate(graph, ori);
+        Dijkstra.Calculate(generator.staticGraph, ori);
 
         // obtener el camino
         var distancia = string.Empty;
         var nodos = string.Empty;
 
-        for (int i = 0; i < graph.nodesQuantity; ++i)
+        for (int i = 0; i < generator.staticGraph.nodesQuantity; ++i)
         {
             if (Dijkstra.distance[i] == int.MaxValue)
             {
@@ -80,10 +82,10 @@ public class TestDijkstra : MonoBehaviour
                 distancia = Dijkstra.distance[i].ToString();
             }
 
-            if (graph.tags[i] == dest)
+            if (generator.staticGraph.tags[i] == dest)
             {
                 nodos = Dijkstra.nodes[i];
-                var mensaje = string.Format("Vertice: {0} --x-- Distancia: {1} --x-- Camino: {2}", graph.tags[i], distancia, Dijkstra.nodes[i]);
+                var mensaje = string.Format("Vertice: {0} --x-- Distancia: {1} --x-- Camino: {2}", generator.staticGraph.tags[i], distancia, Dijkstra.nodes[i]);
                 Debug.Log(mensaje);
                 textNodes = Dijkstra.nodes[i];
 
