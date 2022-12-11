@@ -24,5 +24,5 @@ public enum EmployeeRole
     ShelvePallet,
     Shelve,
     Pallet,
-    Fixer
+    GarbageCollector
 }

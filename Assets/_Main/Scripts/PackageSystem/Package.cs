@@ -29,7 +29,7 @@ public class Package : MonoBehaviour, ISortable
     public PackageState CurrentState { get; private set; }
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
@@ -49,7 +49,7 @@ public class Package : MonoBehaviour, ISortable
         GetComponent<MeshRenderer>().material.color = Data.Color;
     }
 
-    public void PickUp(Transform employee, Transform hand)
+    public virtual void PickUp(Transform employee, Transform hand)
     {
         if (CurrentState == PackageState.InHand) return;
         
@@ -118,7 +118,7 @@ public class Package : MonoBehaviour, ISortable
         yield return null;
     }
 
-    private void OnMouseOver()
+    protected virtual void OnMouseOver()
     {
         var name = Data.Id.ToString();
         UIManager.Instance.ShowName($"{name} package");
