@@ -8,6 +8,8 @@ public class PackageCollector : MonoBehaviour
 {
     [SerializeField] private Transform hand;
 
+    Animator _anim;
+
     private float _timeToInteract = .5f;
     
     public bool CanInteract { get; private set; }
@@ -18,6 +20,7 @@ public class PackageCollector : MonoBehaviour
     private void Awake()
     {
         OnPackageChange += OnPackageChangeHandler;
+        _anim = GetComponent<Animator>();
         CanInteract = true;
     }
 
@@ -31,6 +34,7 @@ public class PackageCollector : MonoBehaviour
         if(PackageInHand)
             PackageInHand.PickUp(transform,hand);
         OnPackageChange?.Invoke();
+        _anim.SetBool("IsBoxed", true);
     }
 
     public void DropPackage()
@@ -41,6 +45,7 @@ public class PackageCollector : MonoBehaviour
         PackageInHand.Drop();
         PackageInHand = null;
         OnPackageChange?.Invoke();
+        _anim.SetBool("IsBoxed", false);
     }
 
     public Package ReturnToShelf()
@@ -48,14 +53,14 @@ public class PackageCollector : MonoBehaviour
         var packageToReturn = PackageInHand;
         PackageInHand = null;
         OnPackageChange?.Invoke();
-        
+        _anim.SetBool("IsBoxed", false);
         return packageToReturn;
     }
 
     public void DropInPallet()
     {
         if (!HasPackageInHand) return;
-        
+        _anim.SetBool("IsBoxed", false);
         //PackageInHand.DropInPallet();
         PackageInHand = null;
         OnPackageChange?.Invoke();
@@ -64,6 +69,7 @@ public class PackageCollector : MonoBehaviour
     public void ClearHand()
     {
         PackageInHand = null;
+        _anim.SetBool("IsBoxed", false);
         OnPackageChange?.Invoke();
     }
 
@@ -85,8 +91,12 @@ public class PackageCollector : MonoBehaviour
         if (!other.TryGetComponent(out Package package)) return;
 
         if (package.CurrentState == Package.PackageState.InHand) return;
-        
-        if(!HasPackageInHand)
+
+        if (!HasPackageInHand)
+        {
+            _anim.SetBool("IsBoxed", true);
             PickUpPackage(package);
+        }
+        
     }
 }
