@@ -79,7 +79,9 @@ public static class Dijkstra
         }
 
         nodes = new string[verticesCount];
+
         int nodOrig = graph.tags[origin];
+
         for (int i = 0; i < verticesCount; i++)
         {
             if (nodesA[i] != -1)
