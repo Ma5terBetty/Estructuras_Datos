@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     private static LevelManager _instance = null;
     private static readonly object Padlock = new object();
+    public GameObject[] waypoints;
 
     [field: SerializeField]
     public LevelSO LevelData { get; private set; }
@@ -34,5 +35,10 @@ public class LevelManager : MonoBehaviour
                 _instance = this;
             }
         }
+    }
+
+    private void Start()
+    {
+        waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
     }
 }
