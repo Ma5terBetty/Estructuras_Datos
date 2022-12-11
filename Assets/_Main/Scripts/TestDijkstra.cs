@@ -28,7 +28,7 @@ public class TestDijkstra : MonoBehaviour
         //graph = GraphGenerator.LoadGraph("grafos", SceneManager.GetActiveScene().name);
         //graph.ComposeAdMatrix();
 
-        graph = generator.staticGraph;
+        //graph = generator.staticGraph;
 
         if (graph == null)
         {
@@ -61,6 +61,7 @@ public class TestDijkstra : MonoBehaviour
 
     public void CalculateDestination()
     {
+        textNodes = string.Empty;
         var ori = origen;
         var dest = destino;
 
@@ -89,10 +90,15 @@ public class TestDijkstra : MonoBehaviour
                 Debug.Log(mensaje);
                 textNodes = Dijkstra.nodes[i];
 
-                //Debug.Log(textNodes);
+                if (textNodes == null) Debug.Log("EHHHH2");
+
+                Debug.Log(textNodes);
 
                 char delimiter = ',';
+
+                
                 travelNodes = textNodes.Split(delimiter);
+
                 foreach (string node in travelNodes)
                 {
                     //Debug.Log($"{node}");

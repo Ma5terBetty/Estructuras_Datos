@@ -1762,139 +1762,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06421881425f55e489da1ad322efc464, type: 3}
---- !u!1 &696094448 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8409401769492735558, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
-  m_PrefabInstance: {fileID: 1652172639}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &696094449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 696094448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec69f864969f66b42aad0f18f167938d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  origen: 0
-  destino: 0
-  levelName: Level_1
-  generator: {fileID: 1336832698}
-  travelNodes:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  waypoints:
-  - {fileID: 811803675}
-  - {fileID: 1082602932}
-  - {fileID: 1188810447}
-  - {fileID: 1596195532}
-  - {fileID: 410852658}
-  - {fileID: 290644233}
-  - {fileID: 2037121366}
-  - {fileID: 256445155}
-  - {fileID: 153092313}
-  - {fileID: 735605211}
 --- !u!1 &714476603
 GameObject:
   m_ObjectHideFlags: 0
@@ -3758,10 +3625,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8409401769492735552, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
-      propertyPath: dijkstraTest
+    - target: {fileID: 696094449, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
+      propertyPath: generator
       value: 
-      objectReference: {fileID: 696094449}
+      objectReference: {fileID: 1336832698}
+    - target: {fileID: 696094449, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
+      propertyPath: waypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 811803675}
+    - target: {fileID: 696094449, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
+      propertyPath: waypoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1082602932}
+    - target: {fileID: 696094449, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
+      propertyPath: waypoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1188810447}
+    - target: {fileID: 696094449, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
+      propertyPath: waypoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 1596195532}
+    - target: {fileID: 696094449, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
+      propertyPath: waypoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 410852658}
+    - target: {fileID: 696094449, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
+      propertyPath: waypoints.Array.data[5]
+      value: 
+      objectReference: {fileID: 290644233}
+    - target: {fileID: 696094449, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
+      propertyPath: waypoints.Array.data[6]
+      value: 
+      objectReference: {fileID: 2037121366}
+    - target: {fileID: 696094449, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
+      propertyPath: waypoints.Array.data[7]
+      value: 
+      objectReference: {fileID: 256445155}
+    - target: {fileID: 696094449, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
+      propertyPath: waypoints.Array.data[8]
+      value: 
+      objectReference: {fileID: 153092313}
+    - target: {fileID: 696094449, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
+      propertyPath: waypoints.Array.data[9]
+      value: 
+      objectReference: {fileID: 735605211}
     - target: {fileID: 8409401769492735555, guid: b60589266ddf2044d9372c8fc8d68cab, type: 3}
       propertyPath: m_RootOrder
       value: 7
