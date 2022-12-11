@@ -40,6 +40,14 @@ public class TaskHandler : MonoBehaviour
         _isDoingTask = false;
     }
 
+    public void Stopper()
+    {
+        StopCoroutine("DoTask");
+        OverrideTask();
+        _isDoingTask = false;
+        _anim.SetBool("IsFree", true);
+    }
+
     private IEnumerator DoTask(Task task)
     {
         _isDoingTask = true;
