@@ -22,6 +22,11 @@ public class TestDijkstra : MonoBehaviour
     
     CustomGraph graph = new CustomGraph();
 
+
+    private void Awake()
+    {
+        generator = GetComponent<GraphGenerator>();
+    }
     void Start()
     {
         waypoints = GameObject.FindGameObjectsWithTag("Waypoint");
