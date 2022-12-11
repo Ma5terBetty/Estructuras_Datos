@@ -29,6 +29,7 @@ public class Supervisor : MonoBehaviour
         _input = GetComponent<InputHandler>();
         _selectEmployee = GetComponent<SelectEmployee>();
         _assignTask = GetComponent<AssignTask>();
+        dijkstraTest = GetComponent<TestDijkstra>();
     }
 
     private void Start()
