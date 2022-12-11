@@ -6,10 +6,9 @@ using UnityEngine.Events;
 
 public class PackageCollector : MonoBehaviour
 {
-    [SerializeField] private Transform hand;
-
+    private EmployeeSO _stats;
     private float _timeToInteract = .5f;
-    
+    [SerializeField] private Transform hand;
     public bool CanInteract { get; private set; }
     public Package PackageInHand { get; private set; }
     public bool HasPackageInHand => PackageInHand != null;
@@ -19,11 +18,13 @@ public class PackageCollector : MonoBehaviour
     {
         OnPackageChange += OnPackageChangeHandler;
         CanInteract = true;
+        _stats = GetComponent<Employee>().GetData();
     }
 
     public void PickUpPackage(Package input)
     {
         if (!CanInteract) return;
+        if (input.Data.Id == PackageId.garbage && _stats.Role != EmployeeRole.GarbageCollector) return;
         if (HasPackageInHand) return;
 
         StartCoroutine(DisableInteraction());
