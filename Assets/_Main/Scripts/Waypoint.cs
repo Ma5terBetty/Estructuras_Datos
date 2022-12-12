@@ -14,7 +14,7 @@ public class Waypoint : MonoBehaviour
     string nodeName;
     bool isInteractable = false;
     [SerializeField] bool isObstacle = false;
-
+    
     BoxCollider boxCollider;
 
     private void Awake()
