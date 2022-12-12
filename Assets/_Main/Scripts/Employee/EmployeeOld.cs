@@ -23,7 +23,7 @@ public class EmployeeOld : MonoBehaviour
         _selectedOutline = GetComponent<Outline>();
         _rb = GetComponent<Rigidbody>();
         _packageCollector = GetComponent<PackageCollector>();
-        _packageCollector.OnPackageChange += OnPackageChangeHandler;
+        //_packageCollector.OnPackageChange += OnPackageChangeHandler;
     }
     
 

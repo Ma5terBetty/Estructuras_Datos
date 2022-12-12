@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TaskHandler : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class TaskHandler : MonoBehaviour
     private bool _isDoingTask;
     private IEnumerator _doTask;
     Animator _anim;
+    public bool IsDoingTask => _isDoingTask;
+
+    public UnityAction<bool> OnTaskChanged;
 
     private void Awake()
     {
@@ -46,12 +50,14 @@ public class TaskHandler : MonoBehaviour
         OverrideTask();
         _isDoingTask = false;
         _anim.SetBool("IsFree", true);
+        OnTaskChanged?.Invoke(_isDoingTask);
     }
 
     private IEnumerator DoTask(Task task)
     {
         _isDoingTask = true;
         _anim.SetBool("IsFree", false);
+        OnTaskChanged?.Invoke(_isDoingTask);
 
         while (Vector3.Distance(transform.position, task.Position) > _stats.MinTaskDistance)
         {
@@ -72,5 +78,6 @@ public class TaskHandler : MonoBehaviour
 
         _isDoingTask = false;
         _anim.SetBool("IsFree", true);
+        OnTaskChanged?.Invoke(_isDoingTask);
     }
 }

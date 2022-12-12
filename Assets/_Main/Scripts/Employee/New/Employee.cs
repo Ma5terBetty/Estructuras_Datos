@@ -9,29 +9,60 @@ using UnityEngine;
 public class Employee : MonoBehaviour
 {
     [SerializeField] private EmployeeSO data;
+    [SerializeField] private SkinnedMeshRenderer mesh;
     
     private OutlineHandler _outlineHandler;
     private PackageCollector _packageCollector;
     
     private TaskHandler _taskHandler;
+    private Animator _animation;
+    
     public EmployeeRole Role { get; private set; }
+
+    
+    //Animations
+    public bool HasPackage { get; private set; }
+    public bool IsDoingTask { get; private set; }
+
 
     private void Awake()
     {
         _taskHandler = GetComponent<TaskHandler>();
         _packageCollector = GetComponent<PackageCollector>();
         _outlineHandler = GetComponent<OutlineHandler>();
+        _animation = GetComponent<Animator>();
     }
 
     private void Start()
     {
+        _taskHandler.OnTaskChanged += OnTaskChangedHandler;
         _packageCollector.OnPackageChange += OverrideTask;
-        Role = data.Role;
+        _packageCollector.OnPackageChange += OnPackageChangeHandler;
+        //Role = data.Role;
+        SetRole(data);
     }
 
     private void OnDisable()
     {
+        _taskHandler.OnTaskChanged -= OnTaskChangedHandler;
         _packageCollector.OnPackageChange -= OverrideTask;
+        _packageCollector.OnPackageChange -= OnPackageChangeHandler;
+    }
+
+    private void OnPackageChangeHandler(bool hasPackage)
+    {
+        HasPackage = hasPackage;
+    }
+
+    private void OnTaskChangedHandler(bool isDoingTask)
+    {
+        IsDoingTask = isDoingTask;
+    }
+
+    private void SetRole(EmployeeSO newData)
+    {
+        Role = newData.Role;
+        mesh.material = newData.Material;
     }
 
     /// <summary>
@@ -52,7 +83,7 @@ public class Employee : MonoBehaviour
     /// <summary>
     /// Cancel the current task
     /// </summary>
-    public void OverrideTask()
+    public void OverrideTask(bool hasPackage = false)
     {
         _taskHandler.OverrideTask();
     }
