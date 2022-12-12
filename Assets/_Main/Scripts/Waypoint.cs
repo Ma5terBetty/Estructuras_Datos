@@ -134,7 +134,7 @@ public class Waypoint : MonoBehaviour
             UIManager.Instance.ShowName(textToShow);
         }
         
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && isInteractable)
         {
             Debug.Log("Me han clickeado");
             Supervisor.Instance.dijkstraTest.destino = int.Parse(gameObject.name);

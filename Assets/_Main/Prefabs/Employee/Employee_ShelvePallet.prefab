@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4885463315404986532}
   - component: {fileID: 4885463315404986555}
   - component: {fileID: 1690889220}
+  - component: {fileID: 8101255041590602952}
   - component: {fileID: 6651960871909934484}
   - component: {fileID: 165849656}
   - component: {fileID: 1799601615565223448}
@@ -107,6 +108,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8101255041590602952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885463315404986534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e660d45ef1ed17c4088b168524c23a15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6651960871909934484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 57af27ad5cb7dde48bf870f5fcebf112, type: 2}
+  mesh: {fileID: 4896494447732222384}
 --- !u!114 &165849656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,6 +571,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ed0c594d7554484fb3a6c8b512b4f3d, type: 3}
+--- !u!137 &4896494447732222384 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 17856900135852021, guid: 5ed0c594d7554484fb3a6c8b512b4f3d, type: 3}
+  m_PrefabInstance: {fileID: 4885463315920420421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4919653165606771118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5ed0c594d7554484fb3a6c8b512b4f3d, type: 3}

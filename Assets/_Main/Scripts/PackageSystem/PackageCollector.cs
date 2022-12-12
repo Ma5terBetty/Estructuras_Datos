@@ -12,7 +12,7 @@ public class PackageCollector : MonoBehaviour
     public bool CanInteract { get; private set; }
     public Package PackageInHand { get; private set; }
     public bool HasPackageInHand => PackageInHand != null;
-    public UnityAction OnPackageChange;
+    public UnityAction<bool> OnPackageChange;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class PackageCollector : MonoBehaviour
         PackageInHand = input;
         if(PackageInHand)
             PackageInHand.PickUp(transform,hand);
-        OnPackageChange?.Invoke();
+        OnPackageChange?.Invoke(true);
     }
 
     public void DropPackage()
@@ -41,14 +41,14 @@ public class PackageCollector : MonoBehaviour
         
         PackageInHand.Drop();
         PackageInHand = null;
-        OnPackageChange?.Invoke();
+        OnPackageChange?.Invoke(false);
     }
 
     public Package ReturnToShelf()
     {
         var packageToReturn = PackageInHand;
         PackageInHand = null;
-        OnPackageChange?.Invoke();
+        OnPackageChange?.Invoke(false);
         
         return packageToReturn;
     }
@@ -59,16 +59,16 @@ public class PackageCollector : MonoBehaviour
         
         //PackageInHand.DropInPallet();
         PackageInHand = null;
-        OnPackageChange?.Invoke();
+        OnPackageChange?.Invoke(false);
     }
 
     public void ClearHand()
     {
         PackageInHand = null;
-        OnPackageChange?.Invoke();
+        OnPackageChange?.Invoke(false);
     }
 
-    private void OnPackageChangeHandler()
+    private void OnPackageChangeHandler(bool hasPackage)
     {
         StartCoroutine(DisableInteraction());
     }

@@ -10,12 +10,14 @@ public class EmployeeSO : ScriptableObject
     [SerializeField] private float speed = 5f;
     [SerializeField] private float minTaskDistance = .3f;
     [SerializeField] private float pickUpDistance = 1f;
+    [SerializeField] private Material material;
 
     public string ID => id;
     public float Speed => speed;
     public float MinTaskDistance => minTaskDistance;
     public float PickUpDistance => pickUpDistance;
-    [field: SerializeField]
+    [field: SerializeField] 
+    public Material Material => material;
     public EmployeeRole Role { get; private set; }
 }
 
