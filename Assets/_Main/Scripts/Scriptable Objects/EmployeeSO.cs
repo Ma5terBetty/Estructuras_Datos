@@ -17,8 +17,8 @@ public class EmployeeSO : ScriptableObject
     public float MinTaskDistance => minTaskDistance;
     public float PickUpDistance => pickUpDistance;
     [field: SerializeField] 
-    public Material Material => material;
     public EmployeeRole Role { get; private set; }
+    public Material Material => material;
 }
 
 public enum EmployeeRole

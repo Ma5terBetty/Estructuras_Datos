@@ -17,3 +17,4 @@ MonoBehaviour:
   minTaskDistance: 0.3
   pickUpDistance: 1
   material: {fileID: 2100000, guid: 8bea0d567e85fa24a8fe81c57c2895ce, type: 2}
+  <Role>k__BackingField: 2
