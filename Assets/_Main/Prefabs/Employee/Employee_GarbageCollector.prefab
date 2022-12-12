@@ -55,5 +55,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: GarbageCollector
       objectReference: {fileID: 0}
+    - target: {fileID: 4896494447732222384, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a284fdf64e79214f97c5c5ee5b1aac1, type: 2}
+    - target: {fileID: 6651960871909934484, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: b72698e35a16258458e400788949ca83, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7838633b8c618e841b5b6dbfecead441, type: 3}
