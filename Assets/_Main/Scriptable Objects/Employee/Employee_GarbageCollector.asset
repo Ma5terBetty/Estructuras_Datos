@@ -16,4 +16,4 @@ MonoBehaviour:
   speed: 25
   minTaskDistance: 0.3
   pickUpDistance: 1
-  <Role>k__BackingField: 3
+  material: {fileID: 2100000, guid: 1a284fdf64e79214f97c5c5ee5b1aac1, type: 2}
