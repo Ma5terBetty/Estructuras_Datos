@@ -133,13 +133,21 @@ public class Waypoint : MonoBehaviour
         {
             UIManager.Instance.ShowName(textToShow);
         }
-
+        
         if (Input.GetMouseButtonDown(1))
         {
             Debug.Log("Me han clickeado");
             Supervisor.Instance.dijkstraTest.destino = int.Parse(gameObject.name);
             Supervisor.Instance.dijkstraTest.CalculateDestination();
             Supervisor.Instance.AssignTask();
+        }
+
+        if (objectAttached != null)
+        {
+            if (objectAttached.GetComponent<Outline>() != null)
+            {
+                objectAttached.GetComponent<Outline>().enabled = true;
+            }
         }
     }
 
@@ -148,6 +156,14 @@ public class Waypoint : MonoBehaviour
         if (isInteractable)
         {
             UIManager.Instance.TurnOffName();
+        }
+
+        if (objectAttached != null)
+        {
+            if (objectAttached.GetComponent<Outline>() != null)
+            {
+                objectAttached.GetComponent<Outline>().enabled = false;
+            }
         }
     }
 }
