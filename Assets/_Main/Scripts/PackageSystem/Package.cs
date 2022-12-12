@@ -11,7 +11,7 @@ public class Package : MonoBehaviour, ISortable
     private Collider _collider;
     private ISortable _sortableImplementation;
 
-    private const float ChangeStateTime = 0.75f;
+    private const float ChangeStateTime = 0.5f;
 
     public float SortValue { get; private set; }
     public GameObject GameObject => gameObject;
@@ -64,6 +64,14 @@ public class Package : MonoBehaviour, ISortable
     {
         if (CurrentState != PackageState.InHand) return;
         
+        _rigidbody.isKinematic = false;
+        transform.SetParent(null);
+        StartCoroutine(ChangeState(PackageState.Dropped));
+    }
+
+    public void DropInConveyor(Transform place)
+    {
+        transform.position = place.position;
         _rigidbody.isKinematic = false;
         transform.SetParent(null);
         StartCoroutine(ChangeState(PackageState.Dropped));

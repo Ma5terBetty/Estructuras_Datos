@@ -44,6 +44,16 @@ public class PackageCollector : MonoBehaviour
         OnPackageChange?.Invoke(false);
     }
 
+    public void DropInConveyor(Transform conveyor)
+    {
+        if (!CanInteract) return;
+        if (!HasPackageInHand) return;
+        
+        PackageInHand.DropInConveyor(conveyor);
+        PackageInHand = null;
+        OnPackageChange?.Invoke(false);
+    }
+
     public Package ReturnToShelf()
     {
         var packageToReturn = PackageInHand;
