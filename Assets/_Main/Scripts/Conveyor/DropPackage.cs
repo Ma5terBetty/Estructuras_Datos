@@ -11,13 +11,11 @@ public class DropPackage : MonoBehaviour, IInteractable
     {
         var packageCollector = other.GetComponent<PackageCollector>();
         if (!packageCollector) return;
+        if (!packageCollector.HasPackageInHand) return;
+        
         var package = packageCollector.PackageInHand;
 
-        if (!package) return;
-        packageCollector.DropPackage();
-        //package.SetCanInteract(false);
-        package.gameObject.transform.position = dropPosition.position;
-        //StartCoroutine(CanUseAfter(package, 0.3f));
+        packageCollector.DropInConveyor(dropPosition);
     }
 
     private IEnumerator CanUseAfter(Package package, float time)
@@ -25,6 +23,7 @@ public class DropPackage : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(time);
         //package.SetCanInteract(true);
     }
+    
     private void OnTriggerEnter(Collider other)
     {
         
